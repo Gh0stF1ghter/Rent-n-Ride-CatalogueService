@@ -2,9 +2,10 @@
 {
     public enum Severity
     {
-        Low = 0,
-        Medium = 1,
-        High = 2,
-        Critical = 3
+        none = 0,
+        Low = 1,
+        Medium = 2,
+        High = 3,
+        Critical = 4
     }
 }

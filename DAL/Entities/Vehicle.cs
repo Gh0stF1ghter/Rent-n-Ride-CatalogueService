@@ -10,15 +10,14 @@ namespace DAL.Entities
         public int Odo { get; set; }
         public double RentCost { get; set; }
 
+        public Client Client { get; set; }
+
         public Guid ModelId { get; set; }
         public Model Model { get; set; }
 
-        public Guid TypeId { get; set; }
         public VehicleType VehicleType { get; set; }
-
         public VehicleState VehicleState { get; set; }
         public FuelType FuelType { get; set; }
-
 
         public IEnumerable<VehicleClientHistory> VehicleClientHistory { get; set; }
     }

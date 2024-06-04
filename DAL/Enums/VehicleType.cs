@@ -2,10 +2,11 @@
 {
     public enum VehicleType
     {
-        Motorcycle = 0,
-        Light = 1,
-        Sport = 2,
-        SUV = 3,
-        Truck = 4
+        none = 0,
+        Motorcycle = 1,
+        Light = 2,
+        Sport = 3,
+        SUV = 4,
+        Truck = 5
     }
 }

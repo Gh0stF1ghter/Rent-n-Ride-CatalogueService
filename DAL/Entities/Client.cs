@@ -8,5 +8,9 @@
         public string LastName { get; set; }
         public string Email { get; set; }
         public int PhoneNumber { get; set; }
+
+        public Vehicle Vehicle { get; set; }
+
+        public IEnumerable<VehicleClientHistory> VehicleClientHistory { get; set; }
     }
 }

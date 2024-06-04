@@ -2,8 +2,9 @@
 {
     public enum VehicleState
     {
-        New = 0,
-        Used = 1,
-        Crashed = 2
+        none = 0,
+        New = 1,
+        Used = 2,
+        Crashed = 3
     }
 }

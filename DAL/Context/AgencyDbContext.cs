@@ -16,5 +16,11 @@ public class AgencyDbContext(DbContextOptions dbContextOptions) : DbContext(dbCo
         base.OnModelCreating(modelBuilder);
 
         DataGenerator.Init();
+
+        modelBuilder.Entity<Manufacturer>().HasData(DataGenerator.Manufacturers);
+        modelBuilder.Entity<Model>().HasData(DataGenerator.Models);
+        modelBuilder.Entity<Vehicle>().HasData(DataGenerator.Vehicles);
+        modelBuilder.Entity<Client>().HasData(DataGenerator.Clients);
+        modelBuilder.Entity<VehicleClientHistory>().HasData(DataGenerator.VehicleClientHistories);
     }
 }

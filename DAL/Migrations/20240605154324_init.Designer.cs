@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DAL.Migrations
 {
     [DbContext(typeof(AgencyDbContext))]
-    [Migration("20240605151936_init")]
+    [Migration("20240605154324_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -79,7 +79,7 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("ManufacturerId")
+                    b.Property<Guid>("ManufacturerId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Name")
@@ -134,7 +134,7 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("ClientId")
+                    b.Property<Guid>("ClientId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("EndDate")
@@ -143,7 +143,7 @@ namespace DAL.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid?>("VehicleId")
+                    b.Property<Guid>("VehicleId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
@@ -170,7 +170,9 @@ namespace DAL.Migrations
                 {
                     b.HasOne("DAL.Entities.Manufacturer", "Manufacturer")
                         .WithMany("Models")
-                        .HasForeignKey("ManufacturerId");
+                        .HasForeignKey("ManufacturerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Manufacturer");
                 });
@@ -190,11 +192,15 @@ namespace DAL.Migrations
                 {
                     b.HasOne("DAL.Entities.Client", "Client")
                         .WithMany("VehicleClientHistory")
-                        .HasForeignKey("ClientId");
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DAL.Entities.Vehicle", "Vehicle")
                         .WithMany("VehicleClientHistory")
-                        .HasForeignKey("VehicleId");
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Client");
 

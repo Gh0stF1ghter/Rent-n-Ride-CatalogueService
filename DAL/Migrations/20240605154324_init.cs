@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
-#pragma warning disable 
 
 namespace DAL.Migrations
 {
@@ -30,7 +29,7 @@ namespace DAL.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    ManufacturerId = table.Column<Guid>(type: "uuid", nullable: true)
+                    ManufacturerId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -39,7 +38,8 @@ namespace DAL.Migrations
                         name: "FK_Models_Manufacturers_ManufacturerId",
                         column: x => x.ManufacturerId,
                         principalTable: "Manufacturers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -50,10 +50,10 @@ namespace DAL.Migrations
                     PlateNumber = table.Column<string>(type: "text", nullable: false),
                     Odo = table.Column<int>(type: "integer", nullable: false),
                     RentCost = table.Column<double>(type: "double precision", nullable: false),
-                    ModelId = table.Column<Guid>(type: "uuid", nullable: false),
                     VehicleType = table.Column<int>(type: "integer", nullable: false),
                     VehicleState = table.Column<int>(type: "integer", nullable: false),
-                    FuelType = table.Column<int>(type: "integer", nullable: false)
+                    FuelType = table.Column<int>(type: "integer", nullable: false),
+                    ModelId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -95,8 +95,8 @@ namespace DAL.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     StartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    VehicleId = table.Column<Guid>(type: "uuid", nullable: true),
-                    ClientId = table.Column<Guid>(type: "uuid", nullable: true)
+                    VehicleId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ClientId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -105,12 +105,14 @@ namespace DAL.Migrations
                         name: "FK_VehicleClientHistories_Clients_ClientId",
                         column: x => x.ClientId,
                         principalTable: "Clients",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_VehicleClientHistories_Vehicles_VehicleId",
                         column: x => x.VehicleId,
                         principalTable: "Vehicles",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -159,6 +161,4 @@ namespace DAL.Migrations
                 name: "Manufacturers");
         }
     }
-
-    #pragma warning restore
 }

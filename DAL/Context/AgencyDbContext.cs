@@ -1,4 +1,5 @@
 ﻿using DAL.Entities;
+using DAL.TestDataGenerator;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Context;
@@ -13,5 +14,7 @@ public class AgencyDbContext(DbContextOptions dbContextOptions) : DbContext(dbCo
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        DataGenerator.Init();
     }
 }

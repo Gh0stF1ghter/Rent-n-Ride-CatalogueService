@@ -1,6 +1,10 @@
+using API.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
+
+services.ConfigureSqlContext(builder.Configuration);
 
 builder.Services.AddControllers();
 
@@ -19,4 +23,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+await app.RunAsync();

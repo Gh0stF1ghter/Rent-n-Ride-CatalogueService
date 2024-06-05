@@ -1,10 +1,9 @@
-﻿namespace DAL.Enums
+﻿namespace DAL.Enums;
+
+public enum VehicleState
 {
-    public enum VehicleState
-    {
-        none = 0,
-        New = 1,
-        Used = 2,
-        Crashed = 3
-    }
+    None = 0,
+    New = 1,
+    Used = 2,
+    Crashed = 3
 }

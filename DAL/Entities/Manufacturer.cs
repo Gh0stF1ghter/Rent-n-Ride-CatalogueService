@@ -1,9 +1,8 @@
-﻿namespace DAL.Entities
-{
-    public class Manufacturer
-    {
-        public Guid Id { get; set; }
+﻿namespace DAL.Entities;
 
-        public string Name { get; set; }
-    }
+public class Manufacturer
+{
+    public Guid Id { get; set; }
+
+    public string Name { get; set; } = string.Empty;
 }

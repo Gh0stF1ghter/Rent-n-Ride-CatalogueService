@@ -10,7 +10,7 @@ public class VehicleClientHistoryRepository(AgencyDbContext context) : IVehicleC
 {
     public async Task<IEnumerable<VehicleClientHistory>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
-        var rowsToSkip = page - 1 * pageSize;
+        var rowsToSkip = (page - 1) * pageSize;
 
         return await context.VehicleClientHistories
             .Skip(rowsToSkip)

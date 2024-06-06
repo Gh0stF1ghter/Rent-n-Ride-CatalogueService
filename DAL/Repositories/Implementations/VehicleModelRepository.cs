@@ -10,7 +10,7 @@ public class VehicleModelRepository(AgencyDbContext context) : IVehicleModelRepo
 {
     public async Task<IEnumerable<VehicleModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
-        var rowsToSkip = page - 1 * pageSize;
+        var rowsToSkip = (page - 1) * pageSize;
 
         return await context.VehicleModels
             .Skip(rowsToSkip)

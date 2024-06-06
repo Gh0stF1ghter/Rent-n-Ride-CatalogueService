@@ -10,7 +10,7 @@ public class ManufacturerRepository(AgencyDbContext context) : IManufacturerRepo
 {
     public async Task<IEnumerable<Manufacturer>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
-        var rowsToSkip = page - 1 * pageSize;
+        var rowsToSkip = (page - 1) * pageSize;
 
         return await context.Manufacturers
             .Skip(rowsToSkip)

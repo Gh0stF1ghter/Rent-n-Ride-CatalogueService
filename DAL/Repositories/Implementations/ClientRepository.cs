@@ -10,7 +10,7 @@ public class ClientRepository(AgencyDbContext context) : IClientRepository
 {
     public async Task<IEnumerable<Client>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
     { 
-        var rowsToSkip = page - 1 * pageSize;
+        var rowsToSkip = (page - 1) * pageSize;
 
         return await context.Clients
             .Skip(rowsToSkip)

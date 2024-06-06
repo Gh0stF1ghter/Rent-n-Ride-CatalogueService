@@ -10,13 +10,13 @@ internal static class ManufacturerMapper
         {
             Id = manufacturerModel.Id,
             Name = manufacturerModel.Name,
-            Models = manufacturerModel.Models,
+            ModelNames = manufacturerModel.Models,
         };
 
     public static ManufacturerModel Map(Manufacturer manufacturer) =>
         new(
             Id: manufacturer.Id,
             Name: manufacturer.Name,
-            Models:manufacturer.Models
+            ModelNames: manufacturer.ModelNames
             );
 }

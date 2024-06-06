@@ -1,8 +1,9 @@
-﻿using Bogus;
+using Bogus;
 using DAL.Entities;
 using DAL.Enums;
 
 namespace DAL.TestDataGenerator;
+
 internal static class DataGenerator
 {
     private const int CountOfGeneratedUnits = 5;
@@ -18,11 +19,11 @@ internal static class DataGenerator
         if (Manufacturers.Count > 0)
             return;
 
-        GetManufacturerData();
-        GetVehicleClientHistoryData();
+        AddManufacturerData();
+        AddVehicleClientHistoryData();
     }
 
-    private static void GetManufacturerData()
+    private static void AddManufacturerData()
     {
         var manufacturerFaker = GetManufacturerFaker();
 
@@ -31,7 +32,7 @@ internal static class DataGenerator
         Manufacturers.AddRange(generatedManufacturers);
     }
 
-    private static void GetModelData(Guid manufacturerId)
+    private static void AddModelData(Guid manufacturerId)
     {
         var modelFaker = GetModelFaker(manufacturerId);
 
@@ -40,7 +41,7 @@ internal static class DataGenerator
         Models.AddRange(generatedModels);
     }
 
-    private static void GetVehicleData(Guid modelId)
+    private static void AddVehicleData(Guid modelId)
     {
         var vehicleFaker = GetVehicleFaker(modelId);
 
@@ -49,7 +50,7 @@ internal static class DataGenerator
         Vehicles.AddRange(generatedVehicles);
     }
 
-    private static void GetClientData(Guid vehicleId)
+    private static void AddClientData(Guid vehicleId)
     {
         var clientFaker = GetClientFaker(vehicleId);
 
@@ -58,7 +59,7 @@ internal static class DataGenerator
         Clients.Add(generatedClient);
     }
 
-    private static void GetVehicleClientHistoryData()
+    private static void AddVehicleClientHistoryData()
     {
         var vehicleClientHistoryFaker = GetVehicleClientHistoryFaker();
 
@@ -73,7 +74,7 @@ internal static class DataGenerator
             .RuleFor(m => m.Name, f => f.Vehicle.Manufacturer())
             .RuleFor(m => m.Models, (_, m) =>
             {
-                GetModelData(m.Id);
+                AddModelData(m.Id);
                 return [];
             });
 
@@ -84,7 +85,7 @@ internal static class DataGenerator
             .RuleFor(m => m.ManufacturerId, _ => manufacturerId)
             .RuleFor(m => m.Vehicles, (_, m) =>
             {
-                GetVehicleData(m.Id);
+                AddVehicleData(m.Id);
                 return [];
             });
 
@@ -100,7 +101,7 @@ internal static class DataGenerator
             .RuleFor(v => v.FuelType, f => f.PickRandom<FuelType>())
             .RuleFor(v => v.Client, (_, e) =>
             {
-                GetClientData(e.Id);
+                AddClientData(e.Id);
                 return null;
             });
 
@@ -112,6 +113,7 @@ internal static class DataGenerator
             .RuleFor(c => c.Email, f => f.Internet.Email())
             .RuleFor(c => c.PhoneNumber, f => f.Phone.PhoneNumber())
             .RuleFor(c => c.VehicleId, _ => vehicleId);
+
     private static Faker<VehicleClientHistory> GetVehicleClientHistoryFaker() =>
         new Faker<VehicleClientHistory>()
             .RuleFor(vch => vch.Id, _ => Guid.NewGuid())

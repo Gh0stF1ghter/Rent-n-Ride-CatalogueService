@@ -1,10 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DAL.Entities;
+using DAL.Models;
 
 namespace DAL.Mappers;
 internal class ClientMapper
 {
+    public Client Map(ClientModel clientModel)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ClientModel Map(Client client)
+    {
+        throw new NotImplementedException();
+    }
 }

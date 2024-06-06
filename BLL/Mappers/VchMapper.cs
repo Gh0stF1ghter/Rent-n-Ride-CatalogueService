@@ -1,20 +1,26 @@
 ﻿using DAL.Entities;
 using DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.Mappers;
-internal class VchMapper
+
+internal static class VchMapper
 {
-    public VchModel Map(VehicleClientHistory vehicleClientHistory)
-    {
-        throw new NotImplementedException();
-    }
-    public VehicleClientHistory Map(VchModel vchModel)
-    {
-        throw new NotImplementedException();
-    }
+    public static VehicleClientHistory Map(VchModel vchModel) =>
+        new()
+        {
+            Id = vchModel.Id,
+            StartDate = vchModel.StartDate,
+            EndDate = vchModel.EndDate,
+            Vehicle = vchModel.Vehicle,
+            Client = vchModel.Client,
+        };
+
+    public static VchModel Map(VehicleClientHistory vehicleClientHistory) =>
+        new(
+            Id: vehicleClientHistory.Id,
+            StartDate: vehicleClientHistory.StartDate,
+            EndDate: vehicleClientHistory.EndDate,
+            Vehicle: vehicleClientHistory.Vehicle,
+            Client: vehicleClientHistory.Client
+            );
 }

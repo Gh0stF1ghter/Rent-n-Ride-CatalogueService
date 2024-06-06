@@ -2,15 +2,21 @@
 using DAL.Models;
 
 namespace DAL.Mappers;
-internal class ManufacturerMapper
-{
-    public ManufacturerModel Map(Manufacturer manufacturer)
-    {
-        throw new NotImplementedException();
-    }
 
-    public Manufacturer Map(ManufacturerModel manufacturerModel)
-    {
-        throw new NotImplementedException();
-    }
+internal static class ManufacturerMapper
+{
+    public static Manufacturer Map(ManufacturerModel manufacturerModel) =>
+        new()
+        {
+            Id = manufacturerModel.Id,
+            Name = manufacturerModel.Name,
+            Models = manufacturerModel.Models,
+        };
+
+    public static ManufacturerModel Map(Manufacturer manufacturer) =>
+        new(
+            Id: manufacturer.Id,
+            Name: manufacturer.Name,
+            Models:manufacturer.Models
+            );
 }

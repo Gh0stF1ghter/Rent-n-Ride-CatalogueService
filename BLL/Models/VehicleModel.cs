@@ -2,6 +2,7 @@
 using DAL.Enums;
 
 namespace DAL.Models;
+
 public record VehicleModel(
     Guid Id,
     string PlateNumber,
@@ -10,6 +11,6 @@ public record VehicleModel(
     VehicleType VehicleType,
     VehicleState VehicleState,
     FuelType FuelType,
-    Model Model,
-    Client Client
+    Model? Model,
+    Client? Client
     );

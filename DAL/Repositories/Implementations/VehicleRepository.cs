@@ -14,11 +14,18 @@ public class VehicleRepository(AgencyDbContext context) : IVehicleRepository
         return await context.Vehicles
             .Skip(rowsToSkip)
             .Take(pageSize)
+            .Include(v => v.Model)
+            .Include(v => v.Client)
             .AsNoTracking()
             .ToListAsync(cancellationToken);
     }
-    public async Task<Vehicle?> GetByIdAsync(int id, CancellationToken cancellationToken) => 
-        await context.Vehicles.FindAsync([id], cancellationToken);
+
+    public async Task<Vehicle?> GetByIdAsync(Guid id, CancellationToken cancellationToken) => 
+        await context.Vehicles
+            .Include(v => v.Model)
+            .Include(v => v.Client)
+            .Include(v => v.VehicleClientHistory)
+            .FirstOrDefaultAsync(v => v.Id == id, cancellationToken);
 
     public Task<bool> IsExistsAsync(Expression<Func<Vehicle, bool>> predicate, CancellationToken cancellationToken) =>
         context.Vehicles.AnyAsync(predicate, cancellationToken);

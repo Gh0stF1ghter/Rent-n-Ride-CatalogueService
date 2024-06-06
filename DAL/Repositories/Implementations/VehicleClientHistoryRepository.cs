@@ -14,11 +14,13 @@ public class VehicleClientHistoryRepository(AgencyDbContext context) : IVehicleC
         return await context.VehicleClientHistories
             .Skip(rowsToSkip)
             .Take(pageSize)
+            .Include(vch => vch.Client)
+            .Include(vch => vch.Vehicle)
             .AsNoTracking()
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<VehicleClientHistory?> GetByIdAsync(int id, CancellationToken cancellationToken) =>
+    public async Task<VehicleClientHistory?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
         await context.VehicleClientHistories.FindAsync([id], cancellationToken);
 
     public async Task<bool> IsExistsAsync(Expression<Func<VehicleClientHistory, bool>> predicate, CancellationToken cancellationToken) =>

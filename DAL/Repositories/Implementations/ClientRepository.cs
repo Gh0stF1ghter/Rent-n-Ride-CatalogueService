@@ -19,8 +19,11 @@ public class ClientRepository(AgencyDbContext context) : IClientRepository
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<Client?> GetByIdAsync(int id, CancellationToken cancellationToken) =>
-        await context.Clients.FindAsync([id], cancellationToken: cancellationToken);
+    public async Task<Client?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
+        await context.Clients
+            .Include(c => c.Vehicle)
+            .Include(c => c.VehicleClientHistory)    
+            .FirstOrDefaultAsync(c => c.Id == id, cancellationToken: cancellationToken);
 
     public async Task<bool> IsExistsAsync(Expression<Func<Client, bool>> predicate, CancellationToken cancellationToken) =>
         await context.Clients.AnyAsync(predicate, cancellationToken: cancellationToken);

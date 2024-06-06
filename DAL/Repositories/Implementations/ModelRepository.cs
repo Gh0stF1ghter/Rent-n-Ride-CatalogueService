@@ -11,10 +11,18 @@ public class ModelRepository(AgencyDbContext context) : IModelRepository
     {
         var rowsToSkip = page - 1 * pageSize;
 
-        return await context.Models.Skip(rowsToSkip).Take(pageSize).AsNoTracking().ToListAsync(cancellationToken);
+        return await context.Models
+            .Skip(rowsToSkip)
+            .Take(pageSize)
+            .Include(m => m.Manufacturer)
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
     }
-    public async Task<Model?> GetByIdAsync(int id, CancellationToken cancellationToken) =>
-        await context.Models.FindAsync([id], cancellationToken);
+
+    public async Task<Model?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
+        await context.Models
+            .Include(m => m.Manufacturer)
+            .FirstOrDefaultAsync(m => m.Id == id, cancellationToken);
 
     public async Task<bool> IsExistsAsync(Expression<Func<Model, bool>> predicate, CancellationToken cancellationToken) =>
         await context.Models.AnyAsync(predicate, cancellationToken);

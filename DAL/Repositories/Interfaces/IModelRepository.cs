@@ -4,11 +4,11 @@ using System.Linq.Expressions;
 namespace DAL.Repositories.Interfaces;
 public interface IModelRepository
 {
-    public Task<IEnumerable<Model>> GetModelsRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
-    public Task<Model?> GetModelByIdAsync(int id, CancellationToken cancellationToken);
+    public Task<IEnumerable<Model>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
+    public Task<Model?> GetByIdAsync(int id, CancellationToken cancellationToken);
 
-    public Task<bool> IsModelExists(Expression<Func<Model, bool>> predicate, CancellationToken cancellationToken);
+    public Task<bool> IsExistsAsync(Expression<Func<Model, bool>> predicate, CancellationToken cancellationToken);
 
-    public void AddModel(Model model);
-    public void RemoveModel(Model model);
+    public Task AddAsync(Model model, CancellationToken cancellationToken);
+    public Task RemoveAsync(Model model, CancellationToken cancellationToken);
 }

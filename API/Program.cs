@@ -6,10 +6,12 @@ var services = builder.Services;
 
 services.ConfigureDbContext(builder.Configuration);
 
-builder.Services.AddControllers();
+services.AddControllers();
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+services.AddEndpointsApiExplorer();
+services.AddSwaggerGen();
+
+services.AddReposDependencies();
 
 var app = builder.Build();
 

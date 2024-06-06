@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 namespace DAL.Repositories.Implementations;
 public class VehicleClientHistoryRepository(AgencyDbContext context) : IVehicleClientHistoryRepository
 {
-    public async Task<IEnumerable<VehicleClientHistory>> GetVehicleClientHistoriesRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
+    public async Task<IEnumerable<VehicleClientHistory>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
         var rowsToSkip = page - 1 * pageSize;
 
@@ -18,15 +18,20 @@ public class VehicleClientHistoryRepository(AgencyDbContext context) : IVehicleC
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<VehicleClientHistory?> GetVehicleClientHistoryByIdAsync(int id, CancellationToken cancellationToken) =>
+    public async Task<VehicleClientHistory?> GetByIdAsync(int id, CancellationToken cancellationToken) =>
         await context.VehicleClientHistories.FindAsync([id], cancellationToken);
 
-    public async Task<bool> IsVehicleClientHistoryExists(Expression<Func<VehicleClientHistory, bool>> predicate, CancellationToken cancellationToken) =>
+    public async Task<bool> IsExistsAsync(Expression<Func<VehicleClientHistory, bool>> predicate, CancellationToken cancellationToken) =>
         await context.VehicleClientHistories.AnyAsync(predicate, cancellationToken);
 
-    public void AddVehicleClientHistory(VehicleClientHistory vehicleClientHistory) =>
-        context.VehicleClientHistories.Add(vehicleClientHistory);
-    public void RemoveVehicleClientHistory(VehicleClientHistory vehicleClientHistory) =>
+    public async Task AddAsync(VehicleClientHistory vehicleClientHistory, CancellationToken cancellationToken)
+    {
+        await context.VehicleClientHistories.AddAsync(vehicleClientHistory, cancellationToken);
+        await context.SaveChangesAsync(cancellationToken);
+    }
+    public async Task RemoveAsync(VehicleClientHistory vehicleClientHistory, CancellationToken cancellationToken)
+    {
         context.VehicleClientHistories.Remove(vehicleClientHistory);
-
+        await context.SaveChangesAsync(cancellationToken);
+    }
 }

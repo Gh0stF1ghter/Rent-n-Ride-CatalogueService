@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 namespace DAL.Repositories.Implementations;
 public class ClientRepository(AgencyDbContext context) : IClientRepository
 {
-    public async Task<IEnumerable<Client>> GetClientsRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Client>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
     { 
         var rowsToSkip = page - 1 * pageSize;
 
@@ -19,15 +19,21 @@ public class ClientRepository(AgencyDbContext context) : IClientRepository
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<Client?> GetClientByIdAsync(int id, CancellationToken cancellationToken) =>
+    public async Task<Client?> GetByIdAsync(int id, CancellationToken cancellationToken) =>
         await context.Clients.FindAsync([id], cancellationToken: cancellationToken);
 
-    public async Task<bool> IsClientExists(Expression<Func<Client, bool>> predicate, CancellationToken cancellationToken) =>
+    public async Task<bool> IsExistsAsync(Expression<Func<Client, bool>> predicate, CancellationToken cancellationToken) =>
         await context.Clients.AnyAsync(predicate, cancellationToken: cancellationToken);
 
-    public void AddClient(Client client) =>
-        context.Clients.Add(client);
+    public async Task AddAsync(Client client, CancellationToken cancellationToken) 
+    {
+        await context.Clients.AddAsync(client, cancellationToken);
+        await context.SaveChangesAsync(cancellationToken);
+    }
 
-    public void RemoveClient(Client client) =>
+    public async Task RemoveAsync(Client client, CancellationToken cancellationToken)
+    {
         context.Clients.Remove(client);
+        await context.SaveChangesAsync(cancellationToken);
+    }
 }

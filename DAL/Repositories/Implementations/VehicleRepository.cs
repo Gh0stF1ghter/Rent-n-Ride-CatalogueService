@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 namespace DAL.Repositories.Implementations;
 public class VehicleRepository(AgencyDbContext context) : IVehicleRepository
 {
-    public async Task<IEnumerable<Vehicle>> GetVehiclesRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Vehicle>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
         var rowsToSkip = page - 1 * pageSize;
 
@@ -17,15 +17,21 @@ public class VehicleRepository(AgencyDbContext context) : IVehicleRepository
             .AsNoTracking()
             .ToListAsync(cancellationToken);
     }
-    public async Task<Vehicle?> GetVehicleByIdAsync(int id, CancellationToken cancellationToken) => 
+    public async Task<Vehicle?> GetByIdAsync(int id, CancellationToken cancellationToken) => 
         await context.Vehicles.FindAsync([id], cancellationToken);
 
-    public Task<bool> IsVehicleExists(Expression<Func<Vehicle, bool>> predicate, CancellationToken cancellationToken) =>
+    public Task<bool> IsExistsAsync(Expression<Func<Vehicle, bool>> predicate, CancellationToken cancellationToken) =>
         context.Vehicles.AnyAsync(predicate, cancellationToken);
 
-    public void AddVehicle(Vehicle vehicle) =>
-        context.Vehicles.Add(vehicle);
+    public async Task AddAsync(Vehicle vehicle, CancellationToken cancellationToken)
+    {
+        await context.Vehicles.AddAsync(vehicle, cancellationToken);
+        await context.SaveChangesAsync(cancellationToken);
+    }
 
-    public void RemoveVehicle(Vehicle vehicle) => 
+    public async Task RemoveAsync(Vehicle vehicle, CancellationToken cancellationToken)
+    {
         context.Vehicles.Remove(vehicle);
+        await context.SaveChangesAsync(cancellationToken);
+    } 
 }

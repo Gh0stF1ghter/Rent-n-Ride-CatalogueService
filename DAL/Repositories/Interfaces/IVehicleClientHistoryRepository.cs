@@ -6,6 +6,7 @@ namespace DAL.Repositories.Interfaces;
 public interface IVehicleClientHistoryRepository
 {
     Task<IEnumerable<VehicleClientHistory>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
+
     Task<VehicleClientHistory?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 
     Task<bool> IsExistsAsync(Expression<Func<VehicleClientHistory, bool>> predicate, CancellationToken cancellationToken);

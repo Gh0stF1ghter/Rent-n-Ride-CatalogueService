@@ -7,6 +7,6 @@ public static class ServicesConfiguration
 {
     public static void AddApplicationDependencies(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDalDependencies(configuration);
+        services.AddDataAccessDependencies(configuration);
     }
 }

@@ -4,5 +4,5 @@ namespace DAL.Models;
 
 public record ManufacturerModel(Guid Id,
     string Name,
-    IEnumerable<Model> Models
+    IEnumerable<ModelName> ModelNames
     );

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace DAL.Repositories.Implementations;
+
 public class ModelRepository(AgencyDbContext context) : IModelRepository
 {
     public async Task<IEnumerable<Model>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
@@ -32,6 +33,7 @@ public class ModelRepository(AgencyDbContext context) : IModelRepository
         await context.Models.AddAsync(model, cancellationToken);
         await context.SaveChangesAsync(cancellationToken);
     }
+
     public async Task RemoveAsync(Model model, CancellationToken cancellationToken) 
     {
         context.Models.Remove(model);

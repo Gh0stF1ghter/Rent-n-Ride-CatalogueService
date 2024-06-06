@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace DAL.Repositories.Implementations;
+
 public class VehicleRepository(AgencyDbContext context) : IVehicleRepository
 {
     public async Task<IEnumerable<Vehicle>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)

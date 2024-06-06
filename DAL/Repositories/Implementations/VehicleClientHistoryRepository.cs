@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace DAL.Repositories.Implementations;
+
 public class VehicleClientHistoryRepository(AgencyDbContext context) : IVehicleClientHistoryRepository
 {
     public async Task<IEnumerable<VehicleClientHistory>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
@@ -31,6 +32,7 @@ public class VehicleClientHistoryRepository(AgencyDbContext context) : IVehicleC
         await context.VehicleClientHistories.AddAsync(vehicleClientHistory, cancellationToken);
         await context.SaveChangesAsync(cancellationToken);
     }
+
     public async Task RemoveAsync(VehicleClientHistory vehicleClientHistory, CancellationToken cancellationToken)
     {
         context.VehicleClientHistories.Remove(vehicleClientHistory);

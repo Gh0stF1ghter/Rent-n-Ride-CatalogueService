@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 
 namespace DAL.Repositories.Interfaces;
+
 public interface IVehicleRepository
 {
     public Task<IEnumerable<Vehicle>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
@@ -10,5 +11,6 @@ public interface IVehicleRepository
     public Task<bool> IsExistsAsync(Expression<Func<Vehicle, bool>> predicate, CancellationToken cancellationToken);
 
     public Task AddAsync(Vehicle vehicle, CancellationToken cancellationToken);
+
     public Task RemoveAsync(Vehicle vehicle, CancellationToken cancellationToken);
 }

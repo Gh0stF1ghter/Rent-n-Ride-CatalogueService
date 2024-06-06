@@ -4,8 +4,8 @@ using DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-
 namespace DAL.Repositories.Implementations;
+
 public class ClientRepository(AgencyDbContext context) : IClientRepository
 {
     public async Task<IEnumerable<Client>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)

@@ -3,6 +3,7 @@ using DAL.Entities;
 using DAL.Enums;
 
 namespace DAL.TestDataGenerator;
+
 internal static class DataGenerator
 {
     private const int CountOfGeneratedUnits = 5;

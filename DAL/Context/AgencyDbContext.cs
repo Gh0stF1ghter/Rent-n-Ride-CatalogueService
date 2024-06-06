@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Context;
+
 public class AgencyDbContext(DbContextOptions dbContextOptions) : DbContext(dbContextOptions)
 {
     public DbSet<Client> Clients { get; set; }

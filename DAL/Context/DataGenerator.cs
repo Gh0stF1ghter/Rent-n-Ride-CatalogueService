@@ -10,7 +10,7 @@ internal static class DataGenerator
 
     public static readonly List<Client> Clients = [];
     public static readonly List<Manufacturer> Manufacturers = [];
-    public static readonly List<Model> Models = [];
+    public static readonly List<VehicleModel> VehicleModels = [];
     public static readonly List<Vehicle> Vehicles = [];
     public static readonly List<VehicleClientHistory> VehicleClientHistories = [];
 
@@ -38,7 +38,7 @@ internal static class DataGenerator
 
         var generatedModels = modelFaker.Generate(CountOfGeneratedUnits);
 
-        Models.AddRange(generatedModels);
+        VehicleModels.AddRange(generatedModels);
     }
 
     private static void AddVehicleData(Guid modelId)
@@ -72,14 +72,14 @@ internal static class DataGenerator
         new Faker<Manufacturer>()
             .RuleFor(m => m.Id, _ => Guid.NewGuid())
             .RuleFor(m => m.Name, f => f.Vehicle.Manufacturer())
-            .RuleFor(m => m.Models, (_, m) =>
+            .RuleFor(m => m.VehicleModels, (_, m) =>
             {
                 AddModelData(m.Id);
                 return [];
             });
 
-    private static Faker<Model> GetModelFaker(Guid manufacturerId) =>
-        new Faker<Model>()
+    private static Faker<VehicleModel> GetModelFaker(Guid manufacturerId) =>
+        new Faker<VehicleModel>()
             .RuleFor(m => m.Id, _ => Guid.NewGuid())
             .RuleFor(m => m.Name, f => f.Vehicle.Model())
             .RuleFor(m => m.ManufacturerId, _ => manufacturerId)

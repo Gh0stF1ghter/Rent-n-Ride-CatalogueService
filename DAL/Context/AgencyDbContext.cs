@@ -8,7 +8,7 @@ public class AgencyDbContext(DbContextOptions dbContextOptions) : DbContext(dbCo
 {
     public DbSet<Client> Clients { get; set; }
     public DbSet<Manufacturer> Manufacturers { get; set; }
-    public DbSet<Model> Models { get; set; }
+    public DbSet<VehicleModel> VehicleModels { get; set; }
     public DbSet<Vehicle> Vehicles { get; set; }
     public DbSet<VehicleClientHistory> VehicleClientHistories { get; set; }
 
@@ -19,7 +19,7 @@ public class AgencyDbContext(DbContextOptions dbContextOptions) : DbContext(dbCo
         DataGenerator.Init();
 
         modelBuilder.Entity<Manufacturer>().HasData(DataGenerator.Manufacturers);
-        modelBuilder.Entity<Model>().HasData(DataGenerator.Models);
+        modelBuilder.Entity<Model>().HasData(DataGenerator.VehicleModels);
         modelBuilder.Entity<Vehicle>().HasData(DataGenerator.Vehicles);
         modelBuilder.Entity<Client>().HasData(DataGenerator.Clients);
         modelBuilder.Entity<VehicleClientHistory>().HasData(DataGenerator.VehicleClientHistories);

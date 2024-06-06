@@ -15,7 +15,7 @@ public class VehicleRepository(AgencyDbContext context) : IVehicleRepository
         return await context.Vehicles
             .Skip(rowsToSkip)
             .Take(pageSize)
-            .Include(v => v.Model)
+            .Include(v => v.VehicleModel)
             .Include(v => v.Client)
             .AsNoTracking()
             .ToListAsync(cancellationToken);
@@ -23,7 +23,7 @@ public class VehicleRepository(AgencyDbContext context) : IVehicleRepository
 
     public async Task<Vehicle?> GetByIdAsync(Guid id, CancellationToken cancellationToken) => 
         await context.Vehicles
-            .Include(v => v.Model)
+            .Include(v => v.VehicleModel)
             .Include(v => v.Client)
             .Include(v => v.VehicleClientHistory)
             .FirstOrDefaultAsync(v => v.Id == id, cancellationToken);

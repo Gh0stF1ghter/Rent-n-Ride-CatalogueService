@@ -6,7 +6,7 @@ public class AgencyDbContext(DbContextOptions dbContextOptions) : DbContext(dbCo
 {
     public DbSet<Client> Clients { get; set; }
     public DbSet<Manufacturer> Manufacturers { get; set; }
-    public DbSet<Model> Models { get; set; }
+    public DbSet<VehicleModel> VehicleModels { get; set; }
     public DbSet<Vehicle> Vehicles { get; set; }
     public DbSet<VehicleClientHistory> VehicleClientHistories { get; set; }
 

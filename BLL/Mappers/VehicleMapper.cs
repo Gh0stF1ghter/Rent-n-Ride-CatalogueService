@@ -15,7 +15,7 @@ internal static class VehicleMapper
             VehicleType = vehicleModel.VehicleType,
             VehicleState = vehicleModel.VehicleState,
             FuelType = vehicleModel.FuelType,
-            Model = vehicleModel.Model,
+            ModelName = vehicleModel.Model,
             Client = vehicleModel.Client,
         };
 
@@ -28,7 +28,7 @@ internal static class VehicleMapper
             VehicleType: vehicle.VehicleType,
             VehicleState: vehicle.VehicleState,
             FuelType: vehicle.FuelType,
-            Model: vehicle.Model,
+            Model: vehicle.ModelName,
             Client: vehicle.Client
             );
 }

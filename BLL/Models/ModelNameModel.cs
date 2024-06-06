@@ -2,7 +2,7 @@
 
 namespace DAL.Models;
 
-public record ModelModel(
+public record ModelNameModel(
     Guid Id,
     string Name,
     Manufacturer? Manufacturer,

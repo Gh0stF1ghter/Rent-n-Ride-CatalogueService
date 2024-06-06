@@ -5,7 +5,7 @@ namespace DAL.Mappers;
 
 internal static class ModelMapper
 {
-    public static Model Map(ModelModel modelModel) =>
+    public static ModelName Map(ModelNameModel modelModel) =>
         new()
         {
             Id = modelModel.Id,
@@ -14,7 +14,7 @@ internal static class ModelMapper
             Vehicles = modelModel.Vehicles
         };
 
-    public static ModelModel Map(Model model) =>
+    public static ModelNameModel Map(ModelName model) =>
         new(
             Id: model.Id,
             Name: model.Name,

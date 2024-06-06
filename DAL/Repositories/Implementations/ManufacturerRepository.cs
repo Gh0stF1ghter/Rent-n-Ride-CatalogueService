@@ -21,7 +21,7 @@ public class ManufacturerRepository(AgencyDbContext context) : IManufacturerRepo
 
     public async Task<Manufacturer?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
         await context.Manufacturers
-            .Include(m => m.VehicleModels)
+            .Include(m => m.ModelNames)
             .FirstOrDefaultAsync(m => m.Id == id, cancellationToken);
 
     public async Task<bool> IsExistsAsync(Expression<Func<Manufacturer, bool>> predicate, CancellationToken cancellationToken) =>

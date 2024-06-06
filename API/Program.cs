@@ -1,4 +1,4 @@
-using API.Extensions;
+using DAL.DI;
 
 var builder = WebApplication.CreateBuilder(args);
 

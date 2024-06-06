@@ -5,7 +5,7 @@ namespace DAL.Repositories.Interfaces;
 public interface IClientRepository
 {
     public Task<IEnumerable<Client>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
-    public Task<Client?> GetByIdAsync(int id, CancellationToken cancellationToken);
+    public Task<Client?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 
     public Task<bool> IsExistsAsync(Expression<Func<Client, bool>> predicate, CancellationToken cancellationToken);
 

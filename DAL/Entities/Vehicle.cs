@@ -6,7 +6,7 @@ public class Vehicle
 {
     public Guid Id { get; set; }
 
-    public int PlateNumber { get; set; }
+    public string PlateNumber { get; set; } = string.Empty;
     public int Odo { get; set; }
     public double RentCost { get; set; }
 

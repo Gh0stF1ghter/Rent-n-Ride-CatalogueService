@@ -7,8 +7,6 @@ public static class ServicesConfiguration
 {
     public static void AddApplicationDependencies(this IServiceCollection services, IConfiguration configuration)
     {
-        services.ConfigureDbContext(configuration);
-
-        services.AddReposDependencies();
+        services.AddDalDependencies(configuration);
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace DAL.Entities;
 
-public class VehicleModel
+public class ModelName
 {
     public Guid Id { get; set; }
 

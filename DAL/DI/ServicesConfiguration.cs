@@ -19,4 +19,4 @@ public static class ServicesConfiguration
         services.AddTransient<IModelNameRepository, ModelNameRepository>();
         services.AddTransient<IVehicleRepository, VehicleRepository>();
     }
-}}
+}

@@ -1,15 +1,15 @@
-using BLL.DI;
+using DAL.DI;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
 
-services.AddApplicationDependencies(builder.Configuration);
+services.ConfigureDbContext(builder.Configuration);
 
-services.AddControllers();
+builder.Services.AddControllers();
 
-services.AddEndpointsApiExplorer();
-services.AddSwaggerGen();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 

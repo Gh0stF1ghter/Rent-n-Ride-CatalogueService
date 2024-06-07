@@ -6,10 +6,10 @@ var services = builder.Services;
 
 services.AddApplicationDependencies(builder.Configuration);
 
-builder.Services.AddControllers();
+services.AddControllers();
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+services.AddEndpointsApiExplorer();
+services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -23,4 +23,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+await app.RunAsync();

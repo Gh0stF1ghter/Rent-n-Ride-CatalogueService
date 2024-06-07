@@ -21,11 +21,18 @@ public class VehicleRepository(AgencyDbContext context) : IVehicleRepository
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<Vehicle?> GetByIdAsync(Guid id, CancellationToken cancellationToken) => 
+    public async Task<Vehicle?> GetByIdAsync(Guid id, bool trackingChanges, CancellationToken cancellationToken) => 
+        trackingChanges ? 
         await context.Vehicles
             .Include(v => v.ModelName)
             .Include(v => v.Client)
             .Include(v => v.VehicleClientHistory)
+            .FirstOrDefaultAsync(v => v.Id == id, cancellationToken) :
+        await context.Vehicles
+            .Include(v => v.ModelName)
+            .Include(v => v.Client)
+            .Include(v => v.VehicleClientHistory)
+            .AsNoTracking()
             .FirstOrDefaultAsync(v => v.Id == id, cancellationToken);
 
     public Task<bool> IsExistsAsync(Expression<Func<Vehicle, bool>> predicate, CancellationToken cancellationToken) =>
@@ -34,6 +41,12 @@ public class VehicleRepository(AgencyDbContext context) : IVehicleRepository
     public async Task AddAsync(Vehicle vehicle, CancellationToken cancellationToken)
     {
         await context.Vehicles.AddAsync(vehicle, cancellationToken);
+        await context.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task UpdateAsync(Vehicle newVehicle, CancellationToken cancellationToken)
+    {
+        context.Update(newVehicle);
         await context.SaveChangesAsync(cancellationToken);
     }
 

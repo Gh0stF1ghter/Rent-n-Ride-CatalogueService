@@ -1,10 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BLL.Services.Interfaces;
+using DAL.Mappers;
+using DAL.Models;
+using DAL.Repositories.Interfaces;
 
 namespace BLL.Services.Implementations;
-internal class ModelNameService
+
+public class ModelNameService(IModelNameRepository repository) : IModelNameService
 {
+    public async Task<IEnumerable<ModelNameModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
+    {
+        var modelNames = await repository.GetRangeAsync(page, pageSize, cancellationToken);
+
+        var modelNameModels = new List<ModelNameModel>();
+
+        foreach (var modelName in modelNames)
+        {
+            var modelNameModel = ModelNameMapper.Map(modelName);
+
+            modelNameModels.Add(modelNameModel); 
+        }
+
+        return modelNameModels;
+    }
+
+    public async Task<ModelNameModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+    {
+        var modelName = await repository.GetByIdAsync(id, false, cancellationToken);
+
+        var modelNameModel = ModelNameMapper.Map(modelName);
+
+        return modelNameModel;
+    }
+
+    public async Task<ModelNameModel> AddAsync(ModelNameModel modelNameModel, CancellationToken cancellationToken)
+    {
+        var modelName = ModelNameMapper.Map(modelNameModel);
+
+        await repository.AddAsync(modelName, cancellationToken);
+
+        var newModelNameModel = ModelNameMapper.Map(modelName);
+
+        return newModelNameModel;
+    }
+
+    public async Task UpdateAsync(Guid id, ModelNameModel newModelNameModel, CancellationToken cancellationToken)
+    {
+        var modelName = await repository.GetByIdAsync(id, true, cancellationToken);
+
+        modelName = ModelNameMapper.Map(newModelNameModel);
+
+        await repository.UpdateAsync(modelName, cancellationToken);
+    }
+
+    public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
+    {
+        var modelName = await repository.GetByIdAsync(id, true, cancellationToken);
+
+        repository.RemoveAsync(modelName, cancellationToken);
+    }
 }

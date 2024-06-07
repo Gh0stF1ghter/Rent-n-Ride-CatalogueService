@@ -1,10 +1,10 @@
-using DAL.DI;
+using BLL.DI;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
 
-services.ConfigureDbContext(builder.Configuration);
+services.AddApplicationDependencies(builder.Configuration);
 
 builder.Services.AddControllers();
 

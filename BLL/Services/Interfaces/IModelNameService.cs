@@ -1,16 +1,16 @@
-﻿using DAL.Models;
+﻿using BLL.ViewModels;
 
 namespace BLL.Services.Interfaces;
 
 public interface IModelNameService
 {
-    Task<IEnumerable<ModelNameModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
+    Task<IEnumerable<ModelNameViewModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
 
-    Task<ModelNameModel> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+    Task<ModelNameViewModel> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 
-    Task<ModelNameModel> AddAsync(ModelNameModel modelNameModel, CancellationToken cancellationToken);
+    Task<ModelNameViewModel> AddAsync(CreateModelNameViewModel modelNameModel, CancellationToken cancellationToken);
 
-    Task UpdateAsync(Guid id, ModelNameModel newModelNameModel, CancellationToken cancellationToken);
+    Task UpdateAsync(Guid id, CreateModelNameViewModel newModelNameModel, CancellationToken cancellationToken);
 
     Task DeleteAsync(Guid id, CancellationToken cancellationToken);
 }

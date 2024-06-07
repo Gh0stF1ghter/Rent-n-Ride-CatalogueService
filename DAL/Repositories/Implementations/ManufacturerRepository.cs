@@ -19,9 +19,14 @@ public class ManufacturerRepository(AgencyDbContext context) : IManufacturerRepo
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<Manufacturer?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
+    public async Task<Manufacturer?> GetByIdAsync(Guid id, bool trackingChanges, CancellationToken cancellationToken) =>
+        trackingChanges ? 
         await context.Manufacturers
             .Include(m => m.ModelNames)
+            .FirstOrDefaultAsync(m => m.Id == id, cancellationToken) :
+        await context.Manufacturers
+            .Include(m => m.ModelNames)
+            .AsNoTracking()
             .FirstOrDefaultAsync(m => m.Id == id, cancellationToken);
 
     public async Task<bool> IsExistsAsync(Expression<Func<Manufacturer, bool>> predicate, CancellationToken cancellationToken) =>
@@ -30,6 +35,12 @@ public class ManufacturerRepository(AgencyDbContext context) : IManufacturerRepo
     public async Task AddAsync(Manufacturer manufacturer, CancellationToken cancellationToken)
     {
         await context.Manufacturers.AddAsync(manufacturer, cancellationToken);
+        await context.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task UpdateAsync(Manufacturer newManufacturer, CancellationToken cancellationToken)
+    {
+        context.Manufacturers.Update(newManufacturer);
         await context.SaveChangesAsync(cancellationToken);
     }
 

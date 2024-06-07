@@ -3,7 +3,7 @@ using DAL.Models;
 
 namespace DAL.Mappers;
 
-internal static class ModelMapper
+internal static class ModelNameMapper
 {
     public static ModelName Map(ModelNameModel modelModel) =>
         new()

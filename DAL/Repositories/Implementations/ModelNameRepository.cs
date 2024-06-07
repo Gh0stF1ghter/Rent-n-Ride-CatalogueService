@@ -19,7 +19,7 @@ public class ModelNameRepository(AgencyDbContext context) : IModelNameRepository
             .AsNoTracking()
             .ToListAsync(cancellationToken);
     }
-
+    
     public async Task<ModelName?> GetByIdAsync(Guid id, bool trackingChanges, CancellationToken cancellationToken) =>
         trackingChanges ? 
         await context.VehicleModels

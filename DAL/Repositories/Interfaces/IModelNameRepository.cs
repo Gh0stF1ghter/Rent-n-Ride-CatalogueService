@@ -1,4 +1,4 @@
-using DAL.Entities;
+﻿using DAL.Entities;
 using System.Linq.Expressions;
 
 namespace DAL.Repositories.Interfaces;

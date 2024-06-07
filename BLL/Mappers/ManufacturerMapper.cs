@@ -1,4 +1,4 @@
-using DAL.Entities;
+﻿using DAL.Entities;
 using DAL.Models;
 
 namespace DAL.Mappers;
@@ -10,7 +10,7 @@ internal static class ManufacturerMapper
         {
             Id = manufacturerModel.Id,
             Name = manufacturerModel.Name,
-            ModelNames = manufacturerModel.ModelNames,
+            ModelNames = manufacturerModel.Models,
         };
 
     public static ManufacturerModel Map(Manufacturer manufacturer) =>

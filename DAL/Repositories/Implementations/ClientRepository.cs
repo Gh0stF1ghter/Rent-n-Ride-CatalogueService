@@ -19,16 +19,10 @@ public class ClientRepository(AgencyDbContext context) : IClientRepository
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<Client?> GetByIdAsync(Guid id, bool trackingChanges, CancellationToken cancellationToken) =>
-        trackingChanges ?
+    public async Task<Client?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
         await context.Clients
             .Include(c => c.Vehicle)
-            .Include(c => c.VehicleClientHistory)
-            .FirstOrDefaultAsync(c => c.Id == id, cancellationToken: cancellationToken) :
-        await context.Clients
-            .Include(c => c.Vehicle)
-            .Include(c => c.VehicleClientHistory)
-            .AsNoTracking()
+            .Include(c => c.VehicleClientHistory)    
             .FirstOrDefaultAsync(c => c.Id == id, cancellationToken: cancellationToken);
 
     public async Task<bool> IsExistsAsync(Expression<Func<Client, bool>> predicate, CancellationToken cancellationToken) =>
@@ -37,12 +31,6 @@ public class ClientRepository(AgencyDbContext context) : IClientRepository
     public async Task AddAsync(Client client, CancellationToken cancellationToken) 
     {
         await context.Clients.AddAsync(client, cancellationToken);
-        await context.SaveChangesAsync(cancellationToken);
-    }
-
-    public async Task UpdateAsync(Client newClient, CancellationToken cancellationToken)
-    {
-        context.Clients.Update(newClient);
         await context.SaveChangesAsync(cancellationToken);
     }
 

@@ -1,15 +1,16 @@
 ﻿using DAL.Models;
 
 namespace BLL.Services.Interfaces;
-internal interface IClientService
+
+public interface IClientService
 {
     Task<IEnumerable<ClientModel>> GetRangeAsync(int pageSize, int page, CancellationToken cancellationToken);
 
-    Task<ClientModel> GetByIdAsync(int id, CancellationToken cancellationToken);
+    Task<ClientModel> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 
-    Task<ClientModel> AddAsync(ClientModel clientModel);
+    Task<ClientModel> AddAsync(ClientModel clientModel, CancellationToken cancellationToken);
 
-    Task UpdateAsync(int id, ClientModel newClientModel);
+    Task UpdateAsync(Guid id, ClientModel newClientModel, CancellationToken cancellationToken);
 
-    Task DeleteAsync(int id);
+    Task DeleteAsync(Guid id, CancellationToken cancellationToken);
 }

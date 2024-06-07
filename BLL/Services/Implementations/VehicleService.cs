@@ -1,7 +1,8 @@
 ﻿using BLL.Services.Interfaces;
-using DAL.Mappers;
+using DAL.Entities;
 using DAL.Models;
 using DAL.Repositories.Interfaces;
+using Mapster;
 
 namespace BLL.Services.Implementations;
 
@@ -11,14 +12,7 @@ public class VehicleService(IVehicleRepository repository) : IVehicleService
     {
         var vehicles = await repository.GetRangeAsync(page, pageSize, cancellationToken);
 
-        var vehicleModels = new List<VehicleModel>();
-
-        foreach (var modelName in vehicles)
-        {
-            var vehicleModel = VehicleMapper.Map(modelName);
-
-            vehicleModels.Add(vehicleModel);
-        }
+        var vehicleModels = vehicles.Adapt<IEnumerable<VehicleModel>>();
 
         return vehicleModels;
     }
@@ -27,18 +21,18 @@ public class VehicleService(IVehicleRepository repository) : IVehicleService
     {
         var vehicle = await repository.GetByIdAsync(id, false, cancellationToken);
 
-        var vehicleModel = VehicleMapper.Map(vehicle);
+        var vehicleModel = vehicle.Adapt<VehicleModel>();
 
         return vehicleModel;
     }
 
     public async Task<VehicleModel> AddAsync(VehicleModel vehicleModel, CancellationToken cancellationToken)
     {
-        var vehicle = VehicleMapper.Map(vehicleModel);
+        var vehicle = vehicleModel.Adapt<Vehicle>();
 
         await repository.AddAsync(vehicle, cancellationToken);
 
-        var newVehicleModel = VehicleMapper.Map(vehicle);
+        var newVehicleModel = vehicle.Adapt<VehicleModel>();
 
         return newVehicleModel;
     }
@@ -47,7 +41,7 @@ public class VehicleService(IVehicleRepository repository) : IVehicleService
     {
         var vehicle = await repository.GetByIdAsync(id, true, cancellationToken);
 
-        vehicle = VehicleMapper.Map(newVehicleModel);
+        newVehicleModel.Adapt(vehicle);
 
         await repository.UpdateAsync(vehicle, cancellationToken);
     }

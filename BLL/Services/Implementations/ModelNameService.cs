@@ -50,6 +50,6 @@ public class ModelNameService(IModelNameRepository repository) : IModelNameServi
     {
         var modelName = await repository.GetByIdAsync(id, true, cancellationToken);
 
-        repository.RemoveAsync(modelName, cancellationToken);
+        await repository.RemoveAsync(modelName, cancellationToken);
     }
 }

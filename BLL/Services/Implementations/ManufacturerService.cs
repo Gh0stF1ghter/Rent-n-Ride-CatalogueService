@@ -50,6 +50,6 @@ public class ManufacturerService(IManufacturerRepository repository) : IManufact
     {
         var manufacturer = await repository.GetByIdAsync(id, true, cancellationToken);
 
-        repository.RemoveAsync(manufacturer, cancellationToken);
+        await repository.RemoveAsync(manufacturer, cancellationToken);
     }
 }

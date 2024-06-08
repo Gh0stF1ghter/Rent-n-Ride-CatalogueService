@@ -42,6 +42,6 @@ public class VehicleClientHistoryService(IVehicleClientHistoryRepository reposit
     {
         var modelName = await repository.GetByIdAsync(id, cancellationToken);
 
-        repository.RemoveAsync(modelName, cancellationToken);
+        await repository.RemoveAsync(modelName, cancellationToken);
     }
 }

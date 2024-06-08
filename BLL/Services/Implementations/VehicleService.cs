@@ -50,6 +50,6 @@ public class VehicleService(IVehicleRepository repository) : IVehicleService
     {
         var vehicle = await repository.GetByIdAsync(id, true, cancellationToken);
 
-        repository.RemoveAsync(vehicle, cancellationToken);
+        await repository.RemoveAsync(vehicle, cancellationToken);
     }
 }

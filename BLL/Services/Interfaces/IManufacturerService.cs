@@ -10,7 +10,7 @@ public interface IManufacturerService
 
     Task<ManufacturerModel> AddAsync(ManufacturerModel manufacturerModel, CancellationToken cancellationToken);
 
-    Task UpdateAsync(Guid id, ManufacturerModel newManufacturerModel, CancellationToken cancellationToken);
+    Task<ManufacturerModel> UpdateAsync(Guid id, ManufacturerModel newManufacturerModel, CancellationToken cancellationToken);
 
     Task DeleteAsync(Guid id, CancellationToken cancellationToken);
 }

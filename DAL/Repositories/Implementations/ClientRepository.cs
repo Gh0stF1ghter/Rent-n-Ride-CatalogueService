@@ -9,7 +9,7 @@ namespace DAL.Repositories.Implementations;
 public class ClientRepository(AgencyDbContext context) : IClientRepository
 {
     public async Task<IEnumerable<Client>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
-    { 
+    {
         var rowsToSkip = (page - 1) * pageSize;
 
         return await context.Clients
@@ -29,7 +29,7 @@ public class ClientRepository(AgencyDbContext context) : IClientRepository
     public async Task<bool> IsExistsAsync(Expression<Func<Client, bool>> predicate, CancellationToken cancellationToken) =>
         await context.Clients.AnyAsync(predicate, cancellationToken: cancellationToken);
 
-    public async Task AddAsync(Client client, CancellationToken cancellationToken) 
+    public async Task AddAsync(Client client, CancellationToken cancellationToken)
     {
         await context.Clients.AddAsync(client, cancellationToken);
         await context.SaveChangesAsync(cancellationToken);

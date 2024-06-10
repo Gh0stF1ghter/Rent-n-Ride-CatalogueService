@@ -19,7 +19,7 @@ public class ModelNameRepository(AgencyDbContext context) : IModelNameRepository
             .AsNoTracking()
             .ToListAsync(cancellationToken);
     }
-    
+
     public async Task<ModelName?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
         await context.VehicleModels
             .Include(m => m.Manufacturer)
@@ -41,7 +41,7 @@ public class ModelNameRepository(AgencyDbContext context) : IModelNameRepository
         await context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task RemoveAsync(ModelName modelName, CancellationToken cancellationToken) 
+    public async Task RemoveAsync(ModelName modelName, CancellationToken cancellationToken)
     {
         context.VehicleModels.Remove(modelName);
         await context.SaveChangesAsync(cancellationToken);

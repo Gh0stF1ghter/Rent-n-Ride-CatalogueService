@@ -11,7 +11,9 @@ public interface IModelNameRepository
 
     Task<bool> IsExistsAsync(Expression<Func<ModelName, bool>> predicate, CancellationToken cancellationToken);
 
-    Task AddAsync(ModelName model, CancellationToken cancellationToken);
+    Task AddAsync(ModelName modelName, CancellationToken cancellationToken);
 
-    Task RemoveAsync(ModelName model, CancellationToken cancellationToken);
+    Task UpdateAsync(ModelName newModelName, CancellationToken cancellationToken);
+
+    Task RemoveAsync(ModelName modelName, CancellationToken cancellationToken);
 }

@@ -13,5 +13,7 @@ public interface IVehicleRepository
 
     Task AddAsync(Vehicle vehicle, CancellationToken cancellationToken);
 
+    Task UpdateAsync(Vehicle newVehicle, CancellationToken cancellationToken);
+
     Task RemoveAsync(Vehicle vehicle, CancellationToken cancellationToken);
 }

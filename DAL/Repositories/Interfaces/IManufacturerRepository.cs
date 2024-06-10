@@ -13,5 +13,7 @@ public interface IManufacturerRepository
 
     Task AddAsync(Manufacturer manufacturer, CancellationToken cancellationToken);
 
+    Task UpdateAsync(Manufacturer newManufacturer, CancellationToken cancellationToken);
+
     Task RemoveAsync(Manufacturer manufacturer, CancellationToken cancellationToken);
 }

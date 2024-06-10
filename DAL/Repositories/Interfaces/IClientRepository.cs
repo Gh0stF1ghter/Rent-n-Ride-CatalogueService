@@ -13,5 +13,7 @@ public interface IClientRepository
 
     Task AddAsync(Client client, CancellationToken cancellationToken);
 
+    Task UpdateAsync(Client newClient, CancellationToken cancellationToken);
+
     Task RemoveAsync(Client client, CancellationToken cancellationToken);
 }

@@ -1,5 +1,4 @@
 ﻿using BLL.Services.Interfaces;
-using BLL.ViewModels;
 using DAL.Entities;
 using DAL.Models;
 using DAL.Repositories.Interfaces;
@@ -46,7 +45,7 @@ public class ModelNameService(IModelNameRepository repository) : IModelNameServi
 
         await repository.UpdateAsync(modelName, cancellationToken);
 
-        var modeNameToReturn = ModelNameMapper.Map(modelName);
+        var modeNameToReturn = modelName.Adapt<ModelNameModel>();
 
         return modeNameToReturn;
     }

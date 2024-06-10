@@ -19,18 +19,10 @@ public class ClientRepository(AgencyDbContext context) : IClientRepository
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<Client?> GetByIdAsync(Guid id, bool trackingChanges, CancellationToken cancellationToken) =>
-        trackingChanges ?
+    public async Task<Client?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
         await context.Clients
             .Include(c => c.Vehicle)
             .Include(c => c.VehicleClientHistory)
-<<<<<<< feature/add-services-to-bll
-            .FirstOrDefaultAsync(c => c.Id == id, cancellationToken: cancellationToken) :
-        await context.Clients
-            .Include(c => c.Vehicle)
-            .Include(c => c.VehicleClientHistory)
-=======
->>>>>>> main
             .AsNoTracking()
             .FirstOrDefaultAsync(c => c.Id == id, cancellationToken: cancellationToken);
 

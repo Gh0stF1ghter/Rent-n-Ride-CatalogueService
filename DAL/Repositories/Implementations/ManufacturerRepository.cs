@@ -19,16 +19,9 @@ public class ManufacturerRepository(AgencyDbContext context) : IManufacturerRepo
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<Manufacturer?> GetByIdAsync(Guid id, bool trackingChanges, CancellationToken cancellationToken) =>
-        trackingChanges ? 
+    public async Task<Manufacturer?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
         await context.Manufacturers
             .Include(m => m.ModelNames)
-<<<<<<< feature/add-services-to-bll
-            .FirstOrDefaultAsync(m => m.Id == id, cancellationToken) :
-        await context.Manufacturers
-            .Include(m => m.ModelNames)
-=======
->>>>>>> main
             .AsNoTracking()
             .FirstOrDefaultAsync(m => m.Id == id, cancellationToken);
 

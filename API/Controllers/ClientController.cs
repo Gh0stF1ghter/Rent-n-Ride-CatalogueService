@@ -1,5 +1,7 @@
 ﻿using BLL.Services.Interfaces;
 using BLL.ViewModels;
+using DAL.Models;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -16,7 +18,9 @@ public class ClientController(IClientService service) : ControllerBase
     {
         var clients = await service.GetRangeAsync(page, pageSize, cancellationToken);
 
-        return Ok(clients);
+        var clientsVMs = clients.Adapt<ClientViewModel>();
+
+        return Ok(clientsVMs);
     }
 
     [HttpGet("{id}")]
@@ -27,7 +31,9 @@ public class ClientController(IClientService service) : ControllerBase
     {
         var client = await service.GetByIdAsync(id, cancellationToken);
 
-        return Ok(client);
+        var clientVM = client.Adapt<ClientViewModel>();
+
+        return Ok(clientVM);
     }
 
     [HttpPost]
@@ -36,7 +42,9 @@ public class ClientController(IClientService service) : ControllerBase
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreateClientViewModel createClientViewModel, CancellationToken cancellationToken)
     {
-        var newClient = await service.AddAsync(createClientViewModel, cancellationToken);
+        var createClientModel = createClientViewModel.Adapt<ClientModel>();
+
+        var newClient = await service.AddAsync(createClientModel, cancellationToken);
 
         return CreatedAtAction("GetClientById", new { id = newClient.Id }, newClient);
     }

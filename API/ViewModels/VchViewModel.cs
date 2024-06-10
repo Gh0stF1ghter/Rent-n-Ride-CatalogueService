@@ -1,4 +1,4 @@
-﻿namespace BLL.ViewModels;
+﻿namespace API.ViewModels;
 
 public record VchViewModel(
     Guid Id,

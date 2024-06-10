@@ -1,8 +1,8 @@
-﻿using BLL.ViewModels;
+﻿using API.ViewModels;
 using DAL.Entities;
 using Mapster;
 
-namespace BLL.MappingConfigurations;
+namespace API.MappingConfigurations;
 
 internal class ClientMapperConfig : IRegister
 {

@@ -5,9 +5,9 @@ namespace BLL.ViewModels;
 public record CreateVehicleViewModel(
     Guid ModelId,
     string PlateNumber,
-    double RentCost,
+    decimal RentCost,
     VehicleType VehicleType,
     VehicleState VehicleState,
     FuelType FuelType,
-    int Odo = 0
+    int Odo
     );

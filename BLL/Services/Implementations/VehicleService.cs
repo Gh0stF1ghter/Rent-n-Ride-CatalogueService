@@ -1,5 +1,4 @@
 ﻿using BLL.Services.Interfaces;
-using BLL.ViewModels;
 using DAL.Entities;
 using DAL.Models;
 using DAL.Repositories.Interfaces;
@@ -9,36 +8,36 @@ namespace BLL.Services.Implementations;
 
 public class VehicleService(IVehicleRepository repository) : IVehicleService
 {
-    public async Task<IEnumerable<VehicleViewModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
+    public async Task<IEnumerable<VehicleModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
         var vehicles = await repository.GetRangeAsync(page, pageSize, cancellationToken);
 
-        var vehicleModels = vehicles.Adapt<IEnumerable<VehicleViewModel>>();
+        var vehicleModels = vehicles.Adapt<IEnumerable<VehicleModel>>();
 
         return vehicleModels;
     }
 
-    public async Task<VehicleViewModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<VehicleModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         var vehicle = await repository.GetByIdAsync(id, false, cancellationToken);
 
-        var vehicleModel = vehicle.Adapt<VehicleViewModel>();
+        var vehicleModel = vehicle.Adapt<VehicleModel>();
 
         return vehicleModel;
     }
 
-    public async Task<VehicleViewModel> AddAsync(CreateVehicleViewModel vehicleModel, CancellationToken cancellationToken)
+    public async Task<VehicleModel> AddAsync(VehicleModel vehicleModel, CancellationToken cancellationToken)
     {
         var vehicle = vehicleModel.Adapt<Vehicle>();
 
         await repository.AddAsync(vehicle, cancellationToken);
 
-        var newVehicleModel = vehicle.Adapt<VehicleViewModel>();
+        var newVehicleModel = vehicle.Adapt<VehicleModel>();
 
         return newVehicleModel;
     }
 
-    public async Task UpdateAsync(Guid id, CreateVehicleViewModel newVehicleModel, CancellationToken cancellationToken)
+    public async Task UpdateAsync(Guid id, VehicleModel newVehicleModel, CancellationToken cancellationToken)
     {
         var vehicle = await repository.GetByIdAsync(id, true, cancellationToken);
 

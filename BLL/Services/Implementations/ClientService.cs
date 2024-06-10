@@ -1,6 +1,6 @@
 ﻿using BLL.Services.Interfaces;
-using BLL.ViewModels;
 using DAL.Entities;
+using DAL.Models;
 using DAL.Repositories.Interfaces;
 using Mapster;
 
@@ -8,36 +8,36 @@ namespace BLL.Services.Implementations;
 
 public class ClientService(IClientRepository clientRepository) : IClientService
 {
-    public async Task<IEnumerable<ClientViewModel>> GetRangeAsync(int pageSize, int page, CancellationToken cancellationToken)
+    public async Task<IEnumerable<ClientModel>> GetRangeAsync(int pageSize, int page, CancellationToken cancellationToken)
     {
         var clients = await clientRepository.GetRangeAsync(pageSize, page, cancellationToken);
 
-        var clientModels = clients.Adapt<IEnumerable<ClientViewModel>>();
+        var clientModels = clients.Adapt<IEnumerable<ClientModel>>();
 
         return clientModels;
     }
 
-    public async Task<ClientViewModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<ClientModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         var client = await clientRepository.GetByIdAsync(id, false, cancellationToken);
 
-        var clientModel = client.Adapt<ClientViewModel>();
+        var clientModel = client.Adapt<ClientModel>();
 
         return clientModel;
     }
 
-    public async Task<ClientViewModel> AddAsync(CreateClientViewModel clientModel, CancellationToken cancellationToken)
+    public async Task<ClientModel> AddAsync(ClientModel clientModel, CancellationToken cancellationToken)
     {
         var newClient = clientModel.Adapt<Client>();
 
         await clientRepository.AddAsync(newClient, cancellationToken);
 
-        var newClientModel = newClient.Adapt<ClientViewModel>();
+        var newClientModel = newClient.Adapt<ClientModel>();
 
         return newClientModel;
     }
 
-    public async Task UpdateAsync(Guid id, CreateClientViewModel newClientModel, CancellationToken cancellationToken)
+    public async Task UpdateAsync(Guid id, ClientModel newClientModel, CancellationToken cancellationToken)
     {
         var clientToUpdate = await clientRepository.GetByIdAsync(id, true, cancellationToken);
 

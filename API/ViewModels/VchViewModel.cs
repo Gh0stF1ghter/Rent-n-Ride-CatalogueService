@@ -1,9 +1,9 @@
-﻿using DAL.Entities;
+﻿namespace BLL.ViewModels;
 
-namespace BLL.ViewModels;
 public record VchViewModel(
     Guid Id,
-    DateTime UseTime,
+    DateTime StartDate,
+    DateTime EndDate,
     VehicleViewModel? Vehicle,
     ClientViewModel? Client
     );

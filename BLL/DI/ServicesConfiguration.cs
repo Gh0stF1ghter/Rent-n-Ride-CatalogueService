@@ -16,10 +16,10 @@ public static class ServicesConfiguration
 
     private static void AddServices(this IServiceCollection services)
     {
-        services.AddTransient<IClientService, ClientService>();
-        services.AddTransient<IManufacturerService, ManufacturerService>();
-        services.AddTransient<IModelNameService, ModelNameService>();
-        services.AddTransient<IVehicleClientHistoryService, VehicleClientHistoryService>();
-        services.AddTransient<IVehicleService, VehicleService>();
+        services.AddScoped<IClientService, ClientService>();
+        services.AddScoped<IManufacturerService, ManufacturerService>();
+        services.AddScoped<IModelNameService, ModelNameService>();
+        services.AddScoped<IVehicleClientHistoryService, VehicleClientHistoryService>();
+        services.AddScoped<IVehicleService, VehicleService>();
     }
 }

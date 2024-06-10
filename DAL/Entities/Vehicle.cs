@@ -19,5 +19,5 @@ public class Vehicle
 
     public Client? Client { get; set; }
 
-    public IEnumerable<VehicleClientHistory> VehicleClientHistory { get; set; } = [];
+    public IEnumerable<VehicleClientHistory> VehicleClientHistory { get; set; } 
 }

@@ -6,5 +6,5 @@ public class Manufacturer
 
     public string Name { get; set; } = string.Empty;
 
-    public IEnumerable<ModelName> ModelNames { get; set; } = [];
+    public IEnumerable<ModelName>? ModelNames { get; set; }
 }

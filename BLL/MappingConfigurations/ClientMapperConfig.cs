@@ -10,6 +10,7 @@ internal class ClientMapperConfig : IRegister
     {
         config
             .NewConfig<Client, ClientViewModel>()
+            .MaxDepth(2)
             .Map(dest => dest.FullName, src => $"{src.FirstName} {src.LastName}");
     }
 }

@@ -1,3 +1,4 @@
+using BLL.MappingConfigurations;
 using BLL.Services.Implementations;
 using BLL.Services.Interfaces;
 using DAL.DI;
@@ -14,8 +15,6 @@ public static class ServicesConfiguration
     {
         services.AddDataAccessDependencies(configuration);
 
-        TypeAdapterConfig.GlobalSettings.Scan(Assembly.GetExecutingAssembly());
-        
         services.AddCustomServicesDependencies();
     }
 

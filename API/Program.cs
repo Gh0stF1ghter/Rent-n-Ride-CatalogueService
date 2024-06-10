@@ -1,10 +1,14 @@
 using BLL.DI;
+using BLL.MappingConfigurations;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
 
 services.AddApplicationDependencies(builder.Configuration);
+
+GlobalMappingSettings.SetMapper();
 
 services.AddControllers();
 

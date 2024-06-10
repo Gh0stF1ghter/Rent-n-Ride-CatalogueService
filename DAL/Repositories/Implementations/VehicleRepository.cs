@@ -21,17 +21,24 @@ public class VehicleRepository(AgencyDbContext context) : IVehicleRepository
             .ToListAsync(cancellationToken);
     }
 
+<<<<<<< feature/add-services-to-bll
     public async Task<Vehicle?> GetByIdAsync(Guid id, bool trackingChanges, CancellationToken cancellationToken) => 
         trackingChanges ? 
+=======
+    public async Task<Vehicle?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
+>>>>>>> main
         await context.Vehicles
             .Include(v => v.ModelName)
             .Include(v => v.Client)
             .Include(v => v.VehicleClientHistory)
+<<<<<<< feature/add-services-to-bll
             .FirstOrDefaultAsync(v => v.Id == id, cancellationToken) :
         await context.Vehicles
             .Include(v => v.ModelName)
             .Include(v => v.Client)
             .Include(v => v.VehicleClientHistory)
+=======
+>>>>>>> main
             .AsNoTracking()
             .FirstOrDefaultAsync(v => v.Id == id, cancellationToken);
 
@@ -54,5 +61,5 @@ public class VehicleRepository(AgencyDbContext context) : IVehicleRepository
     {
         context.Vehicles.Remove(vehicle);
         await context.SaveChangesAsync(cancellationToken);
-    } 
+    }
 }

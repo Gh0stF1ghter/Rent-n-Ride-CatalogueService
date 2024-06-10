@@ -23,9 +23,12 @@ public class ManufacturerRepository(AgencyDbContext context) : IManufacturerRepo
         trackingChanges ? 
         await context.Manufacturers
             .Include(m => m.ModelNames)
+<<<<<<< feature/add-services-to-bll
             .FirstOrDefaultAsync(m => m.Id == id, cancellationToken) :
         await context.Manufacturers
             .Include(m => m.ModelNames)
+=======
+>>>>>>> main
             .AsNoTracking()
             .FirstOrDefaultAsync(m => m.Id == id, cancellationToken);
 

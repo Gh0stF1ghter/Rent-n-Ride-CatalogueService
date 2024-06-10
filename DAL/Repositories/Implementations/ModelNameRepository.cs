@@ -45,7 +45,11 @@ public class ModelNameRepository(AgencyDbContext context) : IModelNameRepository
         await context.SaveChangesAsync(cancellationToken);
     }
 
+<<<<<<< feature/add-services-to-bll
     public async Task RemoveAsync(ModelName modelName, CancellationToken cancellationToken) 
+=======
+    public async Task RemoveAsync(ModelName modelName, CancellationToken cancellationToken)
+>>>>>>> main
     {
         context.VehicleModels.Remove(modelName);
         await context.SaveChangesAsync(cancellationToken);

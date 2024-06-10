@@ -9,7 +9,7 @@ namespace DAL.Repositories.Implementations;
 public class ClientRepository(AgencyDbContext context) : IClientRepository
 {
     public async Task<IEnumerable<Client>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
-    { 
+    {
         var rowsToSkip = (page - 1) * pageSize;
 
         return await context.Clients
@@ -24,17 +24,20 @@ public class ClientRepository(AgencyDbContext context) : IClientRepository
         await context.Clients
             .Include(c => c.Vehicle)
             .Include(c => c.VehicleClientHistory)
+<<<<<<< feature/add-services-to-bll
             .FirstOrDefaultAsync(c => c.Id == id, cancellationToken: cancellationToken) :
         await context.Clients
             .Include(c => c.Vehicle)
             .Include(c => c.VehicleClientHistory)
+=======
+>>>>>>> main
             .AsNoTracking()
             .FirstOrDefaultAsync(c => c.Id == id, cancellationToken: cancellationToken);
 
     public async Task<bool> IsExistsAsync(Expression<Func<Client, bool>> predicate, CancellationToken cancellationToken) =>
         await context.Clients.AnyAsync(predicate, cancellationToken: cancellationToken);
 
-    public async Task AddAsync(Client client, CancellationToken cancellationToken) 
+    public async Task AddAsync(Client client, CancellationToken cancellationToken)
     {
         await context.Clients.AddAsync(client, cancellationToken);
         await context.SaveChangesAsync(cancellationToken);

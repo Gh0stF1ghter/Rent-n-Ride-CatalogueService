@@ -1,5 +1,7 @@
 ﻿using BLL.Services.Interfaces;
 using BLL.ViewModels;
+using DAL.Models;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -36,9 +38,13 @@ public class ModelNameController(IModelNameService service) : ControllerBase
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreateModelNameViewModel createModelNameViewModel, CancellationToken cancellationToken)
     {
-        var newModelName = await service.AddAsync(createModelNameViewModel, cancellationToken);
+        var modelNameModel = createModelNameViewModel.Adapt<ModelNameModel>();
 
-        return CreatedAtAction("GetModelNameById", new { id = newModelName.Id }, newModelName);
+        var newModelName = await service.AddAsync(modelNameModel, cancellationToken);
+
+        var modelNameVM = newModelName.Adapt<ModelNameViewModel>();
+
+        return CreatedAtAction("GetModelNameById", new { id = newModelName.Id }, modelNameVM);
     }
 
     [HttpPut("{id}")]
@@ -48,9 +54,15 @@ public class ModelNameController(IModelNameService service) : ControllerBase
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] CreateModelNameViewModel updateModelNameViewModel, CancellationToken cancellationToken)
     {
-        await service.UpdateAsync(id, updateModelNameViewModel, cancellationToken);
+        var clientModel = updateModelNameViewModel.Adapt<ModelNameModel>();
 
-        return NoContent();
+        id.Adapt(clientModel);
+
+        var newClient = await service.UpdateAsync(clientModel, cancellationToken);
+
+        var clientVM = newClient.Adapt<ModelNameViewModel>();
+
+        return CreatedAtAction("GetClientById", new { id = clientVM.Id }, clientVM);
     }
 
     [HttpDelete("{id}")]

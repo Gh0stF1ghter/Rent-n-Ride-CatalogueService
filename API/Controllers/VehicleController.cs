@@ -1,5 +1,7 @@
 ﻿using BLL.Services.Interfaces;
 using BLL.ViewModels;
+using DAL.Models;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -36,9 +38,13 @@ public class VehicleController(IVehicleService service) : ControllerBase
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreateVehicleViewModel createClientViewModel, CancellationToken cancellationToken)
     {
-        var newClient = await service.AddAsync(createClientViewModel, cancellationToken);
+        var createClientModel = createClientViewModel.Adapt<VehicleModel>();
 
-        return CreatedAtAction("GetVehicleById", new { id = newClient.Id }, newClient);
+        var newClient = await service.AddAsync(createClientModel, cancellationToken);
+
+        var clientVM = newClient.Adapt<VehicleViewModel>();
+
+        return CreatedAtAction("GetVehicleById", new { id = clientVM.Id }, clientVM);
     }
 
     [HttpPut("{id}")]
@@ -48,9 +54,15 @@ public class VehicleController(IVehicleService service) : ControllerBase
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] CreateVehicleViewModel updateVehicleViewModel, CancellationToken cancellationToken)
     {
-        await service.UpdateAsync(id, updateVehicleViewModel, cancellationToken);
+        var clientModel = updateVehicleViewModel.Adapt<VehicleModel>();
 
-        return NoContent();
+        id.Adapt(clientModel);
+
+        var newClient = await service.UpdateAsync(clientModel, cancellationToken);
+
+        var clientVM = newClient.Adapt<VehicleViewModel>();
+
+        return CreatedAtAction("GetClientById", new { id = clientVM.Id }, clientVM);
     }
 
     [HttpDelete("{id}")]

@@ -55,10 +55,14 @@ public class ClientController(IClientService service) : ControllerBase
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] CreateClientViewModel updateClientViewModel, CancellationToken cancellationToken)
-    {
-        await service.UpdateAsync(id, updateClientViewModel, cancellationToken);
+    {       
+        var clientModel = updateClientViewModel.Adapt<ClientModel>();
 
-        return NoContent();
+        var newClient = await service.UpdateAsync(clientModel, cancellationToken);
+
+        var clientVM = newClient.Adapt<ClientViewModel>();
+
+        return CreatedAtAction("GetClientById", new { id = clientVM.Id }, clientVM);
     }
 
     [HttpDelete("{id}")]

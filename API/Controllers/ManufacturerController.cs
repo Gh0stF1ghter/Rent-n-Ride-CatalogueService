@@ -1,5 +1,7 @@
 ﻿using BLL.Services.Interfaces;
 using BLL.ViewModels;
+using DAL.Models;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -36,7 +38,9 @@ public class ManufacturerController(IManufacturerService service) : ControllerBa
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreateManufacturerViewModel createManufacturerViewModel, CancellationToken cancellationToken)
     {
-        var newManufacturer = await service.AddAsync(createManufacturerViewModel, cancellationToken);
+        var manufacturerModel = createManufacturerViewModel.Adapt<ManufacturerModel>();
+
+        var newManufacturer = await service.AddAsync(manufacturerModel, cancellationToken);
 
         return CreatedAtAction("GetManufacturerById", new { id = newManufacturer.Id }, newManufacturer);
     }
@@ -48,9 +52,15 @@ public class ManufacturerController(IManufacturerService service) : ControllerBa
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] CreateManufacturerViewModel updateManufacturerViewModel, CancellationToken cancellationToken)
     {
-        await service.UpdateAsync(id, updateManufacturerViewModel, cancellationToken);
+        var clientModel = updateManufacturerViewModel.Adapt<ManufacturerModel>();
 
-        return NoContent();
+        id.Adapt(clientModel);
+
+        var newClient = await service.UpdateAsync(clientModel, cancellationToken);
+
+        var clientVM = newClient.Adapt<ManufacturerViewModel>();
+
+        return CreatedAtAction("GetClientById", new { id = clientVM.Id }, clientVM);
     }
 
     [HttpDelete("{id}")]

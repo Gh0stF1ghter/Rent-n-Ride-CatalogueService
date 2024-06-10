@@ -1,5 +1,6 @@
-﻿using BLL.Services.Interfaces;
-using BLL.ViewModels;
+﻿using API.ViewModels;
+using API.ViewModels.CreateViewModels;
+using BLL.Services.Interfaces;
 using DAL.Models;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
@@ -13,66 +14,58 @@ public class ClientController(IClientService service) : ControllerBase
 {
     [HttpGet]
     [ActionName("GetAllClientsInRange")]
-    [ProducesResponseType(typeof(IEnumerable<ClientViewModel>), 200)]
-    public async Task<IActionResult> GetAll([FromQuery] int page, [FromQuery] int pageSize, CancellationToken cancellationToken)
+    public async Task<IEnumerable<ClientViewModel>> GetAll([FromQuery] int page, [FromQuery] int pageSize, CancellationToken cancellationToken)
     {
         var clients = await service.GetRangeAsync(page, pageSize, cancellationToken);
 
-        var clientsVMs = clients.Adapt<ClientViewModel>();
+        var clientsVMs = clients.Adapt<IEnumerable<ClientViewModel>>();
 
-        return Ok(clientsVMs);
+        return clientsVMs;
     }
 
     [HttpGet("{id}")]
     [ActionName("GetClientById")]
-    [ProducesResponseType(typeof(ClientViewModel), (int)HttpStatusCode.OK)]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> GetById([FromRoute] Guid id, CancellationToken cancellationToken)
+    public async Task<ClientViewModel> GetById([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var client = await service.GetByIdAsync(id, cancellationToken);
 
         var clientVM = client.Adapt<ClientViewModel>();
 
-        return Ok(clientVM);
+        return clientVM;
     }
 
     [HttpPost]
     [ActionName("CreateClient")]
-    [ProducesResponseType(typeof(ClientViewModel), (int)HttpStatusCode.Created)]
-    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> Create([FromBody] CreateClientViewModel createClientViewModel, CancellationToken cancellationToken)
+    public async Task<ClientViewModel> Create([FromBody] CreateClientViewModel createClientViewModel, CancellationToken cancellationToken)
     {
         var createClientModel = createClientViewModel.Adapt<ClientModel>();
 
         var newClient = await service.AddAsync(createClientModel, cancellationToken);
 
-        return CreatedAtAction("GetClientById", new { id = newClient.Id }, newClient);
+        var clientVM = newClient.Adapt<ClientViewModel>();
+
+        return clientVM;
     }
 
     [HttpPut("{id}")]
     [ActionName("UpdateClientById")]
-    [ProducesResponseType((int)HttpStatusCode.NoContent)]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] CreateClientViewModel updateClientViewModel, CancellationToken cancellationToken)
+    public async Task<ClientViewModel> Update([FromRoute] Guid id, [FromBody] CreateClientViewModel updateClientViewModel, CancellationToken cancellationToken)
     {       
         var clientModel = updateClientViewModel.Adapt<ClientModel>();
+
+        clientModel.Id = id;
 
         var newClient = await service.UpdateAsync(clientModel, cancellationToken);
 
         var clientVM = newClient.Adapt<ClientViewModel>();
 
-        return CreatedAtAction("GetClientById", new { id = clientVM.Id }, clientVM);
+        return clientVM;
     }
 
     [HttpDelete("{id}")]
     [ActionName("DeleteClientById")]
-    [ProducesResponseType((int)HttpStatusCode.NoContent)]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken cancellationToken)
+    public async Task Delete([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         await service.DeleteAsync(id, cancellationToken);
-
-        return NoContent();
     }
 }

@@ -1,9 +1,9 @@
-﻿using BLL.Services.Interfaces;
-using BLL.ViewModels;
+﻿using API.ViewModels;
+using API.ViewModels.CreateViewModels;
+using BLL.Services.Interfaces;
 using DAL.Models;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 
 namespace API.Controllers;
 
@@ -13,63 +13,56 @@ public class VehicleClientHistoryController(IVehicleClientHistoryService service
 {
     [HttpGet]
     [ActionName("GetAlVehicleClientHistoriesInRange")]
-    [ProducesResponseType(typeof(IEnumerable<VchViewModel>), 200)]
-    public async Task<IActionResult> GetAll([FromQuery] int page, [FromQuery] int pageSize, CancellationToken cancellationToken)
+    public async Task<IEnumerable<VchViewModel>> GetAll([FromQuery] int page, [FromQuery] int pageSize, CancellationToken cancellationToken)
     {
         var vehicleClientHistories = await service.GetRangeAsync(page, pageSize, cancellationToken);
 
-        return Ok(vehicleClientHistories);
+        var vehicleClientHistoriesVMs = vehicleClientHistories.Adapt<IEnumerable<VchViewModel>>();
+
+        return vehicleClientHistoriesVMs;
     }
 
     [HttpGet("{id}")]
     [ActionName("GetVehicleClientHistoryById")]
-    [ProducesResponseType(typeof(VchViewModel), (int)HttpStatusCode.OK)]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> GetById([FromRoute] Guid id, CancellationToken cancellationToken)
+    public async Task<VchViewModel> GetById([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var vehicleClientHistory = await service.GetByIdAsync(id, cancellationToken);
 
-        return Ok(vehicleClientHistory);
+        var vehicleClientHistoryVM = vehicleClientHistory.Adapt<VchViewModel>();
+
+        return vehicleClientHistoryVM;
     }
 
     [HttpPost]
     [ActionName("CreateVehicleClientHistory")]
-    [ProducesResponseType(typeof(VchViewModel), (int)HttpStatusCode.Created)]
-    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> Create([FromBody] CreateVchViewModel createVehicleClientHistoryViewModel, CancellationToken cancellationToken)
+    public async Task<VchViewModel> Create([FromBody] CreateVchViewModel createVehicleClientHistoryViewModel, CancellationToken cancellationToken)
     {
-        var vehicleClientHistoryModel = createVehicleClientHistoryViewModel.Adapt<VchModel>();  
+        var vehicleClientHistoryModel = createVehicleClientHistoryViewModel.Adapt<VchModel>();
 
         var newVehicleClientHistory = await service.AddAsync(vehicleClientHistoryModel, cancellationToken);
 
-        var vehicleClientHistoryVM = newVehicleClientHistory.Adapt<VehicleViewModel>();
+        var vehicleClientHistoryVM = newVehicleClientHistory.Adapt<VchViewModel>();
 
-        return CreatedAtAction("GetVehicleClientHistoryById", new { id = vehicleClientHistoryVM.Id }, vehicleClientHistoryVM);
+        return vehicleClientHistoryVM;
     }
 
     [HttpPut("{id}")]
     [ActionName("UpdateModelNameById")]
-    [ProducesResponseType((int)HttpStatusCode.NoContent)]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] CreateVchViewModel updateModelNameViewModel, CancellationToken cancellationToken)
+    public async Task<VchViewModel> Update([FromRoute] Guid id, [FromBody] CreateVchViewModel updateModelNameViewModel, CancellationToken cancellationToken)
     {
-        var clientModel = updateModelNameViewModel.Adapt<VchModel>();
+        var vehicleClientHistoryModel = updateModelNameViewModel.Adapt<VchModel>();
 
-        id.Adapt(clientModel);
+        vehicleClientHistoryModel.Id = id;
 
-        var newClient = await service.UpdateAsync(clientModel, cancellationToken);
+        var newVehicleClientHistory = await service.UpdateAsync(vehicleClientHistoryModel, cancellationToken);
 
-        var clientVM = newClient.Adapt<VchViewModel>();
+        var vehicleClientHistoryVM = newVehicleClientHistory.Adapt<VchViewModel>();
 
-        return CreatedAtAction("GetClientById", new { id = clientVM.Id }, clientVM);
+        return vehicleClientHistoryVM;
     }
-
 
     [HttpDelete("{id}")]
     [ActionName("DeleteVehicleClientHistoryById")]
-    [ProducesResponseType((int)HttpStatusCode.NoContent)]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         await service.DeleteAsync(id, cancellationToken);

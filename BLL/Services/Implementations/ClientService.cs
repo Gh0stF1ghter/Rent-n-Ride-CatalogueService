@@ -37,13 +37,17 @@ public class ClientService(IClientRepository clientRepository) : IClientService
         return newClientModel;
     }
 
-    public async Task UpdateAsync(Guid id, ClientModel newClientModel, CancellationToken cancellationToken)
+    public async Task<ClientModel> UpdateAsync(ClientModel newClientModel, CancellationToken cancellationToken)
     {
-        var clientToUpdate = await clientRepository.GetByIdAsync(id, true, cancellationToken);
+        var clientToUpdate = await clientRepository.GetByIdAsync(newClientModel.Id, true, cancellationToken);
 
         newClientModel.Adapt(clientToUpdate);
 
         await clientRepository.UpdateAsync(clientToUpdate, cancellationToken);
+
+        var clientToReturn = ClientMapper.Map(clientToUpdate);
+
+        return clientToReturn;
     }
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)

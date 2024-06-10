@@ -1,7 +1,9 @@
-﻿using BLL.Mappers;
 using BLL.Models;
 using BLL.Services.Interfaces;
+using BLL.ViewModels;
+using DAL.Entities;
 using DAL.Repositories.Interfaces;
+using Mapster;
 
 namespace BLL.Services.Implementations;
 
@@ -11,14 +13,7 @@ public class ModelNameService(IModelNameRepository repository) : IModelNameServi
     {
         var modelNames = await repository.GetRangeAsync(page, pageSize, cancellationToken);
 
-        var modelNameModels = new List<ModelNameModel>();
-
-        foreach (var modelName in modelNames)
-        {
-            var modelNameModel = ModelNameMapper.Map(modelName);
-
-            modelNameModels.Add(modelNameModel);
-        }
+        var modelNameModels = modelNames.Adapt<IEnumerable<ModelNameModel>>();
 
         return modelNameModels;
     }
@@ -27,18 +22,18 @@ public class ModelNameService(IModelNameRepository repository) : IModelNameServi
     {
         var modelName = await repository.GetByIdAsync(id, false, cancellationToken);
 
-        var modelNameModel = ModelNameMapper.Map(modelName);
+        var modelNameModel = modelName.Adapt<ModelNameModel>();
 
         return modelNameModel;
     }
 
     public async Task<ModelNameModel> AddAsync(ModelNameModel modelNameModel, CancellationToken cancellationToken)
     {
-        var modelName = ModelNameMapper.Map(modelNameModel);
+        var modelName = modelNameModel.Adapt<ModelName>();
 
         await repository.AddAsync(modelName, cancellationToken);
 
-        var newModelNameModel = ModelNameMapper.Map(modelName);
+        var newModelNameModel = modelName.Adapt<ModelNameModel>();
 
         return newModelNameModel;
     }
@@ -47,7 +42,7 @@ public class ModelNameService(IModelNameRepository repository) : IModelNameServi
     {
         var modelName = await repository.GetByIdAsync(newModelNameModel.Id, true, cancellationToken);
 
-        modelName = ModelNameMapper.Map(newModelNameModel);
+        newModelNameModel.Adapt(modelName);
 
         await repository.UpdateAsync(modelName, cancellationToken);
 

@@ -10,5 +10,7 @@ public interface IVehicleClientHistoryService
 
     Task<VchModel> AddAsync(VchModel vchModel, CancellationToken cancellationToken);
 
+    Task<VchModel> UpdateAsync(VchModel vchModel, CancellationToken cancellationToken);
+
     Task DeleteAsync(Guid id, CancellationToken cancellationToken);
 }

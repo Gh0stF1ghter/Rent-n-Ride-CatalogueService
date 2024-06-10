@@ -33,6 +33,12 @@ public class VehicleClientHistoryRepository(AgencyDbContext context) : IVehicleC
         await context.SaveChangesAsync(cancellationToken);
     }
 
+    public async Task UpdateAsync(VehicleClientHistory vehicleClientHistory, CancellationToken cancellationToken)
+    {
+        context.Update(vehicleClientHistory);
+        await context.SaveChangesAsync(cancellationToken);
+    }
+
     public async Task RemoveAsync(VehicleClientHistory vehicleClientHistory, CancellationToken cancellationToken)
     {
         context.VehicleClientHistories.Remove(vehicleClientHistory);

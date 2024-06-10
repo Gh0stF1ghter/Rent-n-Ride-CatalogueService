@@ -10,7 +10,7 @@ public interface IModelNameService
 
     Task<ModelNameModel> AddAsync(ModelNameModel modelNameModel, CancellationToken cancellationToken);
 
-    Task UpdateAsync(Guid id, ModelNameModel newModelNameModel, CancellationToken cancellationToken);
+    Task<ModelNameModel> UpdateAsync(ModelNameModel newModelNameModel, CancellationToken cancellationToken);
 
     Task DeleteAsync(Guid id, CancellationToken cancellationToken);
 }

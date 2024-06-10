@@ -19,11 +19,7 @@ public class ManufacturerRepository(AgencyDbContext context) : IManufacturerRepo
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<Manufacturer?> GetByIdAsync(Guid id, bool trackingChanges, CancellationToken cancellationToken) =>
-        trackingChanges ? 
-        await context.Manufacturers
-            .Include(m => m.ModelNames)
-            .FirstOrDefaultAsync(m => m.Id == id, cancellationToken) :
+    public async Task<Manufacturer?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
         await context.Manufacturers
             .Include(m => m.ModelNames)
             .AsNoTracking()

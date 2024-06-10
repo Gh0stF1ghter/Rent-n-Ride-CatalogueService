@@ -1,4 +1,6 @@
-﻿using DAL.DI;
+using BLL.Services.Implementations;
+using BLL.Services.Interfaces;
+using DAL.DI;
 using Mapster;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,5 +15,16 @@ public static class ServicesConfiguration
         services.AddDataAccessDependencies(configuration);
 
         TypeAdapterConfig.GlobalSettings.Scan(Assembly.GetExecutingAssembly());
+
+        services.AddCustomServicesDependencies();      
+    }
+
+    private static void AddCustomServicesDependencies(this IServiceCollection services)
+    {
+        services.AddTransient<IClientService, ClientService>();
+        services.AddTransient<IManufacturerService, ManufacturerService>();
+        services.AddTransient<IModelNameService, ModelNameService>();
+        services.AddTransient<IVehicleClientHistoryService, VehicleClientHistoryService>();
+        services.AddTransient<IVehicleService, VehicleService>();
     }
 }

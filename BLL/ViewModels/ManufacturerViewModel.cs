@@ -5,5 +5,5 @@ namespace BLL.ViewModels;
 public record ManufacturerViewModel(
     Guid Id,
     string Name,
-    IEnumerable<ModelName> ModelNames
+    IEnumerable<ModelNameViewModel> ModelNames
     );

@@ -7,6 +7,6 @@ public record ClientViewModel(
     string FullName,
     string Email,
     string PhoneNumber,
-    Vehicle? Vehicle,
-    IEnumerable<VehicleClientHistory> VehicleClientHistories
+    VehicleViewModel? Vehicle,
+    IEnumerable<VchViewModel> VehicleClientHistories
     );

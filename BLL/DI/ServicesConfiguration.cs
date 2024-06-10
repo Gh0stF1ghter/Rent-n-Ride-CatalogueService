@@ -11,11 +11,10 @@ public static class ServicesConfiguration
     public static void AddApplicationDependencies(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDataAccessDependencies(configuration);
-        services.AddCustomServicesDependencies();
-        
+        services.AddServices();
     }
 
-    private static void AddCustomServicesDependencies(this IServiceCollection services)
+    private static void AddServices(this IServiceCollection services)
     {
         services.AddTransient<IClientService, ClientService>();
         services.AddTransient<IManufacturerService, ManufacturerService>();

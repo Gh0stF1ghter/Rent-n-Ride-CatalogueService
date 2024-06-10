@@ -1,16 +1,16 @@
-﻿using BLL.ViewModels;
+﻿using DAL.Models;
 
 namespace BLL.Services.Interfaces;
 
 public interface IVehicleService
 {
-    Task<IEnumerable<VehicleViewModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
+    Task<IEnumerable<VehicleModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
 
-    Task<VehicleViewModel> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+    Task<VehicleModel> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 
-    Task<VehicleViewModel> AddAsync(CreateVehicleViewModel vehicleModel, CancellationToken cancellationToken);
+    Task<VehicleModel> AddAsync(VehicleModel vehicleModel, CancellationToken cancellationToken);
 
-    Task UpdateAsync(Guid id, CreateVehicleViewModel newVehicleModel, CancellationToken cancellationToken);
+    Task UpdateAsync(Guid id, VehicleModel newVehicleModel, CancellationToken cancellationToken);
 
     Task DeleteAsync(Guid id, CancellationToken cancellationToken);
 }

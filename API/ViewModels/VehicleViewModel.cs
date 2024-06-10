@@ -1,5 +1,4 @@
-﻿using DAL.Entities;
-using DAL.Enums;
+﻿using DAL.Enums;
 
 namespace BLL.ViewModels;
 
@@ -7,10 +6,10 @@ public record VehicleViewModel(
     Guid Id,
     string PlateNumber,
     int Odo,
-    double RentCost,
+    decimal RentCost,
     VehicleType VehicleType,
     VehicleState VehicleState,
     FuelType FuelType,
-    ModelName? Model,
-    Client? Client
+    ModelNameViewModel? Model,
+    ClientViewModel? Client
     );

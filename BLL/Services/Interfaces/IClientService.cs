@@ -10,7 +10,7 @@ public interface IClientService
 
     Task<ClientModel> AddAsync(ClientModel clientModel, CancellationToken cancellationToken);
 
-    Task<ClientModel> UpdateAsync(Guid id, ClientModel newClientModel, CancellationToken cancellationToken);
+    Task<ClientModel> UpdateAsync(ClientModel newClientModel, CancellationToken cancellationToken);
 
     Task DeleteAsync(Guid id, CancellationToken cancellationToken);
 }

@@ -43,9 +43,9 @@ public class ClientService(IClientRepository clientRepository) : IClientService
         return newClientModel;
     }
 
-    public async Task<ClientModel> UpdateAsync(Guid id, ClientModel newClientModel, CancellationToken cancellationToken)
+    public async Task<ClientModel> UpdateAsync(ClientModel newClientModel, CancellationToken cancellationToken)
     {
-        var clientToUpdate = await clientRepository.GetByIdAsync(id, true, cancellationToken);
+        var clientToUpdate = await clientRepository.GetByIdAsync(newClientModel.Id, true, cancellationToken);
 
         clientToUpdate = ClientMapper.Map(newClientModel);
 

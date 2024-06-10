@@ -43,9 +43,9 @@ public class ModelNameService(IModelNameRepository repository) : IModelNameServi
         return newModelNameModel;
     }
 
-    public async Task<ModelNameModel> UpdateAsync(Guid id, ModelNameModel newModelNameModel, CancellationToken cancellationToken)
+    public async Task<ModelNameModel> UpdateAsync(ModelNameModel newModelNameModel, CancellationToken cancellationToken)
     {
-        var modelName = await repository.GetByIdAsync(id, true, cancellationToken);
+        var modelName = await repository.GetByIdAsync(newModelNameModel.Id, true, cancellationToken);
 
         modelName = ModelNameMapper.Map(newModelNameModel);
 

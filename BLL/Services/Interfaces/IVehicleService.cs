@@ -10,7 +10,7 @@ public interface IVehicleService
 
     Task<VehicleModel> AddAsync(VehicleModel vehicleModel, CancellationToken cancellationToken);
 
-    Task<VehicleModel> UpdateAsync(Guid id, VehicleModel newVehicleModel, CancellationToken cancellationToken);
+    Task<VehicleModel> UpdateAsync(VehicleModel newVehicleModel, CancellationToken cancellationToken);
 
     Task DeleteAsync(Guid id, CancellationToken cancellationToken);
 }

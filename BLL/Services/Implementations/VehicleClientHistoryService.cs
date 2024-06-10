@@ -43,9 +43,9 @@ public class VehicleClientHistoryService(IVehicleClientHistoryRepository reposit
         return newVchModel;
     }
 
-    public async Task<VchModel> UpdateAsync(Guid id, VchModel newVchModel, CancellationToken cancellationToken)
+    public async Task<VchModel> UpdateAsync(VchModel newVchModel, CancellationToken cancellationToken)
     {
-        var vchModel = await repository.GetByIdAsync(id, cancellationToken);
+        var vchModel = await repository.GetByIdAsync(newVchModel.Id, cancellationToken);
 
         vchModel = VchMapper.Map(newVchModel);
 

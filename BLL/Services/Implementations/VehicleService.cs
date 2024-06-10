@@ -43,9 +43,9 @@ public class VehicleService(IVehicleRepository repository) : IVehicleService
         return newVehicleModel;
     }
 
-    public async Task<VehicleModel> UpdateAsync(Guid id, VehicleModel newVehicleModel, CancellationToken cancellationToken)
+    public async Task<VehicleModel> UpdateAsync(VehicleModel newVehicleModel, CancellationToken cancellationToken)
     {
-        var vehicle = await repository.GetByIdAsync(id, true, cancellationToken);
+        var vehicle = await repository.GetByIdAsync(newVehicleModel.Id, true, cancellationToken);
 
         vehicle = VehicleMapper.Map(newVehicleModel);
 

@@ -43,9 +43,9 @@ public class ManufacturerService(IManufacturerRepository repository) : IManufact
         return newManufacturerModel;
     }
 
-    public async Task<ManufacturerModel> UpdateAsync(Guid id, ManufacturerModel newManufacturerModel, CancellationToken cancellationToken)
+    public async Task<ManufacturerModel> UpdateAsync(ManufacturerModel newManufacturerModel, CancellationToken cancellationToken)
     {
-        var manufacturer = await repository.GetByIdAsync(id, true, cancellationToken);
+        var manufacturer = await repository.GetByIdAsync(newManufacturerModel.Id, true, cancellationToken);
 
         manufacturer = ManufacturerMapper.Map(newManufacturerModel);
 

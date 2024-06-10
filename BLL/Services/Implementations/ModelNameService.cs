@@ -38,13 +38,17 @@ public class ModelNameService(IModelNameRepository repository) : IModelNameServi
         return newModelNameModel;
     }
 
-    public async Task UpdateAsync(Guid id, ModelNameModel newModelNameModel, CancellationToken cancellationToken)
+    public async Task<ModelNameModel> UpdateAsync(ModelNameModel newModelNameModel, CancellationToken cancellationToken)
     {
-        var modelName = await repository.GetByIdAsync(id, true, cancellationToken);
+        var modelName = await repository.GetByIdAsync(newModelNameModel.Id, true, cancellationToken);
 
         newModelNameModel.Adapt(modelName);
 
         await repository.UpdateAsync(modelName, cancellationToken);
+
+        var modeNameToReturn = ModelNameMapper.Map(modelName);
+
+        return modeNameToReturn;
     }
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)

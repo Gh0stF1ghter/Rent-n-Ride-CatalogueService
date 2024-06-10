@@ -13,5 +13,7 @@ public interface IVehicleClientHistoryRepository
 
     Task AddAsync(VehicleClientHistory vehicleClientHistory, CancellationToken cancellationToken);
 
+    Task UpdateAsync(VehicleClientHistory vehicleClientHistory, CancellationToken cancellationToken);
+
     Task RemoveAsync(VehicleClientHistory vehicleClientHistory, CancellationToken cancellationToken);
 }

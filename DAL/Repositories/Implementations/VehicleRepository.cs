@@ -21,13 +21,7 @@ public class VehicleRepository(AgencyDbContext context) : IVehicleRepository
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<Vehicle?> GetByIdAsync(Guid id, bool trackingChanges, CancellationToken cancellationToken) => 
-        trackingChanges ? 
-        await context.Vehicles
-            .Include(v => v.ModelName)
-            .Include(v => v.Client)
-            .Include(v => v.VehicleClientHistory)
-            .FirstOrDefaultAsync(v => v.Id == id, cancellationToken) :
+    public async Task<Vehicle?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
         await context.Vehicles
             .Include(v => v.ModelName)
             .Include(v => v.Client)
@@ -54,5 +48,5 @@ public class VehicleRepository(AgencyDbContext context) : IVehicleRepository
     {
         context.Vehicles.Remove(vehicle);
         await context.SaveChangesAsync(cancellationToken);
-    } 
+    }
 }

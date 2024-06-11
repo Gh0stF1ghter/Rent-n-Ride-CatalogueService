@@ -9,5 +9,8 @@ public class Client
     public string Email { get; set; } = string.Empty;
     public string PhoneNumber { get; set; } = string.Empty;
 
-    public IEnumerable<VehicleClientHistory>? VehicleClientHistory { get; set; }
+    public Guid VehicleId { get; set; }
+    public Vehicle? Vehicle { get; set; }
+
+    public IEnumerable<VehicleClientHistory> VehicleClientHistory { get; set; } = [];
 }

@@ -1,8 +1,6 @@
-﻿namespace API.ViewModels;
+﻿namespace API.ViewModels.ShortViewModels;
 
-public record ShortVchViewModel(
-    DateTime StartDate,
-    DateTime EndDate,
-    Guid VehicleId,
-    Guid ClientId
+public record ShortModelNameViewModel(
+    string Name,
+    Guid ManufacturerId
     );

@@ -1,4 +1,4 @@
-﻿namespace API.ViewModels;
+﻿namespace API.ViewModels.ShortViewModels;
 
 public record ShortVchViewModel(
     Guid Id,

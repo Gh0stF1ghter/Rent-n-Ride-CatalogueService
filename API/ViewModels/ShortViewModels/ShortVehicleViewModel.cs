@@ -1,6 +1,6 @@
 ﻿using DAL.Enums;
 
-namespace API.ViewModels;
+namespace API.ViewModels.ShortViewModels;
 
 public record ShortVehicleViewModel(
     Guid ModelId,

@@ -1,10 +1,9 @@
 ﻿using API.ViewModels;
-using API.ViewModels.CreateViewModels;
+using API.ViewModels.ShortViewModels;
+using BLL.Models;
 using BLL.Services.Interfaces;
-using DAL.Models;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 
 namespace API.Controllers;
 
@@ -36,7 +35,7 @@ public class ClientController(IClientService service) : ControllerBase
 
     [HttpPost]
     [ActionName("CreateClient")]
-    public async Task<ClientViewModel> Create([FromBody] CreateClientViewModel createClientViewModel, CancellationToken cancellationToken)
+    public async Task<ClientViewModel> Create([FromBody] ShortClientViewModel createClientViewModel, CancellationToken cancellationToken)
     {
         var createClientModel = createClientViewModel.Adapt<ClientModel>();
 
@@ -49,8 +48,8 @@ public class ClientController(IClientService service) : ControllerBase
 
     [HttpPut("{id}")]
     [ActionName("UpdateClientById")]
-    public async Task<ClientViewModel> Update([FromRoute] Guid id, [FromBody] CreateClientViewModel updateClientViewModel, CancellationToken cancellationToken)
-    {       
+    public async Task<ClientViewModel> Update([FromRoute] Guid id, [FromBody] ShortClientViewModel updateClientViewModel, CancellationToken cancellationToken)
+    {
         var clientModel = updateClientViewModel.Adapt<ClientModel>();
 
         clientModel.Id = id;

@@ -1,7 +1,7 @@
 ﻿using API.ViewModels;
-using API.ViewModels.CreateViewModels;
+using API.ViewModels.ShortViewModels;
+using BLL.Models;
 using BLL.Services.Interfaces;
-using DAL.Models;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,7 +35,7 @@ public class ManufacturerController(IManufacturerService service) : ControllerBa
 
     [HttpPost]
     [ActionName("CreateManufacturer")]
-    public async Task<ManufacturerViewModel> Create([FromBody] CreateManufacturerViewModel createManufacturerViewModel, CancellationToken cancellationToken)
+    public async Task<ManufacturerViewModel> Create([FromBody] ShortManufacturerViewModel createManufacturerViewModel, CancellationToken cancellationToken)
     {
         var manufacturerModel = createManufacturerViewModel.Adapt<ManufacturerModel>();
 
@@ -48,7 +48,7 @@ public class ManufacturerController(IManufacturerService service) : ControllerBa
 
     [HttpPut("{id}")]
     [ActionName("UpdateManufacturerById")]
-    public async Task<ManufacturerViewModel> Update([FromRoute] Guid id, [FromBody] CreateManufacturerViewModel updateManufacturerViewModel, CancellationToken cancellationToken)
+    public async Task<ManufacturerViewModel> Update([FromRoute] Guid id, [FromBody] ShortManufacturerViewModel updateManufacturerViewModel, CancellationToken cancellationToken)
     {
         var manufacturerModel = updateManufacturerViewModel.Adapt<ManufacturerModel>();
         manufacturerModel.Id = id;

@@ -1,7 +1,7 @@
 ﻿using API.ViewModels;
-using API.ViewModels.CreateViewModels;
+using API.ViewModels.ShortViewModels;
+using BLL.Models;
 using BLL.Services.Interfaces;
-using DAL.Models;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,7 +35,7 @@ public class ModelNameController(IModelNameService service) : ControllerBase
 
     [HttpPost]
     [ActionName("CreateModelName")]
-    public async Task<ModelNameViewModel> Create([FromBody] CreateModelNameViewModel createModelNameViewModel, CancellationToken cancellationToken)
+    public async Task<ModelNameViewModel> Create([FromBody] ShortModelNameViewModel createModelNameViewModel, CancellationToken cancellationToken)
     {
         var modelNameModel = createModelNameViewModel.Adapt<ModelNameModel>();
 
@@ -48,7 +48,7 @@ public class ModelNameController(IModelNameService service) : ControllerBase
 
     [HttpPut("{id}")]
     [ActionName("UpdateModelNameById")]
-    public async Task<ModelNameViewModel> Update([FromRoute] Guid id, [FromBody] CreateModelNameViewModel updateModelNameViewModel, CancellationToken cancellationToken)
+    public async Task<ModelNameViewModel> Update([FromRoute] Guid id, [FromBody] ShortModelNameViewModel updateModelNameViewModel, CancellationToken cancellationToken)
     {
         var modelNameModel = updateModelNameViewModel.Adapt<ModelNameModel>();
         modelNameModel.Id = id;

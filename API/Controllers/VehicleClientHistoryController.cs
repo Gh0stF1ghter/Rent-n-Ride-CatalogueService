@@ -1,7 +1,7 @@
 ﻿using API.ViewModels;
-using API.ViewModels.CreateViewModels;
+using API.ViewModels.ShortViewModels;
+using BLL.Models;
 using BLL.Services.Interfaces;
-using DAL.Models;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,7 +35,7 @@ public class VehicleClientHistoryController(IVehicleClientHistoryService service
 
     [HttpPost]
     [ActionName("CreateVehicleClientHistory")]
-    public async Task<VchViewModel> Create([FromBody] CreateVchViewModel createVehicleClientHistoryViewModel, CancellationToken cancellationToken)
+    public async Task<VchViewModel> Create([FromBody] ShortVchViewModel createVehicleClientHistoryViewModel, CancellationToken cancellationToken)
     {
         var vehicleClientHistoryModel = createVehicleClientHistoryViewModel.Adapt<VchModel>();
 
@@ -48,7 +48,7 @@ public class VehicleClientHistoryController(IVehicleClientHistoryService service
 
     [HttpPut("{id}")]
     [ActionName("UpdateModelNameById")]
-    public async Task<VchViewModel> Update([FromRoute] Guid id, [FromBody] CreateVchViewModel updateModelNameViewModel, CancellationToken cancellationToken)
+    public async Task<VchViewModel> Update([FromRoute] Guid id, [FromBody] ShortVchViewModel updateModelNameViewModel, CancellationToken cancellationToken)
     {
         var vehicleClientHistoryModel = updateModelNameViewModel.Adapt<VchModel>();
 
@@ -63,10 +63,8 @@ public class VehicleClientHistoryController(IVehicleClientHistoryService service
 
     [HttpDelete("{id}")]
     [ActionName("DeleteVehicleClientHistoryById")]
-    public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken cancellationToken)
+    public async Task Delete([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         await service.DeleteAsync(id, cancellationToken);
-
-        return NoContent();
     }
 }

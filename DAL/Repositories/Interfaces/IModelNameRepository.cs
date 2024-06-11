@@ -7,7 +7,7 @@ public interface IModelNameRepository
 {
     Task<IEnumerable<ModelName>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
 
-    Task<ModelName?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+    Task<ModelName?> GetByIdAsync(Guid id, bool trackingChanges, CancellationToken cancellationToken);
 
     Task<bool> IsExistsAsync(Expression<Func<ModelName, bool>> predicate, CancellationToken cancellationToken);
 

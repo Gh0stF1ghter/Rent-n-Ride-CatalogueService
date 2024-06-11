@@ -1,6 +1,4 @@
-﻿using DAL.Entities;
-
-namespace DAL.Models;
+﻿namespace BLL.Models;
 
 public record ClientModel(
     Guid Id,
@@ -8,6 +6,6 @@ public record ClientModel(
     string LastName,
     string Email,
     string PhoneNumber,
-    Vehicle? Vehicle,
-    IEnumerable<VehicleClientHistory> VehicleClientHistories
+    VehicleModel? Vehicle,
+    IEnumerable<VchModel> VehicleClientHistories
     );

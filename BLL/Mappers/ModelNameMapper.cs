@@ -1,9 +1,9 @@
-﻿using DAL.Entities;
-using DAL.Models;
+﻿using BLL.Models;
+using DAL.Entities;
 
-namespace DAL.Mappers;
+namespace BLL.Mappers;
 
-internal static class ModelMapper
+internal static class ModelNameMapper
 {
     public static ModelName Map(ModelNameModel modelModel) =>
         new()

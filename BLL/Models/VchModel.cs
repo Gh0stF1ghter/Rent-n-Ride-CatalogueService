@@ -1,6 +1,6 @@
 ﻿namespace BLL.Models;
 
-public record VchModel
+public class VchModel
 {
     public Guid Id { get; set; }
 

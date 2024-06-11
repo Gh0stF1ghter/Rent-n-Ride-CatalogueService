@@ -1,6 +1,6 @@
 ﻿namespace BLL.Models;
 
-public record ClientModel
+public class ClientModel
 {
     public Guid Id { get; set; }
     public string FirstName { get; set; } = string.Empty;

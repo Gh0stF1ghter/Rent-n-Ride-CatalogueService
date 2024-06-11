@@ -2,7 +2,7 @@
 
 namespace BLL.Models;
 
-public record VehicleModel
+public class VehicleModel
 {
     public Guid Id { get; set; }
 

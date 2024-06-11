@@ -1,8 +1,7 @@
 ﻿using BLL.Services.Interfaces;
-using DAL.Entities;
+using DAL.Mappers;
 using DAL.Models;
 using DAL.Repositories.Interfaces;
-using Mapster;
 
 namespace BLL.Services.Implementations;
 
@@ -12,7 +11,14 @@ public class ClientService(IClientRepository clientRepository) : IClientService
     {
         var clients = await clientRepository.GetRangeAsync(pageSize, page, cancellationToken);
 
-        var clientModels = clients.Adapt<IEnumerable<ClientModel>>();
+        var clientModels = new List<ClientModel>();
+
+        foreach (var client in clients)
+        {
+            var clientModel = ClientMapper.Map(client);
+
+            clientModels.Add(clientModel);
+        }
 
         return clientModels;
     }
@@ -21,18 +27,18 @@ public class ClientService(IClientRepository clientRepository) : IClientService
     {
         var client = await clientRepository.GetByIdAsync(id, false, cancellationToken);
 
-        var clientModel = client.Adapt<ClientModel>();
+        var clientModel = ClientMapper.Map(client);
 
         return clientModel;
     }
 
     public async Task<ClientModel> AddAsync(ClientModel clientModel, CancellationToken cancellationToken)
     {
-        var newClient = clientModel.Adapt<Client>();
+        var newClient = ClientMapper.Map(clientModel);
 
         await clientRepository.AddAsync(newClient, cancellationToken);
 
-        var newClientModel = newClient.Adapt<ClientModel>();
+        var newClientModel = ClientMapper.Map(newClient);
 
         return newClientModel;
     }
@@ -41,7 +47,7 @@ public class ClientService(IClientRepository clientRepository) : IClientService
     {
         var clientToUpdate = await clientRepository.GetByIdAsync(newClientModel.Id, true, cancellationToken);
 
-        newClientModel.Adapt(clientToUpdate);
+        clientToUpdate = ClientMapper.Map(newClientModel);
 
         await clientRepository.UpdateAsync(clientToUpdate, cancellationToken);
 

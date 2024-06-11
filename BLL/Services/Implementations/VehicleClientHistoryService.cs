@@ -1,8 +1,7 @@
 ﻿using BLL.Services.Interfaces;
-using DAL.Entities;
+using DAL.Mappers;
 using DAL.Models;
 using DAL.Repositories.Interfaces;
-using Mapster;
 
 namespace BLL.Services.Implementations;
 
@@ -12,7 +11,14 @@ public class VehicleClientHistoryService(IVehicleClientHistoryRepository reposit
     {
         var vehicleClientHistories = await repository.GetRangeAsync(page, pageSize, cancellationToken);
 
-        var vehicleClientHistoryModels = vehicleClientHistories.Adapt<IEnumerable<VchModel>>();
+        var vehicleClientHistoryModels = new List<VchModel>();
+
+        foreach (var vehicleClientHistory in vehicleClientHistories)
+        {
+            var vehicleClientHistoryModel = VchMapper.Map(vehicleClientHistory);
+
+            vehicleClientHistoryModels.Add(vehicleClientHistoryModel);
+        }
 
         return vehicleClientHistoryModels;
     }
@@ -21,18 +27,18 @@ public class VehicleClientHistoryService(IVehicleClientHistoryRepository reposit
     {
         var vch = await repository.GetByIdAsync(id, cancellationToken);
 
-        var vchModel = vch.Adapt<VchModel>();
+        var vchModel = VchMapper.Map(vch);
 
         return vchModel;
     }
 
     public async Task<VchModel> AddAsync(VchModel vchModel, CancellationToken cancellationToken)
     {
-        var vch = vchModel.Adapt<VehicleClientHistory>();
+        var vch = VchMapper.Map(vchModel);
 
         await repository.AddAsync(vch, cancellationToken);
 
-        var newVchModel = vch.Adapt<VchModel>();
+        var newVchModel = VchMapper.Map(vch);
 
         return newVchModel;
     }

@@ -1,7 +1,8 @@
-﻿using BLL.Mappers;
 using BLL.Models;
 using BLL.Services.Interfaces;
+using DAL.Entities;
 using DAL.Repositories.Interfaces;
+using Mapster;
 
 namespace BLL.Services.Implementations;
 
@@ -11,54 +12,47 @@ public class ClientService(IClientRepository clientRepository) : IClientService
     {
         var clients = await clientRepository.GetRangeAsync(pageSize, page, cancellationToken);
 
-        var clientModels = new List<ClientModel>();
-
-        foreach (var client in clients)
-        {
-            var clientModel = ClientMapper.Map(client);
-
-            clientModels.Add(clientModel);
-        }
+        var clientModels = clients.Adapt<IEnumerable<ClientModel>>();
 
         return clientModels;
     }
 
     public async Task<ClientModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        var client = await clientRepository.GetByIdAsync(id, false, cancellationToken);
+        var client = await clientRepository.GetByIdAsync(id, cancellationToken);
 
-        var clientModel = ClientMapper.Map(client);
+        var clientModel = client.Adapt<ClientModel>();
 
         return clientModel;
     }
 
     public async Task<ClientModel> AddAsync(ClientModel clientModel, CancellationToken cancellationToken)
     {
-        var newClient = ClientMapper.Map(clientModel);
+        var newClient = clientModel.Adapt<Client>();
 
         await clientRepository.AddAsync(newClient, cancellationToken);
 
-        var newClientModel = ClientMapper.Map(newClient);
+        var newClientModel = newClient.Adapt<ClientModel>();
 
         return newClientModel;
     }
 
     public async Task<ClientModel> UpdateAsync(ClientModel newClientModel, CancellationToken cancellationToken)
     {
-        var clientToUpdate = await clientRepository.GetByIdAsync(newClientModel.Id, true, cancellationToken);
+        var clientToUpdate = await clientRepository.GetByIdAsync(newClientModel.Id, cancellationToken);
 
-        clientToUpdate = ClientMapper.Map(newClientModel);
+        newClientModel.Adapt(clientToUpdate);
 
         await clientRepository.UpdateAsync(clientToUpdate, cancellationToken);
 
-        var clientToReturn = ClientMapper.Map(clientToUpdate);
+        var clientToReturn = clientToUpdate.Adapt<ClientModel>();
 
         return clientToReturn;
     }
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
-        var clientToDelete = await clientRepository.GetByIdAsync(id, true, cancellationToken);
+        var clientToDelete = await clientRepository.GetByIdAsync(id, cancellationToken);
 
         await clientRepository.RemoveAsync(clientToDelete, cancellationToken);
     }

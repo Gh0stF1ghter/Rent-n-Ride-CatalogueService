@@ -1,7 +1,8 @@
-﻿using BLL.Mappers;
 using BLL.Models;
 using BLL.Services.Interfaces;
+using DAL.Entities;
 using DAL.Repositories.Interfaces;
+using Mapster;
 
 namespace BLL.Services.Implementations;
 
@@ -11,54 +12,47 @@ public class ManufacturerService(IManufacturerRepository repository) : IManufact
     {
         var manufacturers = await repository.GetRangeAsync(page, pageSize, cancellationToken);
 
-        var manufacturerModels = new List<ManufacturerModel>();
-
-        foreach (var manufacturer in manufacturers)
-        {
-            var manufacturerModel = ManufacturerMapper.Map(manufacturer);
-
-            manufacturerModels.Add(manufacturerModel);
-        }
+        var manufacturerModels = manufacturers.Adapt<IEnumerable<ManufacturerModel>>();
 
         return manufacturerModels;
     }
 
     public async Task<ManufacturerModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        var manufacturer = await repository.GetByIdAsync(id, false, cancellationToken);
+        var manufacturer = await repository.GetByIdAsync(id, cancellationToken);
 
-        var manufacturerModel = ManufacturerMapper.Map(manufacturer);
+        var manufacturerModel = manufacturer.Adapt<ManufacturerModel>();
 
         return manufacturerModel;
     }
 
     public async Task<ManufacturerModel> AddAsync(ManufacturerModel manufacturerModel, CancellationToken cancellationToken)
     {
-        var manufacturer = ManufacturerMapper.Map(manufacturerModel);
+        var manufacturer = manufacturerModel.Adapt<Manufacturer>();
 
         await repository.AddAsync(manufacturer, cancellationToken);
 
-        var newManufacturerModel = ManufacturerMapper.Map(manufacturer);
+        var newManufacturerModel = manufacturer.Adapt<ManufacturerModel>();
 
         return newManufacturerModel;
     }
 
     public async Task<ManufacturerModel> UpdateAsync(ManufacturerModel newManufacturerModel, CancellationToken cancellationToken)
     {
-        var manufacturer = await repository.GetByIdAsync(newManufacturerModel.Id, true, cancellationToken);
+        var manufacturer = await repository.GetByIdAsync(newManufacturerModel.Id, cancellationToken);
 
-        manufacturer = ManufacturerMapper.Map(newManufacturerModel);
+        newManufacturerModel.Adapt(manufacturer);
 
         await repository.UpdateAsync(manufacturer, cancellationToken);
 
-        var manufacturerToReturn = ManufacturerMapper.Map(manufacturer);
+        var manufacturerToReturn = manufacturer.Adapt<ManufacturerModel>();
 
         return manufacturerToReturn;
     }
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
-        var manufacturer = await repository.GetByIdAsync(id, true, cancellationToken);
+        var manufacturer = await repository.GetByIdAsync(id, cancellationToken);
 
         await repository.RemoveAsync(manufacturer, cancellationToken);
     }

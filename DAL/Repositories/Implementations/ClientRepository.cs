@@ -16,6 +16,7 @@ public class ClientRepository(AgencyDbContext context) : IClientRepository
             .Skip(rowsToSkip)
             .Take(pageSize)
             .Include(c => c.VehicleClientHistory)
+            .AsNoTracking()
             .ToListAsync(cancellationToken);
     }
 

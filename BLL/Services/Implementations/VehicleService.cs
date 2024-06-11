@@ -1,6 +1,6 @@
-﻿using BLL.Services.Interfaces;
-using DAL.Mappers;
-using DAL.Models;
+﻿using BLL.Mappers;
+using BLL.Models;
+using BLL.Services.Interfaces;
 using DAL.Repositories.Interfaces;
 
 namespace BLL.Services.Implementations;

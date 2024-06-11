@@ -1,7 +1,6 @@
-﻿using DAL.Entities;
-using DAL.Enums;
+﻿using DAL.Enums;
 
-namespace DAL.Models;
+namespace BLL.Models;
 
 public record VehicleModel(
     Guid Id,
@@ -11,6 +10,6 @@ public record VehicleModel(
     VehicleType VehicleType,
     VehicleState VehicleState,
     FuelType FuelType,
-    ModelName? Model,
-    Client? Client
+    ModelNameModel? Model,
+    ClientModel? Client
     );

@@ -1,6 +1,6 @@
-﻿using BLL.Services.Interfaces;
-using DAL.Mappers;
-using DAL.Models;
+﻿using BLL.Mappers;
+using BLL.Models;
+using BLL.Services.Interfaces;
 using DAL.Repositories.Interfaces;
 
 namespace BLL.Services.Implementations;
@@ -17,7 +17,7 @@ public class ModelNameService(IModelNameRepository repository) : IModelNameServi
         {
             var modelNameModel = ModelNameMapper.Map(modelName);
 
-            modelNameModels.Add(modelNameModel); 
+            modelNameModels.Add(modelNameModel);
         }
 
         return modelNameModels;

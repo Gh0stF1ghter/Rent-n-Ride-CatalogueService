@@ -1,10 +1,8 @@
-﻿using DAL.Entities;
-
-namespace DAL.Models;
+﻿namespace BLL.Models;
 
 public record ModelNameModel(
     Guid Id,
     string Name,
-    Manufacturer? Manufacturer,
-    IEnumerable<Vehicle> Vehicles
+    ManufacturerModel? Manufacturer,
+    IEnumerable<VehicleModel> Vehicles
     );

@@ -1,7 +1,7 @@
-﻿using DAL.Entities;
-using DAL.Models;
+﻿using BLL.Models;
+using DAL.Entities;
 
-namespace DAL.Mappers;
+namespace BLL.Mappers;
 
 internal static class ModelNameMapper
 {

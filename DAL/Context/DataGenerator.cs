@@ -20,6 +20,7 @@ internal static class DataGenerator
             return;
 
         AddManufacturerData();
+        AddClientData();
         AddVehicleClientHistoryData();
     }
 
@@ -50,9 +51,9 @@ internal static class DataGenerator
         Vehicles.AddRange(generatedVehicles);
     }
 
-    private static void AddClientData(Guid vehicleId)
+    private static void AddClientData()
     {
-        var clientFaker = GetClientFaker(vehicleId);
+        var clientFaker = GetClientFaker();
 
         var generatedClient = clientFaker.Generate();
 
@@ -98,21 +99,15 @@ internal static class DataGenerator
             .RuleFor(v => v.ModelId, _ => modelId)
             .RuleFor(v => v.VehicleType, f => f.PickRandom<VehicleType>())
             .RuleFor(v => v.VehicleState, f => f.PickRandom<VehicleState>())
-            .RuleFor(v => v.FuelType, f => f.PickRandom<FuelType>())
-            .RuleFor(v => v.Client, (_, e) =>
-            {
-                AddClientData(e.Id);
-                return null;
-            });
+            .RuleFor(v => v.FuelType, f => f.PickRandom<FuelType>());
 
-    private static Faker<Client> GetClientFaker(Guid vehicleId) =>
+    private static Faker<Client> GetClientFaker() =>
         new Faker<Client>()
             .RuleFor(c => c.Id, _ => Guid.NewGuid())
             .RuleFor(c => c.FirstName, f => f.Name.FirstName())
             .RuleFor(c => c.LastName, f => f.Name.LastName())
             .RuleFor(c => c.Email, f => f.Internet.Email())
-            .RuleFor(c => c.PhoneNumber, f => f.Phone.PhoneNumber())
-            .RuleFor(c => c.VehicleId, _ => vehicleId);
+            .RuleFor(c => c.PhoneNumber, f => f.Phone.PhoneNumber());
 
     private static Faker<VehicleClientHistory> GetVehicleClientHistoryFaker() =>
         new Faker<VehicleClientHistory>()

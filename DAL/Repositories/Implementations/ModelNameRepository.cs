@@ -19,9 +19,9 @@ public class ModelNameRepository(AgencyDbContext context) : IModelNameRepository
             .AsNoTracking()
             .ToListAsync(cancellationToken);
     }
-    
+
     public async Task<ModelName?> GetByIdAsync(Guid id, bool trackingChanges, CancellationToken cancellationToken) =>
-        trackingChanges ? 
+        trackingChanges ?
         await context.VehicleModels
             .Include(m => m.Manufacturer)
             .FirstOrDefaultAsync(m => m.Id == id, cancellationToken) :

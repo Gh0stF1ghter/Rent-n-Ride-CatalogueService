@@ -1,6 +1,5 @@
 using BLL.DI;
 using BLL.MappingConfigurations;
-using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 

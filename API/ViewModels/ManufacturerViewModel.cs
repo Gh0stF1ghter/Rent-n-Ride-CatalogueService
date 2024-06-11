@@ -1,6 +1,4 @@
-﻿using DAL.Entities;
-
-namespace API.ViewModels;
+﻿namespace API.ViewModels;
 
 public record ManufacturerViewModel(
     Guid Id,

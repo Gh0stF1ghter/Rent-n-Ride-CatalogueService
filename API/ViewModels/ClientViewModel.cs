@@ -1,10 +1,9 @@
-﻿using DAL.Entities;
-
-namespace API.ViewModels;
+﻿namespace API.ViewModels;
 
 public record ClientViewModel(
     Guid Id,
-    string FullName,
+    string FirstName,
+    string LastName,
     string Email,
     string PhoneNumber,
     VehicleViewModel? Vehicle,

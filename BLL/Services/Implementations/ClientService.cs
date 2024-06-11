@@ -19,7 +19,7 @@ public class ClientService(IClientRepository clientRepository) : IClientService
 
     public async Task<ClientModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        var client = await clientRepository.GetByIdAsync(id, false, cancellationToken);
+        var client = await clientRepository.GetByIdAsync(id, cancellationToken);
 
         var clientModel = client.Adapt<ClientModel>();
 
@@ -39,20 +39,20 @@ public class ClientService(IClientRepository clientRepository) : IClientService
 
     public async Task<ClientModel> UpdateAsync(ClientModel newClientModel, CancellationToken cancellationToken)
     {
-        var clientToUpdate = await clientRepository.GetByIdAsync(newClientModel.Id, true, cancellationToken);
+        var clientToUpdate = await clientRepository.GetByIdAsync(newClientModel.Id, cancellationToken);
 
         newClientModel.Adapt(clientToUpdate);
 
         await clientRepository.UpdateAsync(clientToUpdate, cancellationToken);
 
-        var clientToReturn = ClientMapper.Map(clientToUpdate);
+        var clientToReturn = clientToUpdate.Adapt<ClientModel>();
 
         return clientToReturn;
     }
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
-        var clientToDelete = await clientRepository.GetByIdAsync(id, true, cancellationToken);
+        var clientToDelete = await clientRepository.GetByIdAsync(id, cancellationToken);
 
         await clientRepository.RemoveAsync(clientToDelete, cancellationToken);
     }

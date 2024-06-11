@@ -41,11 +41,11 @@ public class VehicleClientHistoryService(IVehicleClientHistoryRepository reposit
     {
         var vchModel = await repository.GetByIdAsync(newVchModel.Id, cancellationToken);
 
-        vchModel = VchMapper.Map(newVchModel);
+        newVchModel.Adapt(vchModel);
 
         await repository.UpdateAsync(vchModel, cancellationToken);
 
-        var vchModelToReturn = VchMapper.Map(vchModel);
+        var vchModelToReturn = vchModel.Adapt<VchModel>();
 
         return vchModelToReturn;
     }

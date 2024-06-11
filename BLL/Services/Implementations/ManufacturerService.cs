@@ -19,7 +19,7 @@ public class ManufacturerService(IManufacturerRepository repository) : IManufact
 
     public async Task<ManufacturerModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        var manufacturer = await repository.GetByIdAsync(id, false, cancellationToken);
+        var manufacturer = await repository.GetByIdAsync(id, cancellationToken);
 
         var manufacturerModel = manufacturer.Adapt<ManufacturerModel>();
 
@@ -39,20 +39,20 @@ public class ManufacturerService(IManufacturerRepository repository) : IManufact
 
     public async Task<ManufacturerModel> UpdateAsync(ManufacturerModel newManufacturerModel, CancellationToken cancellationToken)
     {
-        var manufacturer = await repository.GetByIdAsync(newManufacturerModel.Id, true, cancellationToken);
+        var manufacturer = await repository.GetByIdAsync(newManufacturerModel.Id, cancellationToken);
 
         newManufacturerModel.Adapt(manufacturer);
 
         await repository.UpdateAsync(manufacturer, cancellationToken);
 
-        var manufacturerToReturn = ManufacturerMapper.Map(manufacturer);
+        var manufacturerToReturn = manufacturer.Adapt<ManufacturerModel>();
 
         return manufacturerToReturn;
     }
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
-        var manufacturer = await repository.GetByIdAsync(id, true, cancellationToken);
+        var manufacturer = await repository.GetByIdAsync(id, cancellationToken);
 
         await repository.RemoveAsync(manufacturer, cancellationToken);
     }

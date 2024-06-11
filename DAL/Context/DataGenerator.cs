@@ -2,7 +2,7 @@ using Bogus;
 using DAL.Entities;
 using DAL.Enums;
 
-namespace DAL.TestDataGenerator;
+namespace DAL.Context;
 
 internal static class DataGenerator
 {

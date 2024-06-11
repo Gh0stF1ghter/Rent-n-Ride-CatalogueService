@@ -15,13 +15,12 @@ public class ClientRepository(AgencyDbContext context) : IClientRepository
         return await context.Clients
             .Skip(rowsToSkip)
             .Take(pageSize)
-            .Include(c => c.Vehicle).AsNoTracking()
+            .Include(c => c.VehicleClientHistory)
             .ToListAsync(cancellationToken);
     }
 
     public async Task<Client?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
         await context.Clients
-            .Include(c => c.Vehicle)
             .Include(c => c.VehicleClientHistory)
             .AsNoTracking()
             .FirstOrDefaultAsync(c => c.Id == id, cancellationToken: cancellationToken);

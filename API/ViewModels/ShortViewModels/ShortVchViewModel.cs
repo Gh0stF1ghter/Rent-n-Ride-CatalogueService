@@ -1,4 +1,4 @@
-﻿namespace API.ViewModels.ShortViewModels;
+namespace API.ViewModels.ShortViewModels;
 
 public record ShortVchViewModel(
     DateTime StartDate,

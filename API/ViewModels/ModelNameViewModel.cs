@@ -1,4 +1,4 @@
-﻿namespace API.ViewModels;
+namespace API.ViewModels;
 
 public record ModelNameViewModel(
     Guid Id,

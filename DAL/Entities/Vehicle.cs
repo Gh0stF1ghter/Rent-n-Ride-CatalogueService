@@ -17,7 +17,5 @@ public class Vehicle
     public Guid ModelId { get; set; }
     public ModelName? ModelName { get; set; }
 
-    public Client? Client { get; set; }
-
-    public IEnumerable<VehicleClientHistory> VehicleClientHistory { get; set; } = [];
+    public IEnumerable<VehicleClientHistory>? VehicleClientHistory { get; set; }
 }

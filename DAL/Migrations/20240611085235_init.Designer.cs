@@ -3,6 +3,7 @@ using System;
 using DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DAL.Migrations
 {
     [DbContext(typeof(AgencyDbContext))]
-    partial class AgencyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240611085235_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,7 +104,7 @@ namespace DAL.Migrations
                         });
                 });
 
-            modelBuilder.Entity("DAL.Entities.Model", b =>
+            modelBuilder.Entity("DAL.Entities.ModelName", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -118,7 +121,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("ManufacturerId");
 
-                    b.ToTable("Models");
+                    b.ToTable("VehicleModels");
 
                     b.HasData(
                         new
@@ -285,6 +288,9 @@ namespace DAL.Migrations
                     b.Property<Guid>("ModelId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("ModelNameId")
+                        .HasColumnType("uuid");
+
                     b.Property<int>("Odo")
                         .HasColumnType("integer");
 
@@ -303,7 +309,7 @@ namespace DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ModelId");
+                    b.HasIndex("ModelNameId");
 
                     b.ToTable("Vehicles");
 
@@ -1757,7 +1763,7 @@ namespace DAL.Migrations
             modelBuilder.Entity("DAL.Entities.ModelName", b =>
                 {
                     b.HasOne("DAL.Entities.Manufacturer", "Manufacturer")
-                        .WithMany("Models")
+                        .WithMany("ModelNames")
                         .HasForeignKey("ManufacturerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1767,13 +1773,11 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Entities.Vehicle", b =>
                 {
-                    b.HasOne("DAL.Entities.Model", "Model")
+                    b.HasOne("DAL.Entities.ModelName", "ModelName")
                         .WithMany("Vehicles")
-                        .HasForeignKey("ModelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ModelNameId");
 
-                    b.Navigation("Model");
+                    b.Navigation("ModelName");
                 });
 
             modelBuilder.Entity("DAL.Entities.VehicleClientHistory", b =>
@@ -1802,10 +1806,10 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Entities.Manufacturer", b =>
                 {
-                    b.Navigation("Models");
+                    b.Navigation("ModelNames");
                 });
 
-            modelBuilder.Entity("DAL.Entities.Model", b =>
+            modelBuilder.Entity("DAL.Entities.ModelName", b =>
                 {
                     b.Navigation("Vehicles");
                 });

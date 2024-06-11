@@ -1,8 +1,7 @@
 ﻿using BLL.Services.Interfaces;
-using DAL.Entities;
+using DAL.Mappers;
 using DAL.Models;
 using DAL.Repositories.Interfaces;
-using Mapster;
 
 namespace BLL.Services.Implementations;
 
@@ -12,7 +11,14 @@ public class ManufacturerService(IManufacturerRepository repository) : IManufact
     {
         var manufacturers = await repository.GetRangeAsync(page, pageSize, cancellationToken);
 
-        var manufacturerModels = manufacturers.Adapt<IEnumerable<ManufacturerModel>>();
+        var manufacturerModels = new List<ManufacturerModel>();
+
+        foreach (var manufacturer in manufacturers)
+        {
+            var manufacturerModel = ManufacturerMapper.Map(manufacturer);
+
+            manufacturerModels.Add(manufacturerModel);
+        }
 
         return manufacturerModels;
     }
@@ -21,18 +27,18 @@ public class ManufacturerService(IManufacturerRepository repository) : IManufact
     {
         var manufacturer = await repository.GetByIdAsync(id, false, cancellationToken);
 
-        var manufacturerModel = manufacturer.Adapt<ManufacturerModel>();
+        var manufacturerModel = ManufacturerMapper.Map(manufacturer);
 
         return manufacturerModel;
     }
 
     public async Task<ManufacturerModel> AddAsync(ManufacturerModel manufacturerModel, CancellationToken cancellationToken)
     {
-        var manufacturer = manufacturerModel.Adapt<Manufacturer>();
+        var manufacturer = ManufacturerMapper.Map(manufacturerModel);
 
         await repository.AddAsync(manufacturer, cancellationToken);
 
-        var newManufacturerModel = manufacturer.Adapt<ManufacturerModel>();
+        var newManufacturerModel = ManufacturerMapper.Map(manufacturer);
 
         return newManufacturerModel;
     }
@@ -41,7 +47,7 @@ public class ManufacturerService(IManufacturerRepository repository) : IManufact
     {
         var manufacturer = await repository.GetByIdAsync(newManufacturerModel.Id, true, cancellationToken);
 
-        newManufacturerModel.Adapt(manufacturer);
+        manufacturer = ManufacturerMapper.Map(newManufacturerModel);
 
         await repository.UpdateAsync(manufacturer, cancellationToken);
 

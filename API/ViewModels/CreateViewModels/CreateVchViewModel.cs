@@ -1,4 +1,4 @@
-﻿namespace BLL.ViewModels;
+﻿namespace API.ViewModels.CreateViewModels;
 
 public record CreateVchViewModel(
     DateTime StartDate,

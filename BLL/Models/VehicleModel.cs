@@ -1,7 +1,7 @@
 ﻿using DAL.Entities;
 using DAL.Enums;
 
-namespace DAL.Models;
+namespace BLL.Models;
 
 public record VehicleModel(
     Guid Id,

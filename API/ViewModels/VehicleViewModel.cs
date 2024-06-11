@@ -1,6 +1,6 @@
 ﻿using DAL.Enums;
 
-namespace BLL.ViewModels;
+namespace API.ViewModels;
 
 public record VehicleViewModel(
     Guid Id,

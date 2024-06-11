@@ -1,6 +1,6 @@
 ﻿using DAL.Entities;
 
-namespace DAL.Models;
+namespace BLL.Models;
 
 public record ClientModel(
     Guid Id,

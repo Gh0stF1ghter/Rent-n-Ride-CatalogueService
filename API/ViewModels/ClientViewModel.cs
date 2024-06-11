@@ -1,6 +1,6 @@
 ﻿using DAL.Entities;
 
-namespace BLL.ViewModels;
+namespace API.ViewModels;
 
 public record ClientViewModel(
     Guid Id,

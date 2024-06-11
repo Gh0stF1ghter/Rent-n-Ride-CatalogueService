@@ -1,8 +1,12 @@
 ﻿namespace BLL.Models;
 
-public record ModelNameModel(
-    Guid Id,
-    string Name,
-    ManufacturerModel? Manufacturer,
-    IEnumerable<VehicleModel> Vehicles
-    );
+public record ModelNameModel
+{
+    public Guid Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+
+    public Guid ManufacturerId { get; set; }
+    public ManufacturerModel? Manufacturer { get; set; }
+
+    public IEnumerable<VehicleModel>? Vehicles { get; set; }
+}

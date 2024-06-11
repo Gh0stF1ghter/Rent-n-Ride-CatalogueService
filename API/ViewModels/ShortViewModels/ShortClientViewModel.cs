@@ -1,6 +1,6 @@
-﻿namespace API.ViewModels.CreateViewModels;
+﻿namespace API.ViewModels.ShortViewModels;
 
-public record CreateClientViewModel(
+public record ShortClientViewModel(
     string FirstName,
     string LastName,
     string Email,

@@ -1,8 +1,8 @@
 ﻿using DAL.Enums;
 
-namespace API.ViewModels.CreateViewModels;
+namespace API.ViewModels.ShortViewModels;
 
-public record CreateVehicleViewModel(
+public record ShortVehicleViewModel(
     Guid ModelId,
     string PlateNumber,
     decimal RentCost,

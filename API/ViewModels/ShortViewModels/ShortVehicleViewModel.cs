@@ -6,8 +6,8 @@ public record ShortVehicleViewModel(
     Guid ModelId,
     string PlateNumber,
     decimal RentCost,
+    int Odo,
     VehicleType VehicleType,
     VehicleState VehicleState,
-    FuelType FuelType,
-    int Odo
+    FuelType FuelType
     );

@@ -5,11 +5,11 @@ namespace DAL.Context;
 
 public class AgencyDbContext(DbContextOptions dbContextOptions) : DbContext(dbContextOptions)
 {
-    public DbSet<Client> Clients { get; set; }
-    public DbSet<Manufacturer> Manufacturers { get; set; }
-    public DbSet<ModelName> VehicleModels { get; set; }
-    public DbSet<Vehicle> Vehicles { get; set; }
-    public DbSet<VehicleClientHistory> VehicleClientHistories { get; set; }
+    public DbSet<ClientEntity> Clients { get; set; }
+    public DbSet<ManufacturerEntity> Manufacturers { get; set; }
+    public DbSet<CarModelEntity> VehicleModels { get; set; }
+    public DbSet<VehicleEntity> Vehicles { get; set; }
+    public DbSet<VehicleClientHistoryEntity> VehicleClientHistories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -17,10 +17,10 @@ public class AgencyDbContext(DbContextOptions dbContextOptions) : DbContext(dbCo
 
         DataGenerator.Init();
 
-        modelBuilder.Entity<Manufacturer>().HasData(DataGenerator.Manufacturers);
-        modelBuilder.Entity<ModelName>().HasData(DataGenerator.VehicleModels);
-        modelBuilder.Entity<Vehicle>().HasData(DataGenerator.Vehicles);
-        modelBuilder.Entity<Client>().HasData(DataGenerator.Clients);
-        modelBuilder.Entity<VehicleClientHistory>().HasData(DataGenerator.VehicleClientHistories);
+        modelBuilder.Entity<ManufacturerEntity>().HasData(DataGenerator.Manufacturers);
+        modelBuilder.Entity<CarModelEntity>().HasData(DataGenerator.VehicleModels);
+        modelBuilder.Entity<VehicleEntity>().HasData(DataGenerator.Vehicles);
+        modelBuilder.Entity<ClientEntity>().HasData(DataGenerator.Clients);
+        modelBuilder.Entity<VehicleClientHistoryEntity>().HasData(DataGenerator.VehicleClientHistories);
     }
 }

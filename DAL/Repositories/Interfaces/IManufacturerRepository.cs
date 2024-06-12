@@ -3,9 +3,9 @@ using System.Linq.Expressions;
 
 namespace DAL.Repositories.Interfaces;
 
-public interface IManufacturerRepository : IRepositoryBase<Manufacturer>
+public interface IManufacturerRepository : IRepositoryBase<ManufacturerEntity>
 {
-    Task<IEnumerable<Manufacturer>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
+    Task<IEnumerable<ManufacturerEntity>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
 
-    Task<Manufacturer?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+    Task<ManufacturerEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 }

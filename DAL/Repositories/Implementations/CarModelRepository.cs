@@ -5,15 +5,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repositories.Implementations;
 
-public class ModelNameRepository(AgencyDbContext context) : RepositoryBase<ModelName>(context), IModelNameRepository
+public class CarModelRepository(AgencyDbContext context) : RepositoryBase<CarModelEntity>(context), ICarModelRepository
 {
-    public async Task<IEnumerable<ModelName>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken) =>
+    public async Task<IEnumerable<CarModelEntity>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken) =>
         await GetRange(page, pageSize)
             .Include(m => m.Manufacturer)
             .ToListAsync(cancellationToken);
     
-
-    public async Task<ModelName?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
+    public async Task<CarModelEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
         await GetByCondition(m => m.Id == id)
             .Include(m => m.Manufacturer)
             .FirstOrDefaultAsync(cancellationToken);

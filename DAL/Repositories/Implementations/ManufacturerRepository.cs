@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repositories.Implementations;
 
-public class ManufacturerRepository(AgencyDbContext context) : RepositoryBase<Manufacturer>(context), IManufacturerRepository
+public class ManufacturerRepository(AgencyDbContext context) : RepositoryBase<ManufacturerEntity>(context), IManufacturerRepository
 {
-    public async Task<IEnumerable<Manufacturer>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken) =>
+    public async Task<IEnumerable<ManufacturerEntity>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken) =>
        await GetRange(page, pageSize)
             .ToListAsync(cancellationToken);
 
-    public async Task<Manufacturer?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
+    public async Task<ManufacturerEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
         await GetByCondition(m => m.Id == id)
             .Include(m => m.ModelNames)
             .FirstOrDefaultAsync(cancellationToken);

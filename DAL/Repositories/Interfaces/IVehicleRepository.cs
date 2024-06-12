@@ -2,9 +2,9 @@
 
 namespace DAL.Repositories.Interfaces;
 
-public interface IVehicleRepository : IRepositoryBase<Vehicle>
+public interface IVehicleRepository : IRepositoryBase<VehicleEntity>
 {
-    Task<IEnumerable<Vehicle>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
+    Task<IEnumerable<VehicleEntity>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
 
-    Task<Vehicle?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+    Task<VehicleEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 }

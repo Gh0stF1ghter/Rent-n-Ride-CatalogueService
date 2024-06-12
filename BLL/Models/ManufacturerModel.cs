@@ -2,5 +2,5 @@
 
 public record ManufacturerModel(Guid Id,
     string Name,
-    IEnumerable<ModelNameModel> ModelNames
+    IEnumerable<CarModel> ModelNames
     );

@@ -7,5 +7,5 @@ public interface IManufacturerRepository : IRepositoryBase<ManufacturerEntity>
 {
     Task<IEnumerable<ManufacturerEntity>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
 
-    Task<ManufacturerManufacturerEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+    Task<ManufacturerEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 }

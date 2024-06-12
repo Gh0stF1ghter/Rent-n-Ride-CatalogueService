@@ -19,7 +19,7 @@ public class CarModelService(ICarModelRepository repository) : ICarModelService
 
     public async Task<CarModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        var modelName = await repository.GetByIdAsync(id, false, cancellationToken);
+        var modelName = await repository.GetByIdAsync(id, cancellationToken);
 
         var modelNameModel = modelName.Adapt<CarModel>();
 
@@ -39,7 +39,7 @@ public class CarModelService(ICarModelRepository repository) : ICarModelService
 
     public async Task<CarModel> UpdateAsync(CarModel newModelNameModel, CancellationToken cancellationToken)
     {
-        var modelName = await repository.GetByIdAsync(newModelNameModel.Id, true, cancellationToken);
+        var modelName = await repository.GetByIdAsync(newModelNameModel.Id, cancellationToken);
 
         newModelNameModel.Adapt(modelName);
 
@@ -52,7 +52,7 @@ public class CarModelService(ICarModelRepository repository) : ICarModelService
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
-        var modelName = await repository.GetByIdAsync(id, true, cancellationToken);
+        var modelName = await repository.GetByIdAsync(id, cancellationToken);
 
         await repository.RemoveAsync(modelName, cancellationToken);
     }

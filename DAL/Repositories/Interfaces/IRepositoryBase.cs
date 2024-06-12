@@ -4,13 +4,15 @@ namespace DAL.Repositories.Interfaces;
 
 public interface IRepositoryBase<TEntity> where TEntity : class
 {
-    Task<IQueryable<TEntity>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
+    IQueryable<TEntity> GetRange(int page, int pageSize);
 
-    Task<IQueryable<TEntity>> GetByConditionAsync(Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken);
+    IQueryable<TEntity> GetByCondition(Expression<Func<TEntity, bool>> condition);
+
+    Task<bool> IsExistsAsync(Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken);
 
     Task AddAsync(TEntity entity, CancellationToken cancellationToken);
 
-    Task UpdateAsync(TEntity entity, CancellationToken cancellationToken);
+    Task UpdateAsync(TEntity newEntity, CancellationToken cancellationToken);
 
-    Task RemoveAsync(TEntity entity, CancellationToken cancellationToken);
+    Task RemoveAsync(TEntity entityToRemove, CancellationToken cancellationToken);
 }

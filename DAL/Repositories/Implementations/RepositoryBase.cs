@@ -35,7 +35,6 @@ public class RepositoryBase<TEntity>(AgencyDbContext context) : IRepositoryBase<
     {
         context.Set<TEntity>().Update(newEntity);
         await context.SaveChangesAsync(cancellationToken);
-
     }
 
     public async Task RemoveAsync(TEntity entityToRemove, CancellationToken cancellationToken)

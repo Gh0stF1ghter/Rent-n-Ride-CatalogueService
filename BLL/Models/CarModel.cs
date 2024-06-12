@@ -1,6 +1,6 @@
 ﻿namespace BLL.Models;
 
-public record ModelNameModel(
+public record CarModel(
     Guid Id,
     string Name,
     ManufacturerModel? Manufacturer,

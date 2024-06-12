@@ -10,6 +10,6 @@ public record VehicleModel(
     VehicleType VehicleType,
     VehicleState VehicleState,
     FuelType FuelType,
-    ModelNameModel? Model,
+    CarModel? Model,
     ClientModel? Client
     );

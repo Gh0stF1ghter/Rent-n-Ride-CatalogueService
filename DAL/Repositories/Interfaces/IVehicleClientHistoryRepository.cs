@@ -5,15 +5,15 @@ namespace DAL.Repositories.Interfaces;
 
 public interface IVehicleClientHistoryRepository
 {
-    Task<IEnumerable<VehicleClientHistory>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
+    Task<IEnumerable<VehicleClientHistoryEntity>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
 
-    Task<VehicleClientHistory?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+    Task<VehicleClientHistoryEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 
-    Task<bool> IsExistsAsync(Expression<Func<VehicleClientHistory, bool>> predicate, CancellationToken cancellationToken);
+    Task<bool> IsExistsAsync(Expression<Func<VehicleClientHistoryEntity, bool>> predicate, CancellationToken cancellationToken);
 
-    Task AddAsync(VehicleClientHistory vehicleClientHistory, CancellationToken cancellationToken);
+    Task AddAsync(VehicleClientHistoryEntity vehicleClientHistory, CancellationToken cancellationToken);
 
-    Task UpdateAsync(VehicleClientHistory vehicleClientHistory, CancellationToken cancellationToken);
+    Task UpdateAsync(VehicleClientHistoryEntity vehicleClientHistory, CancellationToken cancellationToken);
 
-    Task RemoveAsync(VehicleClientHistory vehicleClientHistory, CancellationToken cancellationToken);
+    Task RemoveAsync(VehicleClientHistoryEntity vehicleClientHistory, CancellationToken cancellationToken);
 }

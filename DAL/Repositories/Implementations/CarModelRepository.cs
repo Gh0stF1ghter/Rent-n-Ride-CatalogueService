@@ -6,9 +6,9 @@ using System.Linq.Expressions;
 
 namespace DAL.Repositories.Implementations;
 
-public class ModelNameRepository(AgencyDbContext context) : IModelNameRepository
+public class CarModelRepository(AgencyDbContext context) : ICarModelRepository
 {
-    public async Task<IEnumerable<ModelName>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
+    public async Task<IEnumerable<CarModelEntity>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
         var rowsToSkip = (page - 1) * pageSize;
 
@@ -20,7 +20,7 @@ public class ModelNameRepository(AgencyDbContext context) : IModelNameRepository
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<ModelName?> GetByIdAsync(Guid id, bool trackingChanges, CancellationToken cancellationToken) =>
+    public async Task<CarModelEntity?> GetByIdAsync(Guid id, bool trackingChanges, CancellationToken cancellationToken) =>
         trackingChanges ?
         await context.VehicleModels
             .Include(m => m.Manufacturer)
@@ -30,22 +30,22 @@ public class ModelNameRepository(AgencyDbContext context) : IModelNameRepository
             .AsNoTracking()
             .FirstOrDefaultAsync(m => m.Id == id, cancellationToken);
 
-    public async Task<bool> IsExistsAsync(Expression<Func<ModelName, bool>> predicate, CancellationToken cancellationToken) =>
+    public async Task<bool> IsExistsAsync(Expression<Func<CarModelEntity, bool>> predicate, CancellationToken cancellationToken) =>
         await context.VehicleModels.AnyAsync(predicate, cancellationToken);
 
-    public async Task AddAsync(ModelName modelName, CancellationToken cancellationToken)
+    public async Task AddAsync(CarModelEntity modelName, CancellationToken cancellationToken)
     {
         await context.VehicleModels.AddAsync(modelName, cancellationToken);
         await context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task UpdateAsync(ModelName newModelName, CancellationToken cancellationToken)
+    public async Task UpdateAsync(CarModelEntity newModelName, CancellationToken cancellationToken)
     {
         context.Update(newModelName);
         await context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task RemoveAsync(ModelName modelName, CancellationToken cancellationToken)
+    public async Task RemoveAsync(CarModelEntity modelName, CancellationToken cancellationToken)
     {
         context.VehicleModels.Remove(modelName);
         await context.SaveChangesAsync(cancellationToken);

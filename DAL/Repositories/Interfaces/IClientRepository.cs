@@ -5,15 +5,15 @@ namespace DAL.Repositories.Interfaces;
 
 public interface IClientRepository
 {
-    Task<IEnumerable<Client>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
+    Task<IEnumerable<ClientEntity>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
 
-    Task<Client?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+    Task<ClientEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 
-    Task<bool> IsExistsAsync(Expression<Func<Client, bool>> predicate, CancellationToken cancellationToken);
+    Task<bool> IsExistsAsync(Expression<Func<ClientEntity, bool>> predicate, CancellationToken cancellationToken);
 
-    Task AddAsync(Client client, CancellationToken cancellationToken);
+    Task AddAsync(ClientEntity client, CancellationToken cancellationToken);
 
-    Task UpdateAsync(Client newClient, CancellationToken cancellationToken);
+    Task UpdateAsync(ClientEntity newClient, CancellationToken cancellationToken);
 
-    Task RemoveAsync(Client client, CancellationToken cancellationToken);
+    Task RemoveAsync(ClientEntity client, CancellationToken cancellationToken);
 }

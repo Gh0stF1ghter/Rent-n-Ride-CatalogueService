@@ -6,38 +6,38 @@ using Mapster;
 
 namespace BLL.Services.Implementations;
 
-public class ModelNameService(IModelNameRepository repository) : IModelNameService
+public class CarModelService(ICarModelRepository repository) : ICarModelService
 {
-    public async Task<IEnumerable<ModelNameModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
+    public async Task<IEnumerable<CarModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
         var modelNames = await repository.GetRangeAsync(page, pageSize, cancellationToken);
 
-        var modelNameModels = modelNames.Adapt<IEnumerable<ModelNameModel>>();
+        var modelNameModels = modelNames.Adapt<IEnumerable<CarModel>>();
 
         return modelNameModels;
     }
 
-    public async Task<ModelNameModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<CarModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         var modelName = await repository.GetByIdAsync(id, false, cancellationToken);
 
-        var modelNameModel = modelName.Adapt<ModelNameModel>();
+        var modelNameModel = modelName.Adapt<CarModel>();
 
         return modelNameModel;
     }
 
-    public async Task<ModelNameModel> AddAsync(ModelNameModel modelNameModel, CancellationToken cancellationToken)
+    public async Task<CarModel> AddAsync(CarModel modelNameModel, CancellationToken cancellationToken)
     {
-        var modelName = modelNameModel.Adapt<ModelName>();
+        var modelName = modelNameModel.Adapt<CarModelEntity>();
 
         await repository.AddAsync(modelName, cancellationToken);
 
-        var newModelNameModel = modelName.Adapt<ModelNameModel>();
+        var newModelNameModel = modelName.Adapt<CarModel>();
 
         return newModelNameModel;
     }
 
-    public async Task<ModelNameModel> UpdateAsync(ModelNameModel newModelNameModel, CancellationToken cancellationToken)
+    public async Task<CarModel> UpdateAsync(CarModel newModelNameModel, CancellationToken cancellationToken)
     {
         var modelName = await repository.GetByIdAsync(newModelNameModel.Id, true, cancellationToken);
 
@@ -45,7 +45,7 @@ public class ModelNameService(IModelNameRepository repository) : IModelNameServi
 
         await repository.UpdateAsync(modelName, cancellationToken);
 
-        var modeNameToReturn = modelName.Adapt<ModelNameModel>();
+        var modeNameToReturn = modelName.Adapt<CarModel>();
 
         return modeNameToReturn;
     }

@@ -6,7 +6,7 @@ namespace API.DI;
 
 public static class ServicesConfiguration
 {
-    public static void AddApiDependencies(this IServiceCollection services, IConfiguration configuration)
+    public static void AddApiDependencies(this IServiceCollection services)
     {
         services.AddAutoValidation();
     }

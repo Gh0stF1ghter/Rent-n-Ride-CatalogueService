@@ -13,49 +13,49 @@ public class CarModelController(ICarModelService service) : ControllerBase
 {
     [HttpGet]
     [ActionName("GetAllModelNamesInRange")]
-    public async Task<IEnumerable<ModelNameViewModel>> GetAll([FromQuery] int page, [FromQuery] int pageSize, CancellationToken cancellationToken)
+    public async Task<IEnumerable<CarModelViewModel>> GetAll([FromQuery] int page, [FromQuery] int pageSize, CancellationToken cancellationToken)
     {
         var modelNames = await service.GetRangeAsync(page, pageSize, cancellationToken);
 
-        var modelNamesVMs = modelNames.Adapt<IEnumerable<ModelNameViewModel>>();
+        var modelNamesVMs = modelNames.Adapt<IEnumerable<CarModelViewModel>>();
 
         return modelNamesVMs;
     }
 
     [HttpGet("{id}")]
     [ActionName("GetModelNameById")]
-    public async Task<ModelNameViewModel> GetById([FromRoute] Guid id, CancellationToken cancellationToken)
+    public async Task<CarModelViewModel> GetById([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var modelName = await service.GetByIdAsync(id, cancellationToken);
 
-        var modelNameVM = modelName.Adapt<ModelNameViewModel>();
+        var modelNameVM = modelName.Adapt<CarModelViewModel>();
 
         return modelNameVM;
     }
 
     [HttpPost]
     [ActionName("CreateModelName")]
-    public async Task<ModelNameViewModel> Create([FromBody] ShortModelNameViewModel createModelNameViewModel, CancellationToken cancellationToken)
+    public async Task<CarModelViewModel> Create([FromBody] ShortCarModelViewModel createModelNameViewModel, CancellationToken cancellationToken)
     {
         var modelNameModel = createModelNameViewModel.Adapt<CarModel>();
 
         var newModelName = await service.AddAsync(modelNameModel, cancellationToken);
 
-        var modelNameVM = newModelName.Adapt<ModelNameViewModel>();
+        var modelNameVM = newModelName.Adapt<CarModelViewModel>();
 
         return modelNameVM;
     }
 
     [HttpPut("{id}")]
     [ActionName("UpdateModelNameById")]
-    public async Task<ModelNameViewModel> Update([FromRoute] Guid id, [FromBody] ShortModelNameViewModel updateModelNameViewModel, CancellationToken cancellationToken)
+    public async Task<CarModelViewModel> Update([FromRoute] Guid id, [FromBody] ShortCarModelViewModel updateModelNameViewModel, CancellationToken cancellationToken)
     {
         var modelNameModel = updateModelNameViewModel.Adapt<CarModel>();
         modelNameModel.Id = id;
 
         var newModelName = await service.UpdateAsync(modelNameModel, cancellationToken);
 
-        var modelNameVM = newModelName.Adapt<ModelNameViewModel>();
+        var modelNameVM = newModelName.Adapt<CarModelViewModel>();
 
         return modelNameVM;
     }

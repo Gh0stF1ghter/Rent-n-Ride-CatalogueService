@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Tests.Mocks;
 
-internal class VehicleClientHistoryMock : Mock<IVehicleClientHistoryRepository>
+internal class VehicleClientHistoryRepositoryMock : Mock<IVehicleClientHistoryRepository>
 {
     private readonly CancellationToken _anyToken = It.IsAny<CancellationToken>();
 

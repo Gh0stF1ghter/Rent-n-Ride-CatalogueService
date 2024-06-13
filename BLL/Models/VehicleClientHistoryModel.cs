@@ -1,6 +1,6 @@
 ﻿namespace BLL.Models;
 
-public class VchModel
+public class VehicleClientHistoryModel
 {
     public Guid Id { get; set; }
 

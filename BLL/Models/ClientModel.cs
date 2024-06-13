@@ -7,5 +7,5 @@ public class ClientModel
     public string LastName { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
 
-    public IEnumerable<VchModel>? VehicleClientHistories { get; set; }
+    public IEnumerable<VehicleClientHistoryModel>? VehicleClientHistories { get; set; }
 }

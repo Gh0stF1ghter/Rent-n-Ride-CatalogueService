@@ -1,11 +1,14 @@
 using API.Extensions;
 using BLL.DI;
+using BLL.MappingConfigurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
 
 services.AddApplicationDependencies(builder.Configuration);
+
+GlobalMappingSettings.SetMapper();
 
 services.AddControllers();
 

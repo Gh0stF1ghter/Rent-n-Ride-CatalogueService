@@ -9,5 +9,5 @@ public class CarModelEntity
     public Guid ManufacturerId { get; set; }
     public ManufacturerEntity? Manufacturer { get; set; }
 
-    public IEnumerable<VehicleEntity> Vehicles { get; set; } = [];
+    public IEnumerable<VehicleEntity>? Vehicles { get; set; }
 }

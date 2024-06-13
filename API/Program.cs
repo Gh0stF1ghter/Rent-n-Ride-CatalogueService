@@ -1,3 +1,4 @@
+using API.DI;
 using API.Extensions;
 using BLL.DI;
 
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
 services.AddApplicationDependencies(builder.Configuration);
+services.AddApiDependencies(builder.Configuration);
 
 services.AddControllers();
 

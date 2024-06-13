@@ -6,7 +6,7 @@ using Mapster;
 using Tests.DataGeneration;
 using Tests.Mocks;
 
-namespace Tests.UnitTests;
+namespace Tests.ServicesTests;
 
 public class ClientServiceTests
 {
@@ -30,7 +30,7 @@ public class ClientServiceTests
 
         //Act
         var response = await service.GetRangeAsync(1, 1, default);
-        
+
         //Assert
         response.Should().BeEquivalentTo(correctClientModels);
     }
@@ -39,31 +39,54 @@ public class ClientServiceTests
     public async Task GetByIdAsync__ReturnsClientModel()
     {
         //Arrange
+        var correctClientModel = _clients[0].Adapt<ClientModel>();
+        var service = new ClientService(_repositoryMock.Object);
+
         //Act
+        var response = await service.GetByIdAsync(Guid.NewGuid(), default);
+
         //Assert
+        response.Should().BeEquivalentTo(correctClientModel);
     }
 
     [Fact]
     public async Task AddAsync_ClientModel_ReturnsClientModel()
     {
         //Arrange
+        var correctClientModel = _clients[0].Adapt<ClientModel>();
+        var service = new ClientService(_repositoryMock.Object);
+
         //Act
+        var response = await service.AddAsync(correctClientModel, default);
+
         //Assert
+        response.Should().BeEquivalentTo(correctClientModel);
     }
 
     [Fact]
     public async Task UpdateAsync_ClientModel_ReturnsClientModel()
     {
         //Arrange
+        var correctClientModel = _clients[1].Adapt<ClientModel>();
+        var service = new ClientService(_repositoryMock.Object);
+
         //Act
+        var response = await service.UpdateAsync(correctClientModel, default);
+
         //Assert
+        response.Should().BeEquivalentTo(correctClientModel);
     }
 
     [Fact]
-    public async Task DeleteAsync_ClientId()
+    public async Task DeleteAsync_ClientId_()
     {
         //Arrange
+        var service = new ClientService(_repositoryMock.Object);
+
         //Act
+        var response = async () => await service.DeleteAsync(Guid.NewGuid(), default);
+
         //Assert
+        await response.Should().NotThrowAsync();
     }
 }

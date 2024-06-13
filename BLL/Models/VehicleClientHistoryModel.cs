@@ -1,6 +1,6 @@
-﻿namespace DAL.Entities;
+﻿namespace BLL.Models;
 
-public class VehicleClientHistory
+public class VehicleClientHistoryModel
 {
     public Guid Id { get; set; }
 
@@ -8,8 +8,8 @@ public class VehicleClientHistory
     public DateTime EndDate { get; set; }
 
     public Guid VehicleId { get; set; }
-    public Vehicle? Vehicle { get; set; }
+    public VehicleModel? Vehicle { get; set; }
 
     public Guid ClientId { get; set; }
-    public Client? Client { get; set; }
+    public ClientModel? Client { get; set; }
 }

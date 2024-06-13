@@ -1,6 +1,6 @@
 ﻿namespace BLL.Models;
 
-public record ModelNameModel
+public class CarModel
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = string.Empty;

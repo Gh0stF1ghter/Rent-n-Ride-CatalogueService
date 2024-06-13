@@ -28,7 +28,7 @@ public class VehicleService(IVehicleRepository repository) : IVehicleService
 
     public async Task<VehicleModel> AddAsync(VehicleModel vehicleModel, CancellationToken cancellationToken)
     {
-        var vehicle = vehicleModel.Adapt<Vehicle>();
+        var vehicle = vehicleModel.Adapt<VehicleEntity>();
 
         await repository.AddAsync(vehicle, cancellationToken);
 

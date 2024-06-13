@@ -2,7 +2,7 @@
 
 namespace BLL.Models;
 
-public record VehicleModel
+public class VehicleModel
 {
     public Guid Id { get; set; }
 
@@ -15,8 +15,5 @@ public record VehicleModel
     public FuelType FuelType { get; set; }
 
     public Guid ModelId { get; set; }
-    public ModelNameModel? Model { get; set; }
-
-    public Guid ClientId { get; set; }
-    public ClientModel? Client { get; set; }
+    public CarModel? Model { get; set; }
 }

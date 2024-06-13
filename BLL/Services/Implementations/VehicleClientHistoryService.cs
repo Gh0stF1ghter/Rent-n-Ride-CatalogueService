@@ -28,7 +28,7 @@ public class VehicleClientHistoryService(IVehicleClientHistoryRepository reposit
 
     public async Task<VehicleClientHistoryModel> AddAsync(VehicleClientHistoryModel vchModel, CancellationToken cancellationToken)
     {
-        var vch = vchModel.Adapt<VehicleClientHistory>();
+        var vch = vchModel.Adapt<VehicleClientHistoryEntity>();
 
         await repository.AddAsync(vch, cancellationToken);
 

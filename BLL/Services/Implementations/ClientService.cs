@@ -28,7 +28,7 @@ public class ClientService(IClientRepository clientRepository) : IClientService
 
     public async Task<ClientModel> AddAsync(ClientModel clientModel, CancellationToken cancellationToken)
     {
-        var newClient = clientModel.Adapt<Client>();
+        var newClient = clientModel.Adapt<ClientEntity>();
 
         await clientRepository.AddAsync(newClient, cancellationToken);
 

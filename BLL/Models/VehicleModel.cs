@@ -15,5 +15,5 @@ public class VehicleModel
     public FuelType FuelType { get; set; }
 
     public Guid ModelId { get; set; }
-    public ModelNameModel? Model { get; set; }
+    public CarModel? Model { get; set; }
 }

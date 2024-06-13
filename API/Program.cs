@@ -1,3 +1,4 @@
+using API.Extensions;
 using BLL.DI;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,8 @@ services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {

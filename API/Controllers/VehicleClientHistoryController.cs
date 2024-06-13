@@ -37,7 +37,7 @@ public class VehicleClientHistoryController(IVehicleClientHistoryService service
     [ActionName("CreateVehicleClientHistory")]
     public async Task<VchViewModel> Create([FromBody] ShortVchViewModel createVehicleClientHistoryViewModel, CancellationToken cancellationToken)
     {
-        var vehicleClientHistoryModel = createVehicleClientHistoryViewModel.Adapt<VchModel>();
+        var vehicleClientHistoryModel = createVehicleClientHistoryViewModel.Adapt<VehicleClientHistoryModel>();
 
         var newVehicleClientHistory = await service.AddAsync(vehicleClientHistoryModel, cancellationToken);
 
@@ -50,7 +50,7 @@ public class VehicleClientHistoryController(IVehicleClientHistoryService service
     [ActionName("UpdateModelNameById")]
     public async Task<VchViewModel> Update([FromRoute] Guid id, [FromBody] ShortVchViewModel updateModelNameViewModel, CancellationToken cancellationToken)
     {
-        var vehicleClientHistoryModel = updateModelNameViewModel.Adapt<VchModel>();
+        var vehicleClientHistoryModel = updateModelNameViewModel.Adapt<VehicleClientHistoryModel>();
 
         vehicleClientHistoryModel.Id = id;
 

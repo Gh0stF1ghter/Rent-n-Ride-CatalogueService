@@ -9,7 +9,7 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("api/model")]
-public class ModelNameController(IModelNameService service) : ControllerBase
+public class CarModelController(ICarModelService service) : ControllerBase
 {
     [HttpGet]
     [ActionName("GetAllModelNamesInRange")]
@@ -37,7 +37,7 @@ public class ModelNameController(IModelNameService service) : ControllerBase
     [ActionName("CreateModelName")]
     public async Task<ModelNameViewModel> Create([FromBody] ShortModelNameViewModel createModelNameViewModel, CancellationToken cancellationToken)
     {
-        var modelNameModel = createModelNameViewModel.Adapt<ModelNameModel>();
+        var modelNameModel = createModelNameViewModel.Adapt<CarModel>();
 
         var newModelName = await service.AddAsync(modelNameModel, cancellationToken);
 
@@ -50,7 +50,7 @@ public class ModelNameController(IModelNameService service) : ControllerBase
     [ActionName("UpdateModelNameById")]
     public async Task<ModelNameViewModel> Update([FromRoute] Guid id, [FromBody] ShortModelNameViewModel updateModelNameViewModel, CancellationToken cancellationToken)
     {
-        var modelNameModel = updateModelNameViewModel.Adapt<ModelNameModel>();
+        var modelNameModel = updateModelNameViewModel.Adapt<CarModel>();
         modelNameModel.Id = id;
 
         var newModelName = await service.UpdateAsync(modelNameModel, cancellationToken);

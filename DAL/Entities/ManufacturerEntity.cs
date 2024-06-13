@@ -6,5 +6,5 @@ public class ManufacturerEntity
 
     public string Name { get; set; } = string.Empty;
 
-    public IEnumerable<CarModelEntity> ModelNames { get; set; }
+    public IEnumerable<CarModelEntity>? ModelNames { get; set; }
 }

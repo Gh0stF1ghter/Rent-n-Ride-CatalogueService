@@ -17,5 +17,5 @@ public class VehicleEntity
     public Guid ModelId { get; set; }
     public CarModelEntity? ModelName { get; set; }
 
-    public IEnumerable<VehicleClientHistoryEntity> VehicleClientHistory { get; set; }
+    public IEnumerable<VehicleClientHistoryEntity>? VehicleClientHistory { get; set; }
 }

@@ -13,42 +13,42 @@ public class VehicleClientHistoryController(IVehicleClientHistoryService service
 {
     [HttpGet]
     [ActionName("GetAlVehicleClientHistoriesInRange")]
-    public async Task<IEnumerable<VchViewModel>> GetAll([FromQuery] int page, [FromQuery] int pageSize, CancellationToken cancellationToken)
+    public async Task<IEnumerable<VehicleClientHistoryViewModel>> GetAll([FromQuery] int page, [FromQuery] int pageSize, CancellationToken cancellationToken)
     {
         var vehicleClientHistories = await service.GetRangeAsync(page, pageSize, cancellationToken);
 
-        var vehicleClientHistoriesVMs = vehicleClientHistories.Adapt<IEnumerable<VchViewModel>>();
+        var vehicleClientHistoriesVMs = vehicleClientHistories.Adapt<IEnumerable<VehicleClientHistoryViewModel>>();
 
         return vehicleClientHistoriesVMs;
     }
 
     [HttpGet("{id}")]
     [ActionName("GetVehicleClientHistoryById")]
-    public async Task<VchViewModel> GetById([FromRoute] Guid id, CancellationToken cancellationToken)
+    public async Task<VehicleClientHistoryViewModel> GetById([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var vehicleClientHistory = await service.GetByIdAsync(id, cancellationToken);
 
-        var vehicleClientHistoryVM = vehicleClientHistory.Adapt<VchViewModel>();
+        var vehicleClientHistoryVM = vehicleClientHistory.Adapt<VehicleClientHistoryViewModel>();
 
         return vehicleClientHistoryVM;
     }
 
     [HttpPost]
     [ActionName("CreateVehicleClientHistory")]
-    public async Task<VchViewModel> Create([FromBody] ShortVchViewModel createVehicleClientHistoryViewModel, CancellationToken cancellationToken)
+    public async Task<VehicleClientHistoryViewModel> Create([FromBody] ShortVehicleClientHistoryViewModel createVehicleClientHistoryViewModel, CancellationToken cancellationToken)
     {
         var vehicleClientHistoryModel = createVehicleClientHistoryViewModel.Adapt<VehicleClientHistoryModel>();
 
         var newVehicleClientHistory = await service.AddAsync(vehicleClientHistoryModel, cancellationToken);
 
-        var vehicleClientHistoryVM = newVehicleClientHistory.Adapt<VchViewModel>();
+        var vehicleClientHistoryVM = newVehicleClientHistory.Adapt<VehicleClientHistoryViewModel>();
 
         return vehicleClientHistoryVM;
     }
 
     [HttpPut("{id}")]
     [ActionName("UpdateModelNameById")]
-    public async Task<VchViewModel> Update([FromRoute] Guid id, [FromBody] ShortVchViewModel updateModelNameViewModel, CancellationToken cancellationToken)
+    public async Task<VehicleClientHistoryViewModel> Update([FromRoute] Guid id, [FromBody] ShortVehicleClientHistoryViewModel updateModelNameViewModel, CancellationToken cancellationToken)
     {
         var vehicleClientHistoryModel = updateModelNameViewModel.Adapt<VehicleClientHistoryModel>();
 
@@ -56,7 +56,7 @@ public class VehicleClientHistoryController(IVehicleClientHistoryService service
 
         var newVehicleClientHistory = await service.UpdateAsync(vehicleClientHistoryModel, cancellationToken);
 
-        var vehicleClientHistoryVM = newVehicleClientHistory.Adapt<VchViewModel>();
+        var vehicleClientHistoryVM = newVehicleClientHistory.Adapt<VehicleClientHistoryViewModel>();
 
         return vehicleClientHistoryVM;
     }

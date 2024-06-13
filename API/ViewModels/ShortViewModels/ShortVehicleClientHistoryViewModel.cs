@@ -1,6 +1,6 @@
 namespace API.ViewModels.ShortViewModels;
 
-public record ShortVchViewModel(
+public record ShortVehicleClientHistoryViewModel(
     DateTime StartDate,
     DateTime EndDate,
     Guid VehicleId,

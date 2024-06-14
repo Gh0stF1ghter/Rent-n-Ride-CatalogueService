@@ -32,6 +32,7 @@ jobs:
       uses: highbyte/sonarscan-dotnet@v2.3.0
       with:
         sonarProjectKey: Gh0stF1ghter_Project-Rent-n-Ride
+        sonarProjectName: Project-Rent-n-Ride
         sonarOrganization: gh0stf1ghter
         dotnetBuildArguments: --configuration Release
         dotnetTestArguments: --no-build --configuration Release --verbosity normal --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover

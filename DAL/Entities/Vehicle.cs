@@ -2,7 +2,7 @@
 
 namespace DAL.Entities;
 
-public class VehicleEntity
+public class Vehicle
 {
     public Guid Id { get; set; }
 
@@ -15,7 +15,7 @@ public class VehicleEntity
     public FuelType FuelType { get; set; }
 
     public Guid ModelId { get; set; }
-    public CarModelEntity? ModelName { get; set; }
+    public ModelName? ModelName { get; set; }
 
-    public IEnumerable<VehicleClientHistoryEntity>? VehicleClientHistory { get; set; }
+    public IEnumerable<VehicleClientHistory> VehicleClientHistory { get; set; } = [];
 }

@@ -28,7 +28,7 @@ public class ManufacturerService(IManufacturerRepository repository) : IManufact
 
     public async Task<ManufacturerModel> AddAsync(ManufacturerModel manufacturerModel, CancellationToken cancellationToken)
     {
-        var manufacturer = manufacturerModel.Adapt<ManufacturerEntity>();
+        var manufacturer = manufacturerModel.Adapt<Manufacturer>();
 
         await repository.AddAsync(manufacturer, cancellationToken);
 

@@ -23,7 +23,7 @@ public static class ServicesConfiguration
     {
         services.AddScoped<IClientService, ClientService>();
         services.AddScoped<IManufacturerService, ManufacturerService>();
-        services.AddScoped<ICarModelService, CarModelService>();
+        services.AddScoped<IModelNameService, ModelNameService>();
         services.AddScoped<IVehicleClientHistoryService, VehicleClientHistoryService>();
         services.AddScoped<IVehicleService, VehicleService>();
     }

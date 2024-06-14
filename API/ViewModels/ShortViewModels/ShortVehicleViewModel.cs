@@ -7,7 +7,7 @@ public record ShortVehicleViewModel(
     string PlateNumber,
     decimal RentCost,
     int Odo,
-    VehicleType VehicleType = VehicleType.None,
-    VehicleState VehicleState = VehicleState.None,
-    FuelType FuelType = FuelType.None
+    VehicleType VehicleType,
+    VehicleState VehicleState,
+    FuelType FuelType
     );

@@ -1,6 +1,6 @@
 ﻿namespace DAL.Entities;
 
-public class ClientEntity
+public class Client
 {
     public Guid Id { get; set; }
 
@@ -9,5 +9,5 @@ public class ClientEntity
     public string Email { get; set; } = string.Empty;
     public string PhoneNumber { get; set; } = string.Empty;
 
-    public IEnumerable<VehicleClientHistoryEntity>? VehicleClientHistory { get; set; }
+    public IEnumerable<VehicleClientHistory> VehicleClientHistory { get; set; } = [];
 }

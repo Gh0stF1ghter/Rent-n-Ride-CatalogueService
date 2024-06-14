@@ -1,4 +1,4 @@
-namespace API.ViewModels;
+﻿namespace API.ViewModels;
 
 public record ClientViewModel(
     Guid Id,
@@ -6,5 +6,5 @@ public record ClientViewModel(
     string LastName,
     string Email,
     string PhoneNumber,
-    IEnumerable<VehicleClientHistoryViewModel> VehicleClientHistories
+    IEnumerable<VchViewModel> VehicleClientHistories
     );

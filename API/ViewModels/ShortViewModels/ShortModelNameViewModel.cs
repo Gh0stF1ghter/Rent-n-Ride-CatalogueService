@@ -1,6 +1,6 @@
 ﻿namespace API.ViewModels.ShortViewModels;
 
-public record ShortCarModelViewModel(
+public record ShortModelNameViewModel(
     string Name,
     Guid ManufacturerId
     );

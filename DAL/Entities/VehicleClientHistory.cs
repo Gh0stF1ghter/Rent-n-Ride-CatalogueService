@@ -1,6 +1,6 @@
 ﻿namespace DAL.Entities;
 
-public class VehicleClientHistoryEntity
+public class VehicleClientHistory
 {
     public Guid Id { get; set; }
 
@@ -8,8 +8,8 @@ public class VehicleClientHistoryEntity
     public DateTime EndDate { get; set; }
 
     public Guid VehicleId { get; set; }
-    public VehicleEntity? Vehicle { get; set; }
+    public Vehicle? Vehicle { get; set; }
 
     public Guid ClientId { get; set; }
-    public ClientEntity? Client { get; set; }
+    public Client? Client { get; set; }
 }

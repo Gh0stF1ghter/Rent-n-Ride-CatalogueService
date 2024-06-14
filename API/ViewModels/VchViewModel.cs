@@ -1,6 +1,6 @@
 ﻿namespace API.ViewModels;
 
-public record VehicleClientHistoryViewModel(
+public record VchViewModel(
     Guid Id,
     DateTime StartDate,
     DateTime EndDate,

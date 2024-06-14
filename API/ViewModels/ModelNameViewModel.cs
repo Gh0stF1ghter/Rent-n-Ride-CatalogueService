@@ -1,6 +1,6 @@
 ﻿namespace API.ViewModels;
 
-public record CarModelViewModel(
+public record ModelNameViewModel(
     Guid Id,
     string Name,
     ManufacturerViewModel? Manufacturer,

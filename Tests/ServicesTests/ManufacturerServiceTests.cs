@@ -12,7 +12,7 @@ public class ManufacturerServiceTests
 {
     private readonly ManufacturerRepositoryMock _repositoryMock = new();
 
-    private readonly List<Manufacturer> _manufacturers = DataGenerator.AddManufacturerData(5);
+    private readonly List<ManufacturerEntity> _manufacturers = DataGenerator.AddManufacturerData(5);
 
     public ManufacturerServiceTests()
     {

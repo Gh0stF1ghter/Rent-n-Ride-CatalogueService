@@ -12,7 +12,7 @@ public class VehicleServiceTests
 {
     private readonly VehicleRepositoryMock _repositoryMock = new();
 
-    private readonly List<Vehicle> _vehicles = DataGenerator.AddVehicleData(5);
+    private readonly List<VehicleEntity> _vehicles = DataGenerator.AddVehicleData(5);
 
     public VehicleServiceTests()
     {

@@ -22,7 +22,179 @@ namespace DAL.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("DAL.Entities.Client", b =>
+            modelBuilder.Entity("DAL.Entities.CarModelEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ManufacturerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ManufacturerId");
+
+                    b.ToTable("VehicleModels");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("b7d576f3-a9f7-440e-9c34-2289923d464b"),
+                            ManufacturerId = new Guid("33033254-55f6-4f3b-a8d2-c9dd071ffbd1"),
+                            Name = "Volt"
+                        },
+                        new
+                        {
+                            Id = new Guid("c22744ad-e7e4-4083-9da8-68d3de702289"),
+                            ManufacturerId = new Guid("33033254-55f6-4f3b-a8d2-c9dd071ffbd1"),
+                            Name = "Escalade"
+                        },
+                        new
+                        {
+                            Id = new Guid("79034739-1060-4346-a39b-3800e3651960"),
+                            ManufacturerId = new Guid("33033254-55f6-4f3b-a8d2-c9dd071ffbd1"),
+                            Name = "Fiesta"
+                        },
+                        new
+                        {
+                            Id = new Guid("50433eaf-f309-4a9f-b603-d2a14e59701b"),
+                            ManufacturerId = new Guid("33033254-55f6-4f3b-a8d2-c9dd071ffbd1"),
+                            Name = "Camry"
+                        },
+                        new
+                        {
+                            Id = new Guid("44561354-904e-4ac5-bd97-10415a0d1585"),
+                            ManufacturerId = new Guid("33033254-55f6-4f3b-a8d2-c9dd071ffbd1"),
+                            Name = "2"
+                        },
+                        new
+                        {
+                            Id = new Guid("602fd8a7-57f7-4662-b82f-5351c7351af3"),
+                            ManufacturerId = new Guid("be7f8ca5-7c97-4574-96a8-d7da0a317ffb"),
+                            Name = "CX-9"
+                        },
+                        new
+                        {
+                            Id = new Guid("5e58ca15-9a3d-49ba-8054-8ea280e92980"),
+                            ManufacturerId = new Guid("be7f8ca5-7c97-4574-96a8-d7da0a317ffb"),
+                            Name = "Focus"
+                        },
+                        new
+                        {
+                            Id = new Guid("95b7414f-dc5a-4bb1-831e-bd915d295713"),
+                            ManufacturerId = new Guid("be7f8ca5-7c97-4574-96a8-d7da0a317ffb"),
+                            Name = "A8"
+                        },
+                        new
+                        {
+                            Id = new Guid("4387099b-8477-4ab3-a04c-5f8cd225ebdc"),
+                            ManufacturerId = new Guid("be7f8ca5-7c97-4574-96a8-d7da0a317ffb"),
+                            Name = "Focus"
+                        },
+                        new
+                        {
+                            Id = new Guid("34ce56cd-f2b9-495b-a839-7a9d285e0115"),
+                            ManufacturerId = new Guid("be7f8ca5-7c97-4574-96a8-d7da0a317ffb"),
+                            Name = "Explorer"
+                        },
+                        new
+                        {
+                            Id = new Guid("eedb2e04-0223-4ab0-bbac-aa43b37b6d95"),
+                            ManufacturerId = new Guid("4b3a93c1-aae1-4239-9b92-79a69ef177f7"),
+                            Name = "Countach"
+                        },
+                        new
+                        {
+                            Id = new Guid("ee86b2a2-2428-4053-917b-9a5fef50d789"),
+                            ManufacturerId = new Guid("4b3a93c1-aae1-4239-9b92-79a69ef177f7"),
+                            Name = "Malibu"
+                        },
+                        new
+                        {
+                            Id = new Guid("bffaddb9-36c2-484a-b968-78afa974fcac"),
+                            ManufacturerId = new Guid("4b3a93c1-aae1-4239-9b92-79a69ef177f7"),
+                            Name = "Spyder"
+                        },
+                        new
+                        {
+                            Id = new Guid("8e169234-04b3-48e5-9518-c21cd39f2c7f"),
+                            ManufacturerId = new Guid("4b3a93c1-aae1-4239-9b92-79a69ef177f7"),
+                            Name = "Impala"
+                        },
+                        new
+                        {
+                            Id = new Guid("9995fc8c-3844-4c97-8c99-e0bcfc360cad"),
+                            ManufacturerId = new Guid("4b3a93c1-aae1-4239-9b92-79a69ef177f7"),
+                            Name = "Element"
+                        },
+                        new
+                        {
+                            Id = new Guid("45f39368-4456-433c-ad9b-edaa7783e343"),
+                            ManufacturerId = new Guid("c1893305-d1ba-4930-941e-00e2279a5d49"),
+                            Name = "V90"
+                        },
+                        new
+                        {
+                            Id = new Guid("0cae08a1-e2de-4790-a1aa-5d3e91060acc"),
+                            ManufacturerId = new Guid("c1893305-d1ba-4930-941e-00e2279a5d49"),
+                            Name = "Focus"
+                        },
+                        new
+                        {
+                            Id = new Guid("703ff426-1d0e-403c-bfd6-664927657232"),
+                            ManufacturerId = new Guid("c1893305-d1ba-4930-941e-00e2279a5d49"),
+                            Name = "Mercielago"
+                        },
+                        new
+                        {
+                            Id = new Guid("15bf6bbf-a110-4a88-bc5e-8b4c47510b44"),
+                            ManufacturerId = new Guid("c1893305-d1ba-4930-941e-00e2279a5d49"),
+                            Name = "A8"
+                        },
+                        new
+                        {
+                            Id = new Guid("8ae805d5-0d78-4c71-bd7b-799b49a3a774"),
+                            ManufacturerId = new Guid("c1893305-d1ba-4930-941e-00e2279a5d49"),
+                            Name = "LeBaron"
+                        },
+                        new
+                        {
+                            Id = new Guid("4d54f5ee-5813-4c5e-9246-c065a85c99b9"),
+                            ManufacturerId = new Guid("b6a7711c-a5ce-4197-9a36-a0e9c957a0bc"),
+                            Name = "Wrangler"
+                        },
+                        new
+                        {
+                            Id = new Guid("ea1cc4b7-c655-4b48-8297-557e2d3fbff0"),
+                            ManufacturerId = new Guid("b6a7711c-a5ce-4197-9a36-a0e9c957a0bc"),
+                            Name = "Focus"
+                        },
+                        new
+                        {
+                            Id = new Guid("81ab22e6-6240-4b31-8586-2475de8edc51"),
+                            ManufacturerId = new Guid("b6a7711c-a5ce-4197-9a36-a0e9c957a0bc"),
+                            Name = "Grand Caravan"
+                        },
+                        new
+                        {
+                            Id = new Guid("db15f770-f6dc-4c94-a3ad-6799ed7df34a"),
+                            ManufacturerId = new Guid("b6a7711c-a5ce-4197-9a36-a0e9c957a0bc"),
+                            Name = "Ranchero"
+                        },
+                        new
+                        {
+                            Id = new Guid("cd76eccf-a3f0-4680-b90a-0b19b10c4d48"),
+                            ManufacturerId = new Guid("b6a7711c-a5ce-4197-9a36-a0e9c957a0bc"),
+                            Name = "XC90"
+                        });
+                });
+
+            modelBuilder.Entity("DAL.Entities.ClientEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,15 +223,15 @@ namespace DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3eb356a0-8123-42ef-af05-0650b333a949"),
-                            Email = "Mark_Pagac@gmail.com",
-                            FirstName = "Lisa",
-                            LastName = "Labadie",
-                            PhoneNumber = "(868) 880-3175"
+                            Id = new Guid("5da0b549-709d-42a7-911a-40c53532dd3b"),
+                            Email = "Aurelia_Hirthe40@gmail.com",
+                            FirstName = "Deja",
+                            LastName = "Keebler",
+                            PhoneNumber = "732.527.1470"
                         });
                 });
 
-            modelBuilder.Entity("DAL.Entities.Manufacturer", b =>
+            modelBuilder.Entity("DAL.Entities.ManufacturerEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -76,204 +248,101 @@ namespace DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7d7a7a20-8083-44cf-8917-20f6ae5ce184"),
-                            Name = "Chrysler"
+                            Id = new Guid("33033254-55f6-4f3b-a8d2-c9dd071ffbd1"),
+                            Name = "Hyundai"
                         },
                         new
                         {
-                            Id = new Guid("5b8b98f6-4929-4d73-a6dd-0725808eede3"),
-                            Name = "Dodge"
+                            Id = new Guid("be7f8ca5-7c97-4574-96a8-d7da0a317ffb"),
+                            Name = "Nissan"
                         },
                         new
                         {
-                            Id = new Guid("92025cfe-da31-4823-8060-d91540bcadb4"),
-                            Name = "Cadillac"
+                            Id = new Guid("4b3a93c1-aae1-4239-9b92-79a69ef177f7"),
+                            Name = "Lamborghini"
                         },
                         new
                         {
-                            Id = new Guid("bc77cd17-3aa7-45d8-b6d6-50e1fb281b88"),
-                            Name = "Kia"
+                            Id = new Guid("c1893305-d1ba-4930-941e-00e2279a5d49"),
+                            Name = "Mercedes Benz"
                         },
                         new
                         {
-                            Id = new Guid("41708490-fd13-4408-a894-0c40a308923d"),
-                            Name = "Polestar"
+                            Id = new Guid("b6a7711c-a5ce-4197-9a36-a0e9c957a0bc"),
+                            Name = "Tesla"
                         });
                 });
 
-            modelBuilder.Entity("DAL.Entities.ModelName", b =>
+            modelBuilder.Entity("DAL.Entities.VehicleClientHistoryEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ManufacturerId")
+                    b.Property<Guid>("ClientId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("VehicleId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ManufacturerId");
+                    b.HasIndex("ClientId");
 
-                    b.ToTable("VehicleModels");
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("VehicleClientHistories");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("33d56cd1-5975-48c9-b73c-0b748e63b8ff"),
-                            ManufacturerId = new Guid("7d7a7a20-8083-44cf-8917-20f6ae5ce184"),
-                            Name = "2"
+                            Id = new Guid("07ab88f5-ad1a-44ba-8d06-3bd0017c494f"),
+                            ClientId = new Guid("5da0b549-709d-42a7-911a-40c53532dd3b"),
+                            EndDate = new DateTime(2023, 6, 25, 21, 0, 29, 156, DateTimeKind.Utc).AddTicks(1853),
+                            StartDate = new DateTime(2023, 6, 24, 4, 15, 42, 279, DateTimeKind.Utc).AddTicks(1620),
+                            VehicleId = new Guid("dbc10c30-4a5b-4f91-9791-78bceec204f5")
                         },
                         new
                         {
-                            Id = new Guid("d06ff28c-7710-4c15-937f-5f49633aa704"),
-                            ManufacturerId = new Guid("7d7a7a20-8083-44cf-8917-20f6ae5ce184"),
-                            Name = "Volt"
+                            Id = new Guid("4bad2048-9b59-4b98-9bc0-3e189e414317"),
+                            ClientId = new Guid("5da0b549-709d-42a7-911a-40c53532dd3b"),
+                            EndDate = new DateTime(2023, 8, 27, 21, 39, 1, 386, DateTimeKind.Utc).AddTicks(1114),
+                            StartDate = new DateTime(2023, 10, 22, 7, 21, 17, 585, DateTimeKind.Utc).AddTicks(9345),
+                            VehicleId = new Guid("e2722fa0-d09f-4b98-b551-0c681a82cf32")
                         },
                         new
                         {
-                            Id = new Guid("3c56381f-56eb-4b55-9cec-f4885921d043"),
-                            ManufacturerId = new Guid("7d7a7a20-8083-44cf-8917-20f6ae5ce184"),
-                            Name = "Sentra"
+                            Id = new Guid("4a7cd805-a270-4ea4-9b3c-56cb218e11ee"),
+                            ClientId = new Guid("5da0b549-709d-42a7-911a-40c53532dd3b"),
+                            EndDate = new DateTime(2024, 4, 29, 0, 25, 0, 602, DateTimeKind.Utc).AddTicks(7713),
+                            StartDate = new DateTime(2024, 6, 8, 7, 41, 50, 274, DateTimeKind.Utc).AddTicks(1155),
+                            VehicleId = new Guid("3bd49b40-1472-4a04-bd6c-acea90b50d8d")
                         },
                         new
                         {
-                            Id = new Guid("000a5545-0f97-48f6-b8de-cfbdc3368a5b"),
-                            ManufacturerId = new Guid("7d7a7a20-8083-44cf-8917-20f6ae5ce184"),
-                            Name = "Model T"
+                            Id = new Guid("d0e6f9af-04b5-4f1d-bf5a-9ff3bfe3588d"),
+                            ClientId = new Guid("5da0b549-709d-42a7-911a-40c53532dd3b"),
+                            EndDate = new DateTime(2024, 5, 4, 23, 14, 25, 962, DateTimeKind.Utc).AddTicks(3965),
+                            StartDate = new DateTime(2023, 12, 4, 13, 24, 10, 501, DateTimeKind.Utc).AddTicks(1209),
+                            VehicleId = new Guid("89e81961-7efb-469b-a9d5-c6ec7f973228")
                         },
                         new
                         {
-                            Id = new Guid("18227dd6-01c6-4795-9203-8255e318ce28"),
-                            ManufacturerId = new Guid("7d7a7a20-8083-44cf-8917-20f6ae5ce184"),
-                            Name = "Explorer"
-                        },
-                        new
-                        {
-                            Id = new Guid("555bc933-c002-4fda-937f-8fe3e83d8326"),
-                            ManufacturerId = new Guid("5b8b98f6-4929-4d73-a6dd-0725808eede3"),
-                            Name = "CTS"
-                        },
-                        new
-                        {
-                            Id = new Guid("922afd35-158e-4c72-99fd-805bb758f702"),
-                            ManufacturerId = new Guid("5b8b98f6-4929-4d73-a6dd-0725808eede3"),
-                            Name = "Fiesta"
-                        },
-                        new
-                        {
-                            Id = new Guid("f073954f-e1de-4699-bb33-e9e6df99becd"),
-                            ManufacturerId = new Guid("5b8b98f6-4929-4d73-a6dd-0725808eede3"),
-                            Name = "Model 3"
-                        },
-                        new
-                        {
-                            Id = new Guid("db3603ac-0ae3-4987-8120-924e1bcd2119"),
-                            ManufacturerId = new Guid("5b8b98f6-4929-4d73-a6dd-0725808eede3"),
-                            Name = "Camaro"
-                        },
-                        new
-                        {
-                            Id = new Guid("dcb1a6f4-fd91-4d1a-9eb0-4d9d7963688c"),
-                            ManufacturerId = new Guid("5b8b98f6-4929-4d73-a6dd-0725808eede3"),
-                            Name = "Malibu"
-                        },
-                        new
-                        {
-                            Id = new Guid("76f2cfc6-5fba-48aa-82e4-5d69c71cd4b7"),
-                            ManufacturerId = new Guid("92025cfe-da31-4823-8060-d91540bcadb4"),
-                            Name = "Explorer"
-                        },
-                        new
-                        {
-                            Id = new Guid("13614880-4880-451a-9935-25f2f5b0f93d"),
-                            ManufacturerId = new Guid("92025cfe-da31-4823-8060-d91540bcadb4"),
-                            Name = "Focus"
-                        },
-                        new
-                        {
-                            Id = new Guid("647e3c20-dfc9-4e01-9b4f-007a6c9ea3f5"),
-                            ManufacturerId = new Guid("92025cfe-da31-4823-8060-d91540bcadb4"),
-                            Name = "Cruze"
-                        },
-                        new
-                        {
-                            Id = new Guid("628daeca-f69d-4281-aee7-b935e9f52bb5"),
-                            ManufacturerId = new Guid("92025cfe-da31-4823-8060-d91540bcadb4"),
-                            Name = "Camaro"
-                        },
-                        new
-                        {
-                            Id = new Guid("5fefaeee-2a38-4042-945b-ad4ad07b4657"),
-                            ManufacturerId = new Guid("92025cfe-da31-4823-8060-d91540bcadb4"),
-                            Name = "Camry"
-                        },
-                        new
-                        {
-                            Id = new Guid("7d0ec296-ee40-4321-b44f-94980baac2f9"),
-                            ManufacturerId = new Guid("bc77cd17-3aa7-45d8-b6d6-50e1fb281b88"),
-                            Name = "ATS"
-                        },
-                        new
-                        {
-                            Id = new Guid("027ba638-4808-4d07-9c41-f8551c411c24"),
-                            ManufacturerId = new Guid("bc77cd17-3aa7-45d8-b6d6-50e1fb281b88"),
-                            Name = "Ranchero"
-                        },
-                        new
-                        {
-                            Id = new Guid("6db119ab-df8e-4ce6-91b2-8dd8473e1e70"),
-                            ManufacturerId = new Guid("bc77cd17-3aa7-45d8-b6d6-50e1fb281b88"),
-                            Name = "XC90"
-                        },
-                        new
-                        {
-                            Id = new Guid("2418ffbd-5c3f-48a2-9c9f-d93cafe0112f"),
-                            ManufacturerId = new Guid("bc77cd17-3aa7-45d8-b6d6-50e1fb281b88"),
-                            Name = "Land Cruiser"
-                        },
-                        new
-                        {
-                            Id = new Guid("141f64eb-b7e8-4bd8-9437-860d4dd46c8b"),
-                            ManufacturerId = new Guid("bc77cd17-3aa7-45d8-b6d6-50e1fb281b88"),
-                            Name = "Model S"
-                        },
-                        new
-                        {
-                            Id = new Guid("e554df25-3a79-4264-82c3-08fc630c25e6"),
-                            ManufacturerId = new Guid("41708490-fd13-4408-a894-0c40a308923d"),
-                            Name = "2"
-                        },
-                        new
-                        {
-                            Id = new Guid("e0c9186d-7831-4735-9da0-cb884d53bd83"),
-                            ManufacturerId = new Guid("41708490-fd13-4408-a894-0c40a308923d"),
-                            Name = "Expedition"
-                        },
-                        new
-                        {
-                            Id = new Guid("24f3d93c-10f6-4260-836c-b3f041551209"),
-                            ManufacturerId = new Guid("41708490-fd13-4408-a894-0c40a308923d"),
-                            Name = "Camaro"
-                        },
-                        new
-                        {
-                            Id = new Guid("1a6474bb-e95b-4712-b053-e5cdc8df2a6e"),
-                            ManufacturerId = new Guid("41708490-fd13-4408-a894-0c40a308923d"),
-                            Name = "Volt"
-                        },
-                        new
-                        {
-                            Id = new Guid("517b1982-794f-4bf6-999f-5b5c2f462721"),
-                            ManufacturerId = new Guid("41708490-fd13-4408-a894-0c40a308923d"),
-                            Name = "Colorado"
+                            Id = new Guid("455b43fe-2e14-4824-bffb-4623bed2f887"),
+                            ClientId = new Guid("5da0b549-709d-42a7-911a-40c53532dd3b"),
+                            EndDate = new DateTime(2023, 8, 28, 15, 29, 4, 860, DateTimeKind.Utc).AddTicks(6878),
+                            StartDate = new DateTime(2024, 4, 10, 12, 42, 43, 950, DateTimeKind.Utc).AddTicks(9321),
+                            VehicleId = new Guid("e2722fa0-d09f-4b98-b551-0c681a82cf32")
                         });
                 });
 
-            modelBuilder.Entity("DAL.Entities.Vehicle", b =>
+            modelBuilder.Entity("DAL.Entities.VehicleEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -313,1453 +382,1384 @@ namespace DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("deb45842-ad67-462d-9814-2bdce6c43e33"),
-                            FuelType = 3,
-                            ModelId = new Guid("33d56cd1-5975-48c9-b73c-0b748e63b8ff"),
-                            Odo = 2272,
-                            PlateNumber = "DW0STHX7CFLA15959",
-                            RentCost = 3929.4805621769196,
-                            VehicleState = 1,
-                            VehicleType = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("542d1be7-a402-4696-9b15-cb4c8a2708e7"),
-                            FuelType = 3,
-                            ModelId = new Guid("33d56cd1-5975-48c9-b73c-0b748e63b8ff"),
-                            Odo = 8146,
-                            PlateNumber = "X1JSBMD1GLSZ68088",
-                            RentCost = 1547.327016649291,
-                            VehicleState = 3,
-                            VehicleType = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("63fd496d-8891-4a53-a99f-283b67ddab8d"),
-                            FuelType = 2,
-                            ModelId = new Guid("33d56cd1-5975-48c9-b73c-0b748e63b8ff"),
-                            Odo = 9102,
-                            PlateNumber = "LEM1V0MWQQX638469",
-                            RentCost = 812.16262126824222,
-                            VehicleState = 1,
-                            VehicleType = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("a67a446b-6c4e-486f-a74e-24a39bacd901"),
+                            Id = new Guid("38024e9f-36df-4168-a2d9-c62821219642"),
                             FuelType = 1,
-                            ModelId = new Guid("33d56cd1-5975-48c9-b73c-0b748e63b8ff"),
-                            Odo = 7810,
-                            PlateNumber = "7X7LU6NRSGJL49699",
-                            RentCost = 640.64136639140565,
+                            ModelId = new Guid("b7d576f3-a9f7-440e-9c34-2289923d464b"),
+                            Odo = 5094,
+                            PlateNumber = "VQ6GECSSJDW628881",
+                            RentCost = 3908.2002615417355,
                             VehicleState = 0,
-                            VehicleType = 1
+                            VehicleType = 0
                         },
                         new
                         {
-                            Id = new Guid("5a248d69-368f-4db1-8fbf-2ffb291e4ee1"),
-                            FuelType = 3,
-                            ModelId = new Guid("33d56cd1-5975-48c9-b73c-0b748e63b8ff"),
-                            Odo = 4130,
-                            PlateNumber = "MMOEAN1HCJDC37003",
-                            RentCost = 894.96006936358606,
-                            VehicleState = 0,
-                            VehicleType = 5
-                        },
-                        new
-                        {
-                            Id = new Guid("bd7e2abb-b014-42a0-be89-768c6dfd4733"),
-                            FuelType = 3,
-                            ModelId = new Guid("d06ff28c-7710-4c15-937f-5f49633aa704"),
-                            Odo = 6673,
-                            PlateNumber = "ETO2KSIX1GJ135514",
-                            RentCost = 3813.5398658818585,
+                            Id = new Guid("3bee9412-17d4-4265-9ad8-2f40f273bdf0"),
+                            FuelType = 1,
+                            ModelId = new Guid("b7d576f3-a9f7-440e-9c34-2289923d464b"),
+                            Odo = 7815,
+                            PlateNumber = "AWCZ3EV4H8TX41366",
+                            RentCost = 3100.2564217338772,
                             VehicleState = 2,
                             VehicleType = 5
                         },
                         new
                         {
-                            Id = new Guid("ee4cae45-fc39-45d9-a53e-7b0391be2926"),
-                            FuelType = 1,
-                            ModelId = new Guid("d06ff28c-7710-4c15-937f-5f49633aa704"),
-                            Odo = 1928,
-                            PlateNumber = "48HYS8Q7HSI043743",
-                            RentCost = 3506.1423030685346,
-                            VehicleState = 3,
+                            Id = new Guid("5cd498c0-7aa2-4a6a-a6b4-200481b1ecc3"),
+                            FuelType = 2,
+                            ModelId = new Guid("b7d576f3-a9f7-440e-9c34-2289923d464b"),
+                            Odo = 8892,
+                            PlateNumber = "XAKM0N9XC5EM27695",
+                            RentCost = 3292.6074243568928,
+                            VehicleState = 1,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("02bdb585-9037-46bd-9fee-b6387820d4ae"),
+                            FuelType = 0,
+                            ModelId = new Guid("b7d576f3-a9f7-440e-9c34-2289923d464b"),
+                            Odo = 7704,
+                            PlateNumber = "OLSMKUFGGQUH62585",
+                            RentCost = 693.33826474577199,
+                            VehicleState = 0,
                             VehicleType = 1
                         },
                         new
                         {
-                            Id = new Guid("294081d5-077b-487f-acf8-233528581dc7"),
+                            Id = new Guid("a1b4de89-a964-4e06-93e4-32616a99b28f"),
+                            FuelType = 1,
+                            ModelId = new Guid("b7d576f3-a9f7-440e-9c34-2289923d464b"),
+                            Odo = 6721,
+                            PlateNumber = "Q2CBZNAEKMWX95385",
+                            RentCost = 2437.4293765347165,
+                            VehicleState = 2,
+                            VehicleType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("6f64fd2b-b878-41ac-8ee9-b3530c805396"),
+                            FuelType = 1,
+                            ModelId = new Guid("c22744ad-e7e4-4083-9da8-68d3de702289"),
+                            Odo = 9749,
+                            PlateNumber = "1DJI9YAZOWIB19126",
+                            RentCost = 2412.4581076387299,
+                            VehicleState = 3,
+                            VehicleType = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("abde47ef-0186-4e8b-b9db-e2b0e82b8bcc"),
                             FuelType = 3,
-                            ModelId = new Guid("d06ff28c-7710-4c15-937f-5f49633aa704"),
-                            Odo = 9316,
-                            PlateNumber = "AQ9H18OWZYKD50769",
-                            RentCost = 2883.1470229419447,
+                            ModelId = new Guid("c22744ad-e7e4-4083-9da8-68d3de702289"),
+                            Odo = 3989,
+                            PlateNumber = "PFMJFUURWEMQ85619",
+                            RentCost = 1065.1524140114361,
+                            VehicleState = 3,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("47ac843e-4cf8-4d52-bb77-82dc79a8cc66"),
+                            FuelType = 2,
+                            ModelId = new Guid("c22744ad-e7e4-4083-9da8-68d3de702289"),
+                            Odo = 7215,
+                            PlateNumber = "HO4300YG4KDK63786",
+                            RentCost = 2873.9558369302054,
                             VehicleState = 3,
                             VehicleType = 4
                         },
                         new
                         {
-                            Id = new Guid("a1bf509b-b560-4cc2-8bfc-9fa428016f88"),
-                            FuelType = 1,
-                            ModelId = new Guid("d06ff28c-7710-4c15-937f-5f49633aa704"),
-                            Odo = 7445,
-                            PlateNumber = "0COGAPLAPSD915450",
-                            RentCost = 708.58177896790278,
-                            VehicleState = 3,
-                            VehicleType = 4
-                        },
-                        new
-                        {
-                            Id = new Guid("9243f438-005d-4602-aad9-28d8a400ff4a"),
-                            FuelType = 1,
-                            ModelId = new Guid("d06ff28c-7710-4c15-937f-5f49633aa704"),
-                            Odo = 2367,
-                            PlateNumber = "4TG8SY92KZV058719",
-                            RentCost = 1128.7032729268853,
-                            VehicleState = 1,
-                            VehicleType = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("00aa0349-52ca-4efd-87d0-775cc07b6da2"),
-                            FuelType = 3,
-                            ModelId = new Guid("3c56381f-56eb-4b55-9cec-f4885921d043"),
-                            Odo = 4251,
-                            PlateNumber = "51FY76DJQUJW39216",
-                            RentCost = 1485.3671360991598,
-                            VehicleState = 0,
-                            VehicleType = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("1abcfbc0-dddd-40b2-8f3f-31ff6fae57c1"),
+                            Id = new Guid("538d25be-9805-4061-b559-4f47a1a58dcf"),
                             FuelType = 0,
-                            ModelId = new Guid("3c56381f-56eb-4b55-9cec-f4885921d043"),
-                            Odo = 4821,
-                            PlateNumber = "VYT3E57X7DHP73754",
-                            RentCost = 1351.9655976788733,
-                            VehicleState = 0,
-                            VehicleType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("6df620a7-224b-41a4-9f86-3897cbe1e721"),
-                            FuelType = 0,
-                            ModelId = new Guid("3c56381f-56eb-4b55-9cec-f4885921d043"),
-                            Odo = 5533,
-                            PlateNumber = "WO2VTWXUGSER70002",
-                            RentCost = 599.07444379597268,
+                            ModelId = new Guid("c22744ad-e7e4-4083-9da8-68d3de702289"),
+                            Odo = 1737,
+                            PlateNumber = "UTLRMQ1ZUFF953552",
+                            RentCost = 3502.6600331214436,
                             VehicleState = 3,
                             VehicleType = 3
                         },
                         new
                         {
-                            Id = new Guid("dc02197a-ce1a-4c08-8c83-e18789d63bd5"),
+                            Id = new Guid("b3bfd9f4-5e4e-4ba2-b8a8-c9050a10a0ec"),
                             FuelType = 2,
-                            ModelId = new Guid("3c56381f-56eb-4b55-9cec-f4885921d043"),
-                            Odo = 9637,
-                            PlateNumber = "MVNS48KOPENG39712",
-                            RentCost = 3367.0799278691757,
-                            VehicleState = 0,
-                            VehicleType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("8519217a-1796-45d9-b267-e51c4f752951"),
-                            FuelType = 2,
-                            ModelId = new Guid("3c56381f-56eb-4b55-9cec-f4885921d043"),
-                            Odo = 7448,
-                            PlateNumber = "DSEPMM1WL3AV17913",
-                            RentCost = 3364.2264308281119,
-                            VehicleState = 3,
-                            VehicleType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("b43bd1cd-bfb7-4478-adb6-2c26e7672755"),
-                            FuelType = 3,
-                            ModelId = new Guid("000a5545-0f97-48f6-b8de-cfbdc3368a5b"),
-                            Odo = 8068,
-                            PlateNumber = "YT53WKA9QTEH19608",
-                            RentCost = 1797.8334015996745,
-                            VehicleState = 0,
-                            VehicleType = 4
-                        },
-                        new
-                        {
-                            Id = new Guid("c78bc037-9315-465c-bde7-e56584340114"),
-                            FuelType = 0,
-                            ModelId = new Guid("000a5545-0f97-48f6-b8de-cfbdc3368a5b"),
-                            Odo = 6153,
-                            PlateNumber = "4H8GZXRPWUH561377",
-                            RentCost = 1360.2413900108897,
-                            VehicleState = 3,
-                            VehicleType = 4
-                        },
-                        new
-                        {
-                            Id = new Guid("b5d01de9-91c9-4f86-a4dc-3a9beb482550"),
-                            FuelType = 1,
-                            ModelId = new Guid("000a5545-0f97-48f6-b8de-cfbdc3368a5b"),
-                            Odo = 5557,
-                            PlateNumber = "EHSEP4AEZ3ZW83244",
-                            RentCost = 1296.7680365277745,
-                            VehicleState = 0,
-                            VehicleType = 5
-                        },
-                        new
-                        {
-                            Id = new Guid("1d6ba6ae-d6a9-418a-b97d-16ff6bcde9f2"),
-                            FuelType = 0,
-                            ModelId = new Guid("000a5545-0f97-48f6-b8de-cfbdc3368a5b"),
-                            Odo = 1049,
-                            PlateNumber = "7DIXK0J5HWX962421",
-                            RentCost = 3780.3984463750598,
-                            VehicleState = 2,
-                            VehicleType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("de97503b-7fa3-4b50-86d5-41f3969312e8"),
-                            FuelType = 0,
-                            ModelId = new Guid("000a5545-0f97-48f6-b8de-cfbdc3368a5b"),
-                            Odo = 7779,
-                            PlateNumber = "Z84Q0I36DGWR10525",
-                            RentCost = 3614.5589700809469,
-                            VehicleState = 1,
-                            VehicleType = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("89d76d9c-43c2-4285-9e15-6b45f31beb8b"),
-                            FuelType = 2,
-                            ModelId = new Guid("18227dd6-01c6-4795-9203-8255e318ce28"),
-                            Odo = 5011,
-                            PlateNumber = "Z7WRK2SULIN851884",
-                            RentCost = 1139.5829308715702,
-                            VehicleState = 3,
-                            VehicleType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("05c3cba2-cfc7-47f6-9bcc-bdadc35ce051"),
-                            FuelType = 1,
-                            ModelId = new Guid("18227dd6-01c6-4795-9203-8255e318ce28"),
-                            Odo = 8635,
-                            PlateNumber = "IQO4DR96LQMF14928",
-                            RentCost = 2235.1586779085515,
-                            VehicleState = 2,
-                            VehicleType = 4
-                        },
-                        new
-                        {
-                            Id = new Guid("b7daa736-b848-4106-80a7-95ee69963eda"),
-                            FuelType = 1,
-                            ModelId = new Guid("18227dd6-01c6-4795-9203-8255e318ce28"),
-                            Odo = 6048,
-                            PlateNumber = "DQJV64S601ZF24494",
-                            RentCost = 2564.712389811687,
-                            VehicleState = 2,
-                            VehicleType = 5
-                        },
-                        new
-                        {
-                            Id = new Guid("d19fda6d-8cf4-47e6-a039-883467e7aaca"),
-                            FuelType = 1,
-                            ModelId = new Guid("18227dd6-01c6-4795-9203-8255e318ce28"),
-                            Odo = 2704,
-                            PlateNumber = "ZDXUUP9GHPZ017601",
-                            RentCost = 2847.2122543319906,
-                            VehicleState = 3,
-                            VehicleType = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("b9ba1e24-85f1-4aa6-ba85-b06f488faacc"),
-                            FuelType = 2,
-                            ModelId = new Guid("18227dd6-01c6-4795-9203-8255e318ce28"),
-                            Odo = 5147,
-                            PlateNumber = "H6FCGIK0NCLD64065",
-                            RentCost = 184.43010477328215,
-                            VehicleState = 2,
-                            VehicleType = 4
-                        },
-                        new
-                        {
-                            Id = new Guid("0ceac604-2283-454c-bf7c-a9db129bfab8"),
-                            FuelType = 0,
-                            ModelId = new Guid("555bc933-c002-4fda-937f-8fe3e83d8326"),
-                            Odo = 131,
-                            PlateNumber = "TBRNWMRB8ZVH50224",
-                            RentCost = 1773.4208331258321,
-                            VehicleState = 1,
-                            VehicleType = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("d9df8f8b-cbea-40e6-b6cd-bf5651ee1b23"),
-                            FuelType = 1,
-                            ModelId = new Guid("555bc933-c002-4fda-937f-8fe3e83d8326"),
-                            Odo = 6827,
-                            PlateNumber = "5N4Z5Y4LXRYK34379",
-                            RentCost = 1902.83044550868,
-                            VehicleState = 1,
-                            VehicleType = 5
-                        },
-                        new
-                        {
-                            Id = new Guid("94c13f30-b739-4631-a569-c30bfd33361b"),
-                            FuelType = 2,
-                            ModelId = new Guid("555bc933-c002-4fda-937f-8fe3e83d8326"),
-                            Odo = 8101,
-                            PlateNumber = "JC37WWNKK4VH39036",
-                            RentCost = 3777.5372681010308,
-                            VehicleState = 1,
-                            VehicleType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("9348f750-57f9-47fa-9dd9-55b27b88e72f"),
-                            FuelType = 1,
-                            ModelId = new Guid("555bc933-c002-4fda-937f-8fe3e83d8326"),
-                            Odo = 7443,
-                            PlateNumber = "2DL12SS3A0X740494",
-                            RentCost = 1661.9623785022616,
-                            VehicleState = 2,
-                            VehicleType = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("77c837f8-8f92-4ec8-8342-efc04a078438"),
-                            FuelType = 3,
-                            ModelId = new Guid("555bc933-c002-4fda-937f-8fe3e83d8326"),
-                            Odo = 2826,
-                            PlateNumber = "VM9KCNIA7PJW27454",
-                            RentCost = 2900.7428557412622,
-                            VehicleState = 2,
-                            VehicleType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("039230c9-69a0-4d03-b6b4-d541aa1bb787"),
-                            FuelType = 1,
-                            ModelId = new Guid("922afd35-158e-4c72-99fd-805bb758f702"),
-                            Odo = 1060,
-                            PlateNumber = "S8OBD3430NB631622",
-                            RentCost = 2266.8605282616436,
-                            VehicleState = 0,
-                            VehicleType = 5
-                        },
-                        new
-                        {
-                            Id = new Guid("160861ec-e96a-4753-b900-611b4c074bf9"),
-                            FuelType = 2,
-                            ModelId = new Guid("922afd35-158e-4c72-99fd-805bb758f702"),
-                            Odo = 6244,
-                            PlateNumber = "7APSHVSICERH50586",
-                            RentCost = 1870.513334279593,
-                            VehicleState = 3,
-                            VehicleType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("26d4a454-56a6-4d09-a58c-0067289c6423"),
-                            FuelType = 0,
-                            ModelId = new Guid("922afd35-158e-4c72-99fd-805bb758f702"),
-                            Odo = 3898,
-                            PlateNumber = "WRJNFZWX52IU71167",
-                            RentCost = 542.68939443050772,
-                            VehicleState = 0,
-                            VehicleType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("d4ddab94-4bb8-4e83-ac7a-1eb3fb1055be"),
-                            FuelType = 1,
-                            ModelId = new Guid("922afd35-158e-4c72-99fd-805bb758f702"),
-                            Odo = 1223,
-                            PlateNumber = "WTIBDJVKJ6LW13502",
-                            RentCost = 3893.4945689142269,
-                            VehicleState = 1,
-                            VehicleType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("9bde5e5a-fac2-40e1-a6dc-b55bb5bfe8ef"),
-                            FuelType = 1,
-                            ModelId = new Guid("922afd35-158e-4c72-99fd-805bb758f702"),
-                            Odo = 9827,
-                            PlateNumber = "F8B4WLZQ71X580925",
-                            RentCost = 2482.9684668812033,
+                            ModelId = new Guid("c22744ad-e7e4-4083-9da8-68d3de702289"),
+                            Odo = 8473,
+                            PlateNumber = "MTY2WIWKLCC831389",
+                            RentCost = 1144.3321538621381,
                             VehicleState = 2,
                             VehicleType = 2
                         },
                         new
                         {
-                            Id = new Guid("5ee525bc-522f-41b3-9b91-b83ddf22f6ea"),
-                            FuelType = 0,
-                            ModelId = new Guid("f073954f-e1de-4699-bb33-e9e6df99becd"),
-                            Odo = 4066,
-                            PlateNumber = "BWG7VK88NZTV88570",
-                            RentCost = 1912.5454990141825,
-                            VehicleState = 0,
-                            VehicleType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("503546c9-5439-4317-9837-e05e2c6479ba"),
-                            FuelType = 1,
-                            ModelId = new Guid("f073954f-e1de-4699-bb33-e9e6df99becd"),
-                            Odo = 1366,
-                            PlateNumber = "CWXKEETB39SF79346",
-                            RentCost = 3173.2616989233629,
-                            VehicleState = 0,
-                            VehicleType = 5
-                        },
-                        new
-                        {
-                            Id = new Guid("deb4c1c2-5062-4c61-a34b-144f4f390b1e"),
-                            FuelType = 1,
-                            ModelId = new Guid("f073954f-e1de-4699-bb33-e9e6df99becd"),
-                            Odo = 3988,
-                            PlateNumber = "UNGYQJHEUSCO76495",
-                            RentCost = 2236.8759245688566,
-                            VehicleState = 3,
-                            VehicleType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("4e7df071-9cf8-4558-b8fe-54e07079622f"),
-                            FuelType = 3,
-                            ModelId = new Guid("f073954f-e1de-4699-bb33-e9e6df99becd"),
-                            Odo = 1103,
-                            PlateNumber = "UXBB63AYVMG391707",
-                            RentCost = 1380.4861980944986,
-                            VehicleState = 1,
-                            VehicleType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("eabcebe6-15b2-42c7-a354-7e8649161d77"),
-                            FuelType = 0,
-                            ModelId = new Guid("f073954f-e1de-4699-bb33-e9e6df99becd"),
-                            Odo = 4293,
-                            PlateNumber = "JO58XCQTPNXR43512",
-                            RentCost = 1340.4520062011056,
-                            VehicleState = 3,
-                            VehicleType = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("77ff74a5-e967-4424-8a65-58337ee18fd8"),
+                            Id = new Guid("244e81ec-3e62-462e-8daf-101ce9ba93fb"),
                             FuelType = 2,
-                            ModelId = new Guid("db3603ac-0ae3-4987-8120-924e1bcd2119"),
-                            Odo = 9823,
-                            PlateNumber = "RBV88CPOSXF269646",
-                            RentCost = 933.20908209606432,
-                            VehicleState = 2,
-                            VehicleType = 5
-                        },
-                        new
-                        {
-                            Id = new Guid("417da5bf-fdc1-4bf7-889d-c53282fb4343"),
-                            FuelType = 0,
-                            ModelId = new Guid("db3603ac-0ae3-4987-8120-924e1bcd2119"),
-                            Odo = 5563,
-                            PlateNumber = "WN4BSIJA8WZY45112",
-                            RentCost = 2128.2384366641363,
-                            VehicleState = 3,
-                            VehicleType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("64fdca40-af92-4d40-9489-422ce4fcc241"),
-                            FuelType = 3,
-                            ModelId = new Guid("db3603ac-0ae3-4987-8120-924e1bcd2119"),
-                            Odo = 3167,
-                            PlateNumber = "1E9J1ZQ9HNYC85444",
-                            RentCost = 1218.7666549632452,
-                            VehicleState = 0,
-                            VehicleType = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("760fd47b-5218-4989-a483-ca2cf698fdaa"),
-                            FuelType = 3,
-                            ModelId = new Guid("db3603ac-0ae3-4987-8120-924e1bcd2119"),
-                            Odo = 7330,
-                            PlateNumber = "V0QGNSE5HRMP84625",
-                            RentCost = 3552.9250617121179,
-                            VehicleState = 2,
-                            VehicleType = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("ab9646d9-49ca-4903-9891-04745eed9ef5"),
-                            FuelType = 3,
-                            ModelId = new Guid("db3603ac-0ae3-4987-8120-924e1bcd2119"),
-                            Odo = 7208,
-                            PlateNumber = "6CB9KCP6CDS669882",
-                            RentCost = 944.38230116667273,
-                            VehicleState = 2,
-                            VehicleType = 5
-                        },
-                        new
-                        {
-                            Id = new Guid("641bb4fc-8709-4404-8e48-fcbb75e8b9c0"),
-                            FuelType = 1,
-                            ModelId = new Guid("dcb1a6f4-fd91-4d1a-9eb0-4d9d7963688c"),
-                            Odo = 4761,
-                            PlateNumber = "SAGOVPWG2LYJ27777",
-                            RentCost = 291.34214179889761,
-                            VehicleState = 3,
-                            VehicleType = 5
-                        },
-                        new
-                        {
-                            Id = new Guid("16419846-1370-4881-a831-6f95acdc4e07"),
-                            FuelType = 3,
-                            ModelId = new Guid("dcb1a6f4-fd91-4d1a-9eb0-4d9d7963688c"),
-                            Odo = 665,
-                            PlateNumber = "CFOJ3YSQOQFF69825",
-                            RentCost = 1818.4267588231478,
-                            VehicleState = 0,
-                            VehicleType = 5
-                        },
-                        new
-                        {
-                            Id = new Guid("4487e13c-3340-4530-8036-7c311032c615"),
-                            FuelType = 1,
-                            ModelId = new Guid("dcb1a6f4-fd91-4d1a-9eb0-4d9d7963688c"),
-                            Odo = 7484,
-                            PlateNumber = "P7PMOG2CXUCU93714",
-                            RentCost = 2017.2948041274863,
-                            VehicleState = 1,
-                            VehicleType = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("b8dd118a-5845-49df-b0c2-78e2c285ed1e"),
-                            FuelType = 2,
-                            ModelId = new Guid("dcb1a6f4-fd91-4d1a-9eb0-4d9d7963688c"),
-                            Odo = 5759,
-                            PlateNumber = "JWTLHMB2H6OO70973",
-                            RentCost = 2571.9158278738014,
-                            VehicleState = 2,
-                            VehicleType = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("c9a5de51-1683-49b5-93ae-9f1a484ba95f"),
-                            FuelType = 0,
-                            ModelId = new Guid("dcb1a6f4-fd91-4d1a-9eb0-4d9d7963688c"),
-                            Odo = 5004,
-                            PlateNumber = "M09QV8XLZNQS33129",
-                            RentCost = 986.41143019624883,
+                            ModelId = new Guid("79034739-1060-4346-a39b-3800e3651960"),
+                            Odo = 4517,
+                            PlateNumber = "TWDRGUU1XABA76236",
+                            RentCost = 910.49826017275529,
                             VehicleState = 2,
                             VehicleType = 1
                         },
                         new
                         {
-                            Id = new Guid("0e121d2d-f184-45c5-a0be-2ed061de1171"),
+                            Id = new Guid("9a685f64-f625-4d27-9ea6-13501258ccb4"),
                             FuelType = 0,
-                            ModelId = new Guid("76f2cfc6-5fba-48aa-82e4-5d69c71cd4b7"),
-                            Odo = 4854,
-                            PlateNumber = "8CZZJXMNMJTA39827",
-                            RentCost = 681.36646509714285,
+                            ModelId = new Guid("79034739-1060-4346-a39b-3800e3651960"),
+                            Odo = 9933,
+                            PlateNumber = "WHZJXMHV8OEI17073",
+                            RentCost = 3949.6318946599931,
+                            VehicleState = 0,
+                            VehicleType = 3
+                        },
+                        new
+                        {
+                            Id = new Guid("d7d2a61b-57c0-461a-b268-df00bc5a8a2a"),
+                            FuelType = 0,
+                            ModelId = new Guid("79034739-1060-4346-a39b-3800e3651960"),
+                            Odo = 3947,
+                            PlateNumber = "AJ2H41NIALKJ45606",
+                            RentCost = 1328.8014275830105,
+                            VehicleState = 2,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("782a6007-8316-4345-ae2a-3e4c5bc0550d"),
+                            FuelType = 2,
+                            ModelId = new Guid("79034739-1060-4346-a39b-3800e3651960"),
+                            Odo = 5528,
+                            PlateNumber = "887306Q4QIAD96882",
+                            RentCost = 3097.9350801498745,
                             VehicleState = 2,
                             VehicleType = 1
                         },
                         new
                         {
-                            Id = new Guid("1a88bf6f-9977-4b4b-abbd-671fe3aabedf"),
-                            FuelType = 0,
-                            ModelId = new Guid("76f2cfc6-5fba-48aa-82e4-5d69c71cd4b7"),
-                            Odo = 56,
-                            PlateNumber = "97EFOJMAGNLY51558",
-                            RentCost = 2409.2765969496822,
+                            Id = new Guid("eb99eac3-d6a0-456a-8d65-eb94ba9a64b5"),
+                            FuelType = 2,
+                            ModelId = new Guid("79034739-1060-4346-a39b-3800e3651960"),
+                            Odo = 460,
+                            PlateNumber = "U3B3Z0A24WBP31037",
+                            RentCost = 1893.3374230949175,
+                            VehicleState = 1,
+                            VehicleType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("eeb7722a-80ad-43ce-90cb-c4d7f217f752"),
+                            FuelType = 1,
+                            ModelId = new Guid("50433eaf-f309-4a9f-b603-d2a14e59701b"),
+                            Odo = 203,
+                            PlateNumber = "4L8TWMEHCSF018179",
+                            RentCost = 1937.4305130505288,
                             VehicleState = 3,
+                            VehicleType = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("4548b1cb-83b9-4cc7-a8e2-aca462c2239c"),
+                            FuelType = 1,
+                            ModelId = new Guid("50433eaf-f309-4a9f-b603-d2a14e59701b"),
+                            Odo = 1487,
+                            PlateNumber = "KFKKLTVZ5TYA52104",
+                            RentCost = 3225.9165076959339,
+                            VehicleState = 1,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("dea3935a-b76b-46aa-a6ed-d2a2e5e6a545"),
+                            FuelType = 0,
+                            ModelId = new Guid("50433eaf-f309-4a9f-b603-d2a14e59701b"),
+                            Odo = 6850,
+                            PlateNumber = "53JG4EY0QLDC72452",
+                            RentCost = 2479.9299593447558,
+                            VehicleState = 1,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("11b9f524-f621-44e8-b175-ec191ea4a48e"),
+                            FuelType = 3,
+                            ModelId = new Guid("50433eaf-f309-4a9f-b603-d2a14e59701b"),
+                            Odo = 2591,
+                            PlateNumber = "2US6Q8CED7LL25227",
+                            RentCost = 3664.1969113054201,
+                            VehicleState = 1,
                             VehicleType = 3
                         },
                         new
                         {
-                            Id = new Guid("13f04f29-0b0b-4df4-9d85-fbc671eef7c2"),
+                            Id = new Guid("bf5d35d3-5c76-4000-8ed5-eaf86f534e04"),
                             FuelType = 0,
-                            ModelId = new Guid("76f2cfc6-5fba-48aa-82e4-5d69c71cd4b7"),
-                            Odo = 849,
-                            PlateNumber = "B4R3S6Y3Z3XD48583",
-                            RentCost = 3124.4099791744443,
+                            ModelId = new Guid("50433eaf-f309-4a9f-b603-d2a14e59701b"),
+                            Odo = 8521,
+                            PlateNumber = "FQJ6FDSHP5AW20346",
+                            RentCost = 2444.6885333543332,
                             VehicleState = 0,
-                            VehicleType = 0
+                            VehicleType = 2
                         },
                         new
                         {
-                            Id = new Guid("7ab8f5c1-97df-40c2-850b-466cda8703c1"),
+                            Id = new Guid("768f480c-49f6-49ac-abd7-bc248eb92d54"),
                             FuelType = 0,
-                            ModelId = new Guid("76f2cfc6-5fba-48aa-82e4-5d69c71cd4b7"),
-                            Odo = 1005,
-                            PlateNumber = "WSPOZ9W9CJR052018",
-                            RentCost = 3125.0880662914456,
-                            VehicleState = 0,
-                            VehicleType = 0
+                            ModelId = new Guid("44561354-904e-4ac5-bd97-10415a0d1585"),
+                            Odo = 3217,
+                            PlateNumber = "ENMO45AFLNRV53448",
+                            RentCost = 3619.3822536945831,
+                            VehicleState = 1,
+                            VehicleType = 5
                         },
                         new
                         {
-                            Id = new Guid("5bcad41c-870d-4182-a234-f21b7c763be7"),
-                            FuelType = 0,
-                            ModelId = new Guid("76f2cfc6-5fba-48aa-82e4-5d69c71cd4b7"),
-                            Odo = 3012,
-                            PlateNumber = "7HZ5TQNTT7SE94909",
-                            RentCost = 1299.210206467397,
-                            VehicleState = 0,
-                            VehicleType = 0
+                            Id = new Guid("31151c8a-b801-4f5e-8fd4-d092abc5cfd6"),
+                            FuelType = 1,
+                            ModelId = new Guid("44561354-904e-4ac5-bd97-10415a0d1585"),
+                            Odo = 2204,
+                            PlateNumber = "H0TT07WO5ISC50353",
+                            RentCost = 3257.4311021946905,
+                            VehicleState = 2,
+                            VehicleType = 1
                         },
                         new
                         {
-                            Id = new Guid("481d9e74-7df7-4457-ae81-bd0cdba4b3ba"),
-                            FuelType = 2,
-                            ModelId = new Guid("13614880-4880-451a-9935-25f2f5b0f93d"),
-                            Odo = 4023,
-                            PlateNumber = "SAQOSOFTPSZ751450",
-                            RentCost = 2825.6579301407346,
+                            Id = new Guid("9172ab35-7cf3-48ac-9cbe-37b30131c467"),
+                            FuelType = 1,
+                            ModelId = new Guid("44561354-904e-4ac5-bd97-10415a0d1585"),
+                            Odo = 5336,
+                            PlateNumber = "727VZW6QOSGH72308",
+                            RentCost = 1295.6064865532226,
                             VehicleState = 2,
                             VehicleType = 0
                         },
                         new
                         {
-                            Id = new Guid("5ef4c8b4-13a2-49df-b0f7-643b2b7ca459"),
-                            FuelType = 1,
-                            ModelId = new Guid("13614880-4880-451a-9935-25f2f5b0f93d"),
-                            Odo = 8754,
-                            PlateNumber = "634EYL4HRWU336951",
-                            RentCost = 874.77332997535484,
-                            VehicleState = 0,
-                            VehicleType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("8e789e58-6c46-4c5e-9ff2-9d709d3095bb"),
-                            FuelType = 0,
-                            ModelId = new Guid("13614880-4880-451a-9935-25f2f5b0f93d"),
-                            Odo = 5587,
-                            PlateNumber = "I7A3JIG2BEO078397",
-                            RentCost = 3062.7762393843605,
-                            VehicleState = 1,
-                            VehicleType = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("b725e2fb-a958-49f4-b6e6-23c3c096578b"),
+                            Id = new Guid("d3e25e66-7d90-43cd-ad1f-d69f22493786"),
                             FuelType = 3,
-                            ModelId = new Guid("13614880-4880-451a-9935-25f2f5b0f93d"),
-                            Odo = 6094,
-                            PlateNumber = "VAPDICUF0TLC87149",
-                            RentCost = 348.15277638908219,
-                            VehicleState = 1,
-                            VehicleType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("677cc126-f2c1-445a-a53a-dbed3d0ae456"),
-                            FuelType = 3,
-                            ModelId = new Guid("13614880-4880-451a-9935-25f2f5b0f93d"),
-                            Odo = 3038,
-                            PlateNumber = "J2J83KQ2V2NP56792",
-                            RentCost = 1616.7442082118482,
+                            ModelId = new Guid("44561354-904e-4ac5-bd97-10415a0d1585"),
+                            Odo = 8026,
+                            PlateNumber = "MCVOAC40VYV085998",
+                            RentCost = 1579.9343236179368,
                             VehicleState = 0,
-                            VehicleType = 2
+                            VehicleType = 5
                         },
                         new
                         {
-                            Id = new Guid("51191d92-ab79-4ae5-9ba1-186b507b0d4d"),
-                            FuelType = 1,
-                            ModelId = new Guid("647e3c20-dfc9-4e01-9b4f-007a6c9ea3f5"),
-                            Odo = 7018,
-                            PlateNumber = "8TZSS2ZV38WT46304",
-                            RentCost = 605.42621063834054,
+                            Id = new Guid("8ff89c2c-635b-4f38-a02f-b6794160a789"),
+                            FuelType = 3,
+                            ModelId = new Guid("44561354-904e-4ac5-bd97-10415a0d1585"),
+                            Odo = 374,
+                            PlateNumber = "HMBRAO884HBN68770",
+                            RentCost = 1557.2330785261638,
                             VehicleState = 1,
                             VehicleType = 4
                         },
                         new
                         {
-                            Id = new Guid("1055e07f-a942-4b7f-9513-841124842ea1"),
-                            FuelType = 3,
-                            ModelId = new Guid("647e3c20-dfc9-4e01-9b4f-007a6c9ea3f5"),
-                            Odo = 2271,
-                            PlateNumber = "I9E69MOR35FO52251",
-                            RentCost = 1536.2562230475432,
+                            Id = new Guid("9c02cf28-1708-4ba4-85a7-bbb740bf7b1e"),
+                            FuelType = 1,
+                            ModelId = new Guid("602fd8a7-57f7-4662-b82f-5351c7351af3"),
+                            Odo = 5551,
+                            PlateNumber = "G7FBV7CFA7UW63103",
+                            RentCost = 3979.6428673307041,
                             VehicleState = 2,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("47e675f4-ecf6-4325-90ef-93e16d86e8e0"),
+                            FuelType = 2,
+                            ModelId = new Guid("602fd8a7-57f7-4662-b82f-5351c7351af3"),
+                            Odo = 7182,
+                            PlateNumber = "95GM37TCNKVY41638",
+                            RentCost = 1738.4591707470286,
+                            VehicleState = 2,
+                            VehicleType = 3
+                        },
+                        new
+                        {
+                            Id = new Guid("f5389ea0-1dbc-4c8b-aff1-734e7bf864a8"),
+                            FuelType = 3,
+                            ModelId = new Guid("602fd8a7-57f7-4662-b82f-5351c7351af3"),
+                            Odo = 4827,
+                            PlateNumber = "AII4DLO5AFL563487",
+                            RentCost = 1845.0779876994732,
+                            VehicleState = 1,
+                            VehicleType = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("45b0a26b-879e-41b3-ac9e-602d70d3c29e"),
+                            FuelType = 1,
+                            ModelId = new Guid("602fd8a7-57f7-4662-b82f-5351c7351af3"),
+                            Odo = 2476,
+                            PlateNumber = "QOS39CFOASPH62418",
+                            RentCost = 2025.6523326295496,
+                            VehicleState = 3,
+                            VehicleType = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("4a298220-efc3-4a66-a3f0-f58fde993dc1"),
+                            FuelType = 0,
+                            ModelId = new Guid("602fd8a7-57f7-4662-b82f-5351c7351af3"),
+                            Odo = 9076,
+                            PlateNumber = "YTNKAWY5AJNU89675",
+                            RentCost = 2062.8500094562442,
+                            VehicleState = 2,
+                            VehicleType = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("10763b92-bfcf-45d2-ad3b-50c1e1184b40"),
+                            FuelType = 1,
+                            ModelId = new Guid("5e58ca15-9a3d-49ba-8054-8ea280e92980"),
+                            Odo = 2420,
+                            PlateNumber = "HJKHSUBQ7KN973582",
+                            RentCost = 115.23149514356473,
+                            VehicleState = 1,
+                            VehicleType = 3
+                        },
+                        new
+                        {
+                            Id = new Guid("8838c6b1-c43f-45dd-9eef-4bf84d6aa712"),
+                            FuelType = 3,
+                            ModelId = new Guid("5e58ca15-9a3d-49ba-8054-8ea280e92980"),
+                            Odo = 386,
+                            PlateNumber = "V0KM7Y9Q10BX88302",
+                            RentCost = 2367.9353224899965,
+                            VehicleState = 3,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("b21131c0-1da9-4fb0-8935-6edc729d9d84"),
+                            FuelType = 1,
+                            ModelId = new Guid("5e58ca15-9a3d-49ba-8054-8ea280e92980"),
+                            Odo = 6575,
+                            PlateNumber = "N8EAHIAZ9RZ296656",
+                            RentCost = 3322.819743113429,
+                            VehicleState = 0,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("a8976017-657e-4ee5-b6e7-eb07e2232812"),
+                            FuelType = 2,
+                            ModelId = new Guid("5e58ca15-9a3d-49ba-8054-8ea280e92980"),
+                            Odo = 9223,
+                            PlateNumber = "LE5DDDZX0BXY75716",
+                            RentCost = 2301.0439891306391,
+                            VehicleState = 1,
                             VehicleType = 1
                         },
                         new
                         {
-                            Id = new Guid("5fc1075e-0015-4430-b023-54e81aa5e024"),
+                            Id = new Guid("e566093e-912d-4b63-aec6-948fd0e4a6a1"),
+                            FuelType = 0,
+                            ModelId = new Guid("5e58ca15-9a3d-49ba-8054-8ea280e92980"),
+                            Odo = 8141,
+                            PlateNumber = "ZE0X1QPLHBF324687",
+                            RentCost = 601.61277961403607,
+                            VehicleState = 1,
+                            VehicleType = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("15c33d7f-8675-4841-b7b8-7d4a6c947db3"),
+                            FuelType = 2,
+                            ModelId = new Guid("95b7414f-dc5a-4bb1-831e-bd915d295713"),
+                            Odo = 6352,
+                            PlateNumber = "EZJFA1HHFEMX59110",
+                            RentCost = 2736.1873562388141,
+                            VehicleState = 3,
+                            VehicleType = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("923576ca-472a-4e52-849e-d1c01067c8da"),
+                            FuelType = 3,
+                            ModelId = new Guid("95b7414f-dc5a-4bb1-831e-bd915d295713"),
+                            Odo = 101,
+                            PlateNumber = "L10TIY1JAUPN51822",
+                            RentCost = 2255.4564375101395,
+                            VehicleState = 2,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("89e81961-7efb-469b-a9d5-c6ec7f973228"),
+                            FuelType = 3,
+                            ModelId = new Guid("95b7414f-dc5a-4bb1-831e-bd915d295713"),
+                            Odo = 1473,
+                            PlateNumber = "WT9Y001MSYVA34984",
+                            RentCost = 3552.5784929035426,
+                            VehicleState = 2,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("82ae790e-2fc3-43e6-9d44-910d16b8c0b8"),
                             FuelType = 1,
-                            ModelId = new Guid("647e3c20-dfc9-4e01-9b4f-007a6c9ea3f5"),
-                            Odo = 8886,
-                            PlateNumber = "HREPUGCOJ5WN60825",
-                            RentCost = 2249.1122780451692,
+                            ModelId = new Guid("95b7414f-dc5a-4bb1-831e-bd915d295713"),
+                            Odo = 514,
+                            PlateNumber = "MXCP0KZHN1U239800",
+                            RentCost = 1232.2532895763561,
+                            VehicleState = 2,
+                            VehicleType = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("4f8d8c54-76fc-4b8a-8e4f-3d529df898bd"),
+                            FuelType = 3,
+                            ModelId = new Guid("95b7414f-dc5a-4bb1-831e-bd915d295713"),
+                            Odo = 5847,
+                            PlateNumber = "LHD5K8FM83A364003",
+                            RentCost = 3115.5767437333852,
+                            VehicleState = 1,
+                            VehicleType = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("1da3a269-d59c-4b5a-99ba-4a75c28ed7e6"),
+                            FuelType = 0,
+                            ModelId = new Guid("4387099b-8477-4ab3-a04c-5f8cd225ebdc"),
+                            Odo = 4089,
+                            PlateNumber = "7EEFTYFH9ZKQ12040",
+                            RentCost = 564.90221691955583,
+                            VehicleState = 0,
+                            VehicleType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("00be6035-a719-406b-9fd1-39313aaf9e16"),
+                            FuelType = 1,
+                            ModelId = new Guid("4387099b-8477-4ab3-a04c-5f8cd225ebdc"),
+                            Odo = 7722,
+                            PlateNumber = "5P61VY1ZY5ON67384",
+                            RentCost = 2527.028805502775,
+                            VehicleState = 2,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("b951e0ae-9ea3-44cc-bc65-b7b7067c4005"),
+                            FuelType = 1,
+                            ModelId = new Guid("4387099b-8477-4ab3-a04c-5f8cd225ebdc"),
+                            Odo = 1886,
+                            PlateNumber = "20VYGEQNNNLE60320",
+                            RentCost = 426.53266456881829,
+                            VehicleState = 2,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("8f97999d-46a0-4873-b2b0-8d45cac96248"),
+                            FuelType = 0,
+                            ModelId = new Guid("4387099b-8477-4ab3-a04c-5f8cd225ebdc"),
+                            Odo = 538,
+                            PlateNumber = "U4DH6HV1PQEJ94847",
+                            RentCost = 3141.504362870533,
+                            VehicleState = 1,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("6e93c7b8-54ea-4d6d-b893-789e4ac22819"),
+                            FuelType = 0,
+                            ModelId = new Guid("4387099b-8477-4ab3-a04c-5f8cd225ebdc"),
+                            Odo = 820,
+                            PlateNumber = "R9DM4TFP0KRK89779",
+                            RentCost = 1669.0446185832534,
                             VehicleState = 0,
                             VehicleType = 2
                         },
                         new
                         {
-                            Id = new Guid("b1738f4d-436c-4bbc-a1d1-b3a9439e3b41"),
+                            Id = new Guid("dbc10c30-4a5b-4f91-9791-78bceec204f5"),
                             FuelType = 0,
-                            ModelId = new Guid("647e3c20-dfc9-4e01-9b4f-007a6c9ea3f5"),
+                            ModelId = new Guid("34ce56cd-f2b9-495b-a839-7a9d285e0115"),
+                            Odo = 4255,
+                            PlateNumber = "LZEDB0AP3PZ946102",
+                            RentCost = 1453.4188973053992,
+                            VehicleState = 3,
+                            VehicleType = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("f7b540db-9d79-4674-a182-d83ca8521370"),
+                            FuelType = 1,
+                            ModelId = new Guid("34ce56cd-f2b9-495b-a839-7a9d285e0115"),
+                            Odo = 7238,
+                            PlateNumber = "4KBXJHANVAN049703",
+                            RentCost = 493.76313627594192,
+                            VehicleState = 2,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("53e3af5e-c876-4534-9ada-47affc8e3a29"),
+                            FuelType = 2,
+                            ModelId = new Guid("34ce56cd-f2b9-495b-a839-7a9d285e0115"),
+                            Odo = 5922,
+                            PlateNumber = "RZLO1PFCFTSW61011",
+                            RentCost = 1242.3798766909558,
+                            VehicleState = 0,
+                            VehicleType = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("e4914beb-0204-4497-83a0-b65b56186a90"),
+                            FuelType = 1,
+                            ModelId = new Guid("34ce56cd-f2b9-495b-a839-7a9d285e0115"),
+                            Odo = 3627,
+                            PlateNumber = "C2KP1UUFMQQQ82949",
+                            RentCost = 2451.8922634038163,
+                            VehicleState = 3,
+                            VehicleType = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("df18d420-db36-4472-8b1b-e33b134f5001"),
+                            FuelType = 1,
+                            ModelId = new Guid("34ce56cd-f2b9-495b-a839-7a9d285e0115"),
+                            Odo = 4966,
+                            PlateNumber = "D2M2I9D9ULUU99898",
+                            RentCost = 610.25924701163331,
+                            VehicleState = 0,
+                            VehicleType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("446cf47a-498e-4f51-b443-e2df15fc727a"),
+                            FuelType = 3,
+                            ModelId = new Guid("eedb2e04-0223-4ab0-bbac-aa43b37b6d95"),
+                            Odo = 5186,
+                            PlateNumber = "WOACESWFFXC647328",
+                            RentCost = 2660.3450193888189,
+                            VehicleState = 1,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("750da4bb-9e92-4529-9f47-811538035d39"),
+                            FuelType = 0,
+                            ModelId = new Guid("eedb2e04-0223-4ab0-bbac-aa43b37b6d95"),
+                            Odo = 733,
+                            PlateNumber = "H7AQB5AM6DFH57756",
+                            RentCost = 2242.3684808137205,
+                            VehicleState = 2,
+                            VehicleType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("0c9ca35e-6927-4cf2-9acc-fe3cd817fc40"),
+                            FuelType = 3,
+                            ModelId = new Guid("eedb2e04-0223-4ab0-bbac-aa43b37b6d95"),
+                            Odo = 3664,
+                            PlateNumber = "WD1VR99LFJT257414",
+                            RentCost = 1685.2751859954187,
+                            VehicleState = 1,
+                            VehicleType = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("e2722fa0-d09f-4b98-b551-0c681a82cf32"),
+                            FuelType = 2,
+                            ModelId = new Guid("eedb2e04-0223-4ab0-bbac-aa43b37b6d95"),
+                            Odo = 5815,
+                            PlateNumber = "NQE4O6BSQ4DE50392",
+                            RentCost = 318.60551016501847,
+                            VehicleState = 1,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("6942e5ab-153b-477f-87fa-589aada8c0e4"),
+                            FuelType = 1,
+                            ModelId = new Guid("eedb2e04-0223-4ab0-bbac-aa43b37b6d95"),
+                            Odo = 3670,
+                            PlateNumber = "3E8WPOWR7CM686398",
+                            RentCost = 3344.5251315146861,
+                            VehicleState = 1,
+                            VehicleType = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("e46efc08-49f1-43fe-83b0-a79ec820a8d9"),
+                            FuelType = 1,
+                            ModelId = new Guid("ee86b2a2-2428-4053-917b-9a5fef50d789"),
+                            Odo = 4689,
+                            PlateNumber = "EUZC11TH6MDE61673",
+                            RentCost = 1112.4091283222542,
+                            VehicleState = 3,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("fbe42799-0a4c-4970-ac0f-38c02e8c0ed5"),
+                            FuelType = 3,
+                            ModelId = new Guid("ee86b2a2-2428-4053-917b-9a5fef50d789"),
+                            Odo = 4267,
+                            PlateNumber = "G1ZHA7GMC4U395314",
+                            RentCost = 1345.1164075904464,
+                            VehicleState = 0,
+                            VehicleType = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("6472dcc5-2e96-44c7-a987-e05007037e6c"),
+                            FuelType = 0,
+                            ModelId = new Guid("ee86b2a2-2428-4053-917b-9a5fef50d789"),
+                            Odo = 2481,
+                            PlateNumber = "PKRJ1THMIMII94518",
+                            RentCost = 2160.6985150974974,
+                            VehicleState = 2,
+                            VehicleType = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("4c794350-ba62-47c2-a8ba-2f39b1013f03"),
+                            FuelType = 0,
+                            ModelId = new Guid("ee86b2a2-2428-4053-917b-9a5fef50d789"),
+                            Odo = 4847,
+                            PlateNumber = "LRS78V0R3RYN16309",
+                            RentCost = 1109.3985304300609,
+                            VehicleState = 1,
+                            VehicleType = 3
+                        },
+                        new
+                        {
+                            Id = new Guid("6f39f195-1419-4d42-8002-ecfc71593d8e"),
+                            FuelType = 3,
+                            ModelId = new Guid("ee86b2a2-2428-4053-917b-9a5fef50d789"),
+                            Odo = 9295,
+                            PlateNumber = "KEWTFWCRSBQ642653",
+                            RentCost = 1442.3742433077341,
+                            VehicleState = 3,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("21c1407b-5af8-4828-b3df-bb942670c4b3"),
+                            FuelType = 0,
+                            ModelId = new Guid("bffaddb9-36c2-484a-b968-78afa974fcac"),
+                            Odo = 2888,
+                            PlateNumber = "XB3X77LN2QQ359801",
+                            RentCost = 400.16389433528195,
+                            VehicleState = 1,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("8e9aba1e-3dd0-46cb-8e44-c38ced3a1ef3"),
+                            FuelType = 1,
+                            ModelId = new Guid("bffaddb9-36c2-484a-b968-78afa974fcac"),
+                            Odo = 9951,
+                            PlateNumber = "33QEHQ9AKTL417061",
+                            RentCost = 748.81408590592412,
+                            VehicleState = 1,
+                            VehicleType = 3
+                        },
+                        new
+                        {
+                            Id = new Guid("927e1c03-7857-4617-a5ad-bec2caa9a88a"),
+                            FuelType = 0,
+                            ModelId = new Guid("bffaddb9-36c2-484a-b968-78afa974fcac"),
+                            Odo = 9835,
+                            PlateNumber = "GUSCB6A3DUQN46974",
+                            RentCost = 1485.5746662921968,
+                            VehicleState = 0,
+                            VehicleType = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("9a1ea418-b6f2-4c55-9be8-4b72f5d56d5e"),
+                            FuelType = 1,
+                            ModelId = new Guid("bffaddb9-36c2-484a-b968-78afa974fcac"),
+                            Odo = 4779,
+                            PlateNumber = "MBARZH97Z9Q694864",
+                            RentCost = 242.68248916891176,
+                            VehicleState = 3,
+                            VehicleType = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("dd96ba71-2080-40fb-bde1-49dde7b23698"),
+                            FuelType = 3,
+                            ModelId = new Guid("bffaddb9-36c2-484a-b968-78afa974fcac"),
+                            Odo = 7471,
+                            PlateNumber = "NM9KABO0ZIAA72504",
+                            RentCost = 1306.9742638634457,
+                            VehicleState = 3,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("3db17bb2-20d8-4f2b-8243-a0f96379e858"),
+                            FuelType = 0,
+                            ModelId = new Guid("8e169234-04b3-48e5-9518-c21cd39f2c7f"),
+                            Odo = 4749,
+                            PlateNumber = "IB7UEOQ3DXNT69710",
+                            RentCost = 731.0120835602421,
+                            VehicleState = 3,
+                            VehicleType = 3
+                        },
+                        new
+                        {
+                            Id = new Guid("79b27d5d-85fd-4166-9057-2179c4336325"),
+                            FuelType = 2,
+                            ModelId = new Guid("8e169234-04b3-48e5-9518-c21cd39f2c7f"),
+                            Odo = 4043,
+                            PlateNumber = "DVQ84ZD8Y7DR35451",
+                            RentCost = 3838.0699004557459,
+                            VehicleState = 0,
+                            VehicleType = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("f14fbbf4-76bf-4055-9f9b-006cae06ac0b"),
+                            FuelType = 2,
+                            ModelId = new Guid("8e169234-04b3-48e5-9518-c21cd39f2c7f"),
                             Odo = 2767,
-                            PlateNumber = "FGWRK6JL8GWC98311",
-                            RentCost = 2347.9113105736528,
-                            VehicleState = 1,
-                            VehicleType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("534d24eb-f165-449c-8838-02d19eaa025e"),
-                            FuelType = 0,
-                            ModelId = new Guid("647e3c20-dfc9-4e01-9b4f-007a6c9ea3f5"),
-                            Odo = 4071,
-                            PlateNumber = "4IF6KY0FFPI930557",
-                            RentCost = 291.78289732059648,
-                            VehicleState = 2,
-                            VehicleType = 5
-                        },
-                        new
-                        {
-                            Id = new Guid("a6505baa-d2fd-48f1-b982-7d691b29a565"),
-                            FuelType = 0,
-                            ModelId = new Guid("628daeca-f69d-4281-aee7-b935e9f52bb5"),
-                            Odo = 3520,
-                            PlateNumber = "5GUKSH69ZBEO61128",
-                            RentCost = 2606.1198294184342,
-                            VehicleState = 2,
-                            VehicleType = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("d2d61b60-905d-4071-8b18-57aed6feb695"),
-                            FuelType = 1,
-                            ModelId = new Guid("628daeca-f69d-4281-aee7-b935e9f52bb5"),
-                            Odo = 8957,
-                            PlateNumber = "L4UZ7X1CA1J215250",
-                            RentCost = 2987.7808728750583,
-                            VehicleState = 3,
-                            VehicleType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("9bbed713-4044-4409-96ad-bca7822d9455"),
-                            FuelType = 0,
-                            ModelId = new Guid("628daeca-f69d-4281-aee7-b935e9f52bb5"),
-                            Odo = 3495,
-                            PlateNumber = "KJ8R404AA2N148950",
-                            RentCost = 3295.3211393103625,
-                            VehicleState = 1,
-                            VehicleType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("623a6d83-076a-4063-843a-414a4c276f6d"),
-                            FuelType = 0,
-                            ModelId = new Guid("628daeca-f69d-4281-aee7-b935e9f52bb5"),
-                            Odo = 6526,
-                            PlateNumber = "KA34CGYVQTFL21809",
-                            RentCost = 1447.5502379846528,
-                            VehicleState = 1,
-                            VehicleType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("edfc90bc-d92d-4479-90e3-d16a42d341e3"),
-                            FuelType = 0,
-                            ModelId = new Guid("628daeca-f69d-4281-aee7-b935e9f52bb5"),
-                            Odo = 3300,
-                            PlateNumber = "O43W1DQ3YFA445186",
-                            RentCost = 1697.5165561075387,
-                            VehicleState = 3,
-                            VehicleType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("922677c0-3ff0-4eae-a0ce-c48ce29d6a72"),
-                            FuelType = 0,
-                            ModelId = new Guid("5fefaeee-2a38-4042-945b-ad4ad07b4657"),
-                            Odo = 7314,
-                            PlateNumber = "OA9YIJ8JJJI289946",
-                            RentCost = 487.13746298392175,
-                            VehicleState = 0,
-                            VehicleType = 4
-                        },
-                        new
-                        {
-                            Id = new Guid("3f3ffd9e-938f-4321-83fb-3bcd2f7941d2"),
-                            FuelType = 1,
-                            ModelId = new Guid("5fefaeee-2a38-4042-945b-ad4ad07b4657"),
-                            Odo = 411,
-                            PlateNumber = "QAXJPYEF9GR139304",
-                            RentCost = 3421.5809445556974,
-                            VehicleState = 2,
-                            VehicleType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("bced4528-1972-447d-b770-953ea2ddfacf"),
-                            FuelType = 1,
-                            ModelId = new Guid("5fefaeee-2a38-4042-945b-ad4ad07b4657"),
-                            Odo = 1540,
-                            PlateNumber = "VC2ONLFOO4HD98472",
-                            RentCost = 2071.5770809832011,
-                            VehicleState = 2,
-                            VehicleType = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("857da1c3-9e4b-4da5-9d77-ce76a0d3a498"),
-                            FuelType = 1,
-                            ModelId = new Guid("5fefaeee-2a38-4042-945b-ad4ad07b4657"),
-                            Odo = 6609,
-                            PlateNumber = "0GE5CRSHADI290611",
-                            RentCost = 3793.3865904017416,
-                            VehicleState = 3,
-                            VehicleType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("aea36c9a-26e0-4105-b357-44e453223382"),
-                            FuelType = 0,
-                            ModelId = new Guid("5fefaeee-2a38-4042-945b-ad4ad07b4657"),
-                            Odo = 3347,
-                            PlateNumber = "Q3FJ5AAY6DZF69608",
-                            RentCost = 2151.7660794788439,
-                            VehicleState = 3,
-                            VehicleType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("b1c6b53f-8333-46b9-a5b9-7c0b3b3dc345"),
-                            FuelType = 1,
-                            ModelId = new Guid("7d0ec296-ee40-4321-b44f-94980baac2f9"),
-                            Odo = 7417,
-                            PlateNumber = "TTV31JIYODLG59442",
-                            RentCost = 2076.0558068919272,
-                            VehicleState = 1,
-                            VehicleType = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("5ac758ae-6024-4271-b190-4890babffeaf"),
-                            FuelType = 1,
-                            ModelId = new Guid("7d0ec296-ee40-4321-b44f-94980baac2f9"),
-                            Odo = 4843,
-                            PlateNumber = "3WK0Z2SNBNKT93290",
-                            RentCost = 2628.3404801421766,
-                            VehicleState = 1,
-                            VehicleType = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("ce14879c-b867-4838-a241-c488efd37950"),
-                            FuelType = 3,
-                            ModelId = new Guid("7d0ec296-ee40-4321-b44f-94980baac2f9"),
-                            Odo = 7858,
-                            PlateNumber = "FF1XXMNYS6VX48275",
-                            RentCost = 3626.2362226554505,
-                            VehicleState = 0,
-                            VehicleType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("51ac07f7-87de-4170-98bd-2265a60daaa6"),
-                            FuelType = 0,
-                            ModelId = new Guid("7d0ec296-ee40-4321-b44f-94980baac2f9"),
-                            Odo = 2227,
-                            PlateNumber = "4SXGJW9ZQYAV53762",
-                            RentCost = 3975.7820696141125,
-                            VehicleState = 3,
-                            VehicleType = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("e89f9ef7-ad27-4814-9bcf-73e3bab94eef"),
-                            FuelType = 3,
-                            ModelId = new Guid("7d0ec296-ee40-4321-b44f-94980baac2f9"),
-                            Odo = 4586,
-                            PlateNumber = "OIJVQH2WW1G335369",
-                            RentCost = 272.50635485609791,
-                            VehicleState = 3,
-                            VehicleType = 4
-                        },
-                        new
-                        {
-                            Id = new Guid("fd6640fe-c7c7-47f3-9a6c-3e774dee812d"),
-                            FuelType = 0,
-                            ModelId = new Guid("027ba638-4808-4d07-9c41-f8551c411c24"),
-                            Odo = 3305,
-                            PlateNumber = "MR4VALHOFMI374959",
-                            RentCost = 2364.5010413912973,
-                            VehicleState = 1,
-                            VehicleType = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("c21fe318-d278-4422-a22a-3ada3e9055a6"),
-                            FuelType = 2,
-                            ModelId = new Guid("027ba638-4808-4d07-9c41-f8551c411c24"),
-                            Odo = 3773,
-                            PlateNumber = "HJN96258A5UQ40352",
-                            RentCost = 3945.9188887200726,
-                            VehicleState = 3,
-                            VehicleType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("8f0afa87-c002-4194-99d5-c371213d36d7"),
-                            FuelType = 2,
-                            ModelId = new Guid("027ba638-4808-4d07-9c41-f8551c411c24"),
-                            Odo = 2177,
-                            PlateNumber = "GYBSL3PL8QJO71817",
-                            RentCost = 1555.9135208877508,
-                            VehicleState = 0,
-                            VehicleType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("2d88aff3-a62a-4674-a659-03d96afc0466"),
-                            FuelType = 1,
-                            ModelId = new Guid("027ba638-4808-4d07-9c41-f8551c411c24"),
-                            Odo = 3659,
-                            PlateNumber = "VTCGD4B3XHYC59686",
-                            RentCost = 3422.0365338018419,
-                            VehicleState = 1,
-                            VehicleType = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("5f7ada7e-747f-4043-8a0e-be850c63d692"),
-                            FuelType = 2,
-                            ModelId = new Guid("027ba638-4808-4d07-9c41-f8551c411c24"),
-                            Odo = 6753,
-                            PlateNumber = "P4GCTA62G6VB73239",
-                            RentCost = 587.63040647149228,
-                            VehicleState = 2,
-                            VehicleType = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("a2edced4-51a2-4179-a756-1388ef5bd5ab"),
-                            FuelType = 1,
-                            ModelId = new Guid("6db119ab-df8e-4ce6-91b2-8dd8473e1e70"),
-                            Odo = 9732,
-                            PlateNumber = "B2O0H898OOBZ51746",
-                            RentCost = 973.49573380217009,
-                            VehicleState = 2,
-                            VehicleType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("96042697-85fc-49a8-931c-b42dc9c048f5"),
-                            FuelType = 3,
-                            ModelId = new Guid("6db119ab-df8e-4ce6-91b2-8dd8473e1e70"),
-                            Odo = 1140,
-                            PlateNumber = "KLWI3O949EEV26280",
-                            RentCost = 1892.5919125236921,
+                            PlateNumber = "4WA8Y88KBMG950825",
+                            RentCost = 562.43534454488849,
                             VehicleState = 0,
                             VehicleType = 5
                         },
                         new
                         {
-                            Id = new Guid("b0994018-b3f6-4b56-99d3-1f643cd3793b"),
-                            FuelType = 0,
-                            ModelId = new Guid("6db119ab-df8e-4ce6-91b2-8dd8473e1e70"),
-                            Odo = 833,
-                            PlateNumber = "RG1J2B9BV7H995901",
-                            RentCost = 1416.2571478541706,
-                            VehicleState = 0,
-                            VehicleType = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("9894cfba-e4ba-4132-afe8-bca567b30f93"),
-                            FuelType = 2,
-                            ModelId = new Guid("6db119ab-df8e-4ce6-91b2-8dd8473e1e70"),
-                            Odo = 9924,
-                            PlateNumber = "S9DJ6U61IGEA71967",
-                            RentCost = 2160.6179047907008,
-                            VehicleState = 0,
-                            VehicleType = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("135bbfb6-8b00-41c8-85b3-25d347d51be5"),
-                            FuelType = 2,
-                            ModelId = new Guid("6db119ab-df8e-4ce6-91b2-8dd8473e1e70"),
-                            Odo = 5635,
-                            PlateNumber = "4CLJ0CBYGZUY60800",
-                            RentCost = 1355.8940819091199,
-                            VehicleState = 1,
-                            VehicleType = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("cf826d0c-a666-4af1-acd0-e954b294f2c6"),
-                            FuelType = 3,
-                            ModelId = new Guid("2418ffbd-5c3f-48a2-9c9f-d93cafe0112f"),
-                            Odo = 3815,
-                            PlateNumber = "5VD1KD2CV1AE70182",
-                            RentCost = 510.40227531130364,
-                            VehicleState = 1,
-                            VehicleType = 4
-                        },
-                        new
-                        {
-                            Id = new Guid("e9d522b5-37ff-4740-8ba3-63cec63a9b32"),
+                            Id = new Guid("17f06459-ebab-4271-a79b-afbef15277f9"),
                             FuelType = 1,
-                            ModelId = new Guid("2418ffbd-5c3f-48a2-9c9f-d93cafe0112f"),
-                            Odo = 3828,
-                            PlateNumber = "48P5E28S13DG67447",
-                            RentCost = 3051.3809673524761,
-                            VehicleState = 0,
-                            VehicleType = 5
-                        },
-                        new
-                        {
-                            Id = new Guid("ef082489-ca3b-40b3-84e4-b32672b430a0"),
-                            FuelType = 0,
-                            ModelId = new Guid("2418ffbd-5c3f-48a2-9c9f-d93cafe0112f"),
-                            Odo = 5839,
-                            PlateNumber = "6OQBSOM6YFGZ21569",
-                            RentCost = 3946.0432113647594,
-                            VehicleState = 3,
+                            ModelId = new Guid("8e169234-04b3-48e5-9518-c21cd39f2c7f"),
+                            Odo = 3308,
+                            PlateNumber = "0XFR2ZTMRIP717788",
+                            RentCost = 3122.9669077444701,
+                            VehicleState = 2,
                             VehicleType = 0
                         },
                         new
                         {
-                            Id = new Guid("d776e92f-31a6-4181-9be4-bf0849021694"),
-                            FuelType = 2,
-                            ModelId = new Guid("2418ffbd-5c3f-48a2-9c9f-d93cafe0112f"),
-                            Odo = 5145,
-                            PlateNumber = "RB9WYRCZGLMJ83852",
-                            RentCost = 1344.8192347492304,
-                            VehicleState = 0,
-                            VehicleType = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("a75b5551-4bb6-4225-93eb-434974013340"),
+                            Id = new Guid("7d0f2101-d4d6-4a35-8a9e-e31a3d4af432"),
                             FuelType = 0,
-                            ModelId = new Guid("2418ffbd-5c3f-48a2-9c9f-d93cafe0112f"),
-                            Odo = 6280,
-                            PlateNumber = "L7I4RGP0E8MQ30707",
-                            RentCost = 1684.574317203266,
-                            VehicleState = 3,
-                            VehicleType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("ab326315-5819-4cb6-b199-2635592de425"),
-                            FuelType = 1,
-                            ModelId = new Guid("141f64eb-b7e8-4bd8-9437-860d4dd46c8b"),
-                            Odo = 7908,
-                            PlateNumber = "IYCYOB4HMPDJ97175",
-                            RentCost = 2997.1151257618681,
-                            VehicleState = 1,
+                            ModelId = new Guid("8e169234-04b3-48e5-9518-c21cd39f2c7f"),
+                            Odo = 1781,
+                            PlateNumber = "60RJGFPTDOW161437",
+                            RentCost = 3247.0601344374381,
+                            VehicleState = 2,
                             VehicleType = 1
                         },
                         new
                         {
-                            Id = new Guid("153a02e3-01ba-473a-9087-a0a77d1c06ce"),
+                            Id = new Guid("6c866869-5bd0-4466-a4e0-75939c12f43f"),
                             FuelType = 2,
-                            ModelId = new Guid("141f64eb-b7e8-4bd8-9437-860d4dd46c8b"),
-                            Odo = 8257,
-                            PlateNumber = "3ESOLZ2CJVWB58139",
-                            RentCost = 1095.8939828837993,
-                            VehicleState = 1,
-                            VehicleType = 4
-                        },
-                        new
-                        {
-                            Id = new Guid("b5702259-d2c2-47b7-83f8-8ae50b84f266"),
-                            FuelType = 1,
-                            ModelId = new Guid("141f64eb-b7e8-4bd8-9437-860d4dd46c8b"),
-                            Odo = 5025,
-                            PlateNumber = "6LK3FUN4HRVC48919",
-                            RentCost = 451.43666399894556,
+                            ModelId = new Guid("9995fc8c-3844-4c97-8c99-e0bcfc360cad"),
+                            Odo = 5320,
+                            PlateNumber = "O85887Z6DSPV73647",
+                            RentCost = 2559.5853708365721,
                             VehicleState = 3,
                             VehicleType = 2
                         },
                         new
                         {
-                            Id = new Guid("45a698d1-40fd-4200-9a99-a95a24bb9c67"),
-                            FuelType = 1,
-                            ModelId = new Guid("141f64eb-b7e8-4bd8-9437-860d4dd46c8b"),
-                            Odo = 9855,
-                            PlateNumber = "JKVDN3WEIMXQ26079",
-                            RentCost = 328.17507132376971,
+                            Id = new Guid("11f179bf-30c2-4593-9050-87afce1aa112"),
+                            FuelType = 2,
+                            ModelId = new Guid("9995fc8c-3844-4c97-8c99-e0bcfc360cad"),
+                            Odo = 2602,
+                            PlateNumber = "XXOAPVW7NNV157834",
+                            RentCost = 1154.1018424728377,
                             VehicleState = 0,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("97b78eb0-dff7-49b7-90ca-89f4aeae9d1d"),
+                            FuelType = 2,
+                            ModelId = new Guid("9995fc8c-3844-4c97-8c99-e0bcfc360cad"),
+                            Odo = 4905,
+                            PlateNumber = "W2WBZ4LOJYGO20575",
+                            RentCost = 1964.2106161244046,
+                            VehicleState = 3,
                             VehicleType = 3
                         },
                         new
                         {
-                            Id = new Guid("9680f392-3f80-4a8e-9f2f-fe5a51c3d8ef"),
+                            Id = new Guid("b70c608b-85b6-4235-862e-e9239cb4eb03"),
+                            FuelType = 3,
+                            ModelId = new Guid("9995fc8c-3844-4c97-8c99-e0bcfc360cad"),
+                            Odo = 4588,
+                            PlateNumber = "1TYEA6QWYCQD99644",
+                            RentCost = 3056.7319506534864,
+                            VehicleState = 2,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("a7bc50f8-1415-424d-826f-9e57c12338c6"),
+                            FuelType = 1,
+                            ModelId = new Guid("9995fc8c-3844-4c97-8c99-e0bcfc360cad"),
+                            Odo = 5765,
+                            PlateNumber = "E5JCT2EJQNE477385",
+                            RentCost = 2588.7853149260973,
+                            VehicleState = 2,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("61c0d1ac-693c-47a0-9de8-aa63caac7d64"),
+                            FuelType = 1,
+                            ModelId = new Guid("45f39368-4456-433c-ad9b-edaa7783e343"),
+                            Odo = 7627,
+                            PlateNumber = "G057RLGLS1WN33869",
+                            RentCost = 966.96979296551717,
+                            VehicleState = 2,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("6ac9b28d-1517-4759-917d-8977a1541b3c"),
                             FuelType = 2,
-                            ModelId = new Guid("141f64eb-b7e8-4bd8-9437-860d4dd46c8b"),
-                            Odo = 8729,
-                            PlateNumber = "NFCKO8UDK0OA40694",
-                            RentCost = 764.04137657879505,
+                            ModelId = new Guid("45f39368-4456-433c-ad9b-edaa7783e343"),
+                            Odo = 1965,
+                            PlateNumber = "N2N1E3BF8EGM66557",
+                            RentCost = 2809.7659068949315,
+                            VehicleState = 3,
+                            VehicleType = 3
+                        },
+                        new
+                        {
+                            Id = new Guid("496b9fad-261c-45a3-b3c7-9ef7dbb06cd0"),
+                            FuelType = 1,
+                            ModelId = new Guid("45f39368-4456-433c-ad9b-edaa7783e343"),
+                            Odo = 9040,
+                            PlateNumber = "62BP1G1XNPPP29312",
+                            RentCost = 1950.2579431421236,
+                            VehicleState = 0,
+                            VehicleType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("1b085255-c951-4318-b233-c6c834356fcd"),
+                            FuelType = 1,
+                            ModelId = new Guid("45f39368-4456-433c-ad9b-edaa7783e343"),
+                            Odo = 6632,
+                            PlateNumber = "KW5BXYPR09B099674",
+                            RentCost = 501.89836141179285,
+                            VehicleState = 3,
+                            VehicleType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("670f5130-e264-49db-bda9-8df326af012a"),
+                            FuelType = 2,
+                            ModelId = new Guid("45f39368-4456-433c-ad9b-edaa7783e343"),
+                            Odo = 3234,
+                            PlateNumber = "5NPMXUSUIHCG10113",
+                            RentCost = 1124.0457303336852,
                             VehicleState = 1,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("3f6deafd-eafd-49a2-9cbd-9eccaeee911a"),
+                            FuelType = 2,
+                            ModelId = new Guid("0cae08a1-e2de-4790-a1aa-5d3e91060acc"),
+                            Odo = 6112,
+                            PlateNumber = "0VMKE2ML3IQ613643",
+                            RentCost = 3403.0045672769211,
+                            VehicleState = 2,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("de07f4ab-2872-4e63-bf31-d449ca4ed851"),
+                            FuelType = 1,
+                            ModelId = new Guid("0cae08a1-e2de-4790-a1aa-5d3e91060acc"),
+                            Odo = 3528,
+                            PlateNumber = "7IA9Y68JJUCA54730",
+                            RentCost = 295.92911944626388,
+                            VehicleState = 0,
                             VehicleType = 2
                         },
                         new
                         {
-                            Id = new Guid("bf73fc95-54c8-4882-b845-0dac4e4ff0e9"),
-                            FuelType = 1,
-                            ModelId = new Guid("e554df25-3a79-4264-82c3-08fc630c25e6"),
-                            Odo = 7724,
-                            PlateNumber = "LD5ERA4BBNRE97788",
-                            RentCost = 747.11594372523632,
-                            VehicleState = 0,
-                            VehicleType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("b1b7f6b1-71f1-4e6c-900d-4d12a1f9dc6a"),
-                            FuelType = 0,
-                            ModelId = new Guid("e554df25-3a79-4264-82c3-08fc630c25e6"),
-                            Odo = 1304,
-                            PlateNumber = "5W8ENK2D65A911236",
-                            RentCost = 2612.4655403595093,
-                            VehicleState = 3,
-                            VehicleType = 5
-                        },
-                        new
-                        {
-                            Id = new Guid("cec76663-27ee-4d69-98a1-069026c1f03c"),
-                            FuelType = 3,
-                            ModelId = new Guid("e554df25-3a79-4264-82c3-08fc630c25e6"),
-                            Odo = 6598,
-                            PlateNumber = "CRGXR64TVXQI11185",
-                            RentCost = 2495.9845516822252,
-                            VehicleState = 3,
-                            VehicleType = 5
-                        },
-                        new
-                        {
-                            Id = new Guid("dd747cbd-344d-4a8c-988e-bbbe71361641"),
-                            FuelType = 3,
-                            ModelId = new Guid("e554df25-3a79-4264-82c3-08fc630c25e6"),
-                            Odo = 6872,
-                            PlateNumber = "UDJ3SMPU3BT886288",
-                            RentCost = 767.9188277538608,
-                            VehicleState = 2,
-                            VehicleType = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("b0d6c516-d7c6-4eaa-9243-61cfb3009668"),
-                            FuelType = 0,
-                            ModelId = new Guid("e554df25-3a79-4264-82c3-08fc630c25e6"),
-                            Odo = 3359,
-                            PlateNumber = "PW7H21B703TD29406",
-                            RentCost = 228.22618243713671,
-                            VehicleState = 0,
-                            VehicleType = 5
-                        },
-                        new
-                        {
-                            Id = new Guid("6a027294-b966-41a1-bc0a-434844c9dd5d"),
-                            FuelType = 3,
-                            ModelId = new Guid("e0c9186d-7831-4735-9da0-cb884d53bd83"),
-                            Odo = 1772,
-                            PlateNumber = "CCPKH1XWEPDI88059",
-                            RentCost = 1116.1122442839019,
+                            Id = new Guid("0cddd240-ee9a-4d30-879b-ba5123f3c22b"),
+                            FuelType = 2,
+                            ModelId = new Guid("0cae08a1-e2de-4790-a1aa-5d3e91060acc"),
+                            Odo = 1092,
+                            PlateNumber = "BGPXO8KW48SJ41753",
+                            RentCost = 3648.495677067162,
                             VehicleState = 3,
                             VehicleType = 4
                         },
                         new
                         {
-                            Id = new Guid("c2692daa-cce0-4d9b-9601-6492ed74b36b"),
-                            FuelType = 2,
-                            ModelId = new Guid("e0c9186d-7831-4735-9da0-cb884d53bd83"),
-                            Odo = 4469,
-                            PlateNumber = "XEQM2YS12ND725496",
-                            RentCost = 1116.0562302427318,
-                            VehicleState = 2,
-                            VehicleType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("d27fbd28-4a0b-4bc5-8eb4-27b55416e5dd"),
+                            Id = new Guid("5cf0fa82-da19-4ec4-b55b-308b47ddcbac"),
                             FuelType = 3,
-                            ModelId = new Guid("e0c9186d-7831-4735-9da0-cb884d53bd83"),
-                            Odo = 7545,
-                            PlateNumber = "R6VYPSQJB6B067538",
-                            RentCost = 924.16812183704997,
-                            VehicleState = 3,
-                            VehicleType = 4
-                        },
-                        new
-                        {
-                            Id = new Guid("2b54c4a2-e85b-4223-ba51-bb277e0ddec4"),
-                            FuelType = 1,
-                            ModelId = new Guid("e0c9186d-7831-4735-9da0-cb884d53bd83"),
-                            Odo = 5426,
-                            PlateNumber = "2HSE58JUWGH721343",
-                            RentCost = 624.9104457311887,
+                            ModelId = new Guid("0cae08a1-e2de-4790-a1aa-5d3e91060acc"),
+                            Odo = 5923,
+                            PlateNumber = "I975S5OUGNDF17644",
+                            RentCost = 1216.6122813215902,
                             VehicleState = 2,
-                            VehicleType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("c16d1f74-042d-42d6-90b4-93f9d396b739"),
-                            FuelType = 2,
-                            ModelId = new Guid("e0c9186d-7831-4735-9da0-cb884d53bd83"),
-                            Odo = 3328,
-                            PlateNumber = "2PRA0WHOYIQ652943",
-                            RentCost = 1115.9925398685496,
-                            VehicleState = 0,
-                            VehicleType = 5
-                        },
-                        new
-                        {
-                            Id = new Guid("24c77547-fbb3-428b-9d6e-6b470b8e8066"),
-                            FuelType = 0,
-                            ModelId = new Guid("24f3d93c-10f6-4260-836c-b3f041551209"),
-                            Odo = 1908,
-                            PlateNumber = "FM3084YOCTFT64151",
-                            RentCost = 633.15225827624363,
-                            VehicleState = 0,
-                            VehicleType = 4
-                        },
-                        new
-                        {
-                            Id = new Guid("1caec604-84de-4a90-85a1-8c6cd7518263"),
-                            FuelType = 2,
-                            ModelId = new Guid("24f3d93c-10f6-4260-836c-b3f041551209"),
-                            Odo = 2325,
-                            PlateNumber = "JABCBOD94RJB11240",
-                            RentCost = 3070.6514606579021,
-                            VehicleState = 1,
                             VehicleType = 1
                         },
                         new
                         {
-                            Id = new Guid("379d1bf9-10bc-4415-9742-fb11f91525d1"),
-                            FuelType = 0,
-                            ModelId = new Guid("24f3d93c-10f6-4260-836c-b3f041551209"),
-                            Odo = 9621,
-                            PlateNumber = "3I606FK8P4Y438089",
-                            RentCost = 1954.834118103882,
-                            VehicleState = 1,
-                            VehicleType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("d4f59c8c-7b8c-4987-9f76-15a39dbb8d7b"),
-                            FuelType = 0,
-                            ModelId = new Guid("24f3d93c-10f6-4260-836c-b3f041551209"),
-                            Odo = 707,
-                            PlateNumber = "MMBGGZ2OJ8DN32699",
-                            RentCost = 3490.8732741478816,
-                            VehicleState = 1,
-                            VehicleType = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("fb3ed3a2-e031-4eac-9e2e-67a32bb927e1"),
-                            FuelType = 1,
-                            ModelId = new Guid("24f3d93c-10f6-4260-836c-b3f041551209"),
-                            Odo = 7598,
-                            PlateNumber = "DFZCSLVQGVHO52562",
-                            RentCost = 110.46875368459706,
+                            Id = new Guid("faa4b28f-91a1-4094-ae5b-6c559277c390"),
+                            FuelType = 3,
+                            ModelId = new Guid("0cae08a1-e2de-4790-a1aa-5d3e91060acc"),
+                            Odo = 5453,
+                            PlateNumber = "8V7KG4888KBZ32404",
+                            RentCost = 2973.1591687363839,
                             VehicleState = 3,
-                            VehicleType = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("1c1e3feb-23a6-41ab-8c38-9824dff8bd7f"),
-                            FuelType = 2,
-                            ModelId = new Guid("1a6474bb-e95b-4712-b053-e5cdc8df2a6e"),
-                            Odo = 9192,
-                            PlateNumber = "MCAF110ZNOQ115446",
-                            RentCost = 1235.609524980825,
-                            VehicleState = 2,
-                            VehicleType = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("026ce876-d0d9-4cfe-884a-e8da603c04cc"),
-                            FuelType = 0,
-                            ModelId = new Guid("1a6474bb-e95b-4712-b053-e5cdc8df2a6e"),
-                            Odo = 9984,
-                            PlateNumber = "75C5ZKVKACGQ57710",
-                            RentCost = 2495.8437017632359,
-                            VehicleState = 0,
                             VehicleType = 5
                         },
                         new
                         {
-                            Id = new Guid("67ce83b4-8fde-48e2-9c2f-9203da1471e4"),
+                            Id = new Guid("a69e8837-a628-40e5-9d03-16502f35b599"),
                             FuelType = 2,
-                            ModelId = new Guid("1a6474bb-e95b-4712-b053-e5cdc8df2a6e"),
-                            Odo = 7323,
-                            PlateNumber = "I5SFGE3KOVSR89968",
-                            RentCost = 1952.7865051980341,
-                            VehicleState = 1,
-                            VehicleType = 5
-                        },
-                        new
-                        {
-                            Id = new Guid("9ea3a92f-ecbe-4506-bf2b-e3d94ea446bb"),
-                            FuelType = 2,
-                            ModelId = new Guid("1a6474bb-e95b-4712-b053-e5cdc8df2a6e"),
-                            Odo = 7665,
-                            PlateNumber = "7CJJ0HYE7UW181784",
-                            RentCost = 715.60705714335779,
-                            VehicleState = 2,
-                            VehicleType = 4
-                        },
-                        new
-                        {
-                            Id = new Guid("a8a86913-1235-4d3b-9f1f-175af8f5ba10"),
-                            FuelType = 0,
-                            ModelId = new Guid("1a6474bb-e95b-4712-b053-e5cdc8df2a6e"),
-                            Odo = 6315,
-                            PlateNumber = "EK0XEJ4U95AY24679",
-                            RentCost = 1607.1135441562187,
-                            VehicleState = 2,
-                            VehicleType = 5
-                        },
-                        new
-                        {
-                            Id = new Guid("353c738b-b9c3-4d22-97fd-f22e41df772a"),
-                            FuelType = 0,
-                            ModelId = new Guid("517b1982-794f-4bf6-999f-5b5c2f462721"),
-                            Odo = 8548,
-                            PlateNumber = "MV330QT42RPV55323",
-                            RentCost = 1561.286063950567,
-                            VehicleState = 0,
-                            VehicleType = 4
-                        },
-                        new
-                        {
-                            Id = new Guid("8102baa1-d51a-432d-9d5f-17d4bf868a78"),
-                            FuelType = 0,
-                            ModelId = new Guid("517b1982-794f-4bf6-999f-5b5c2f462721"),
-                            Odo = 7186,
-                            PlateNumber = "9B0MOMTCU2ZB53344",
-                            RentCost = 3346.5929062474065,
-                            VehicleState = 1,
-                            VehicleType = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("b4b8e095-6385-47c5-84a2-5aa53f6f2cfd"),
-                            FuelType = 2,
-                            ModelId = new Guid("517b1982-794f-4bf6-999f-5b5c2f462721"),
-                            Odo = 4125,
-                            PlateNumber = "OLG0YNSICRDR11167",
-                            RentCost = 192.12506887746252,
+                            ModelId = new Guid("703ff426-1d0e-403c-bfd6-664927657232"),
+                            Odo = 2868,
+                            PlateNumber = "V7ILO64TY7B634187",
+                            RentCost = 3490.3174330292973,
                             VehicleState = 2,
                             VehicleType = 2
                         },
                         new
                         {
-                            Id = new Guid("ef1f9fd3-ee65-470f-9145-450c99d8b4a1"),
+                            Id = new Guid("59ca6ad6-4664-4dba-92d4-a532c67ba3f7"),
+                            FuelType = 2,
+                            ModelId = new Guid("703ff426-1d0e-403c-bfd6-664927657232"),
+                            Odo = 3562,
+                            PlateNumber = "454NWQCN2LIZ57424",
+                            RentCost = 1774.5622062529451,
+                            VehicleState = 1,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("58102c09-5c15-4e36-9b89-d24ad5b98291"),
+                            FuelType = 3,
+                            ModelId = new Guid("703ff426-1d0e-403c-bfd6-664927657232"),
+                            Odo = 81,
+                            PlateNumber = "C30N2T6O54MI39561",
+                            RentCost = 3631.1928856201066,
+                            VehicleState = 2,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("c95e1902-2480-416e-a81e-160b59e5e449"),
+                            FuelType = 0,
+                            ModelId = new Guid("703ff426-1d0e-403c-bfd6-664927657232"),
+                            Odo = 3466,
+                            PlateNumber = "NGCJP1EFAETD19096",
+                            RentCost = 1778.9095953301774,
+                            VehicleState = 0,
+                            VehicleType = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("d1a653d6-d565-49ec-97a3-5686d72800d3"),
+                            FuelType = 3,
+                            ModelId = new Guid("703ff426-1d0e-403c-bfd6-664927657232"),
+                            Odo = 5963,
+                            PlateNumber = "6X3LSHUITWY187078",
+                            RentCost = 3979.0517726401963,
+                            VehicleState = 3,
+                            VehicleType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("dba740a9-9070-477b-a3da-e3a1207197e3"),
                             FuelType = 1,
-                            ModelId = new Guid("517b1982-794f-4bf6-999f-5b5c2f462721"),
-                            Odo = 4028,
-                            PlateNumber = "IQCSFKXQNWQG71212",
-                            RentCost = 2687.8351480880228,
+                            ModelId = new Guid("15bf6bbf-a110-4a88-bc5e-8b4c47510b44"),
+                            Odo = 5123,
+                            PlateNumber = "AJ0FP7S4DPNF53804",
+                            RentCost = 1321.6271989951376,
+                            VehicleState = 2,
+                            VehicleType = 3
+                        },
+                        new
+                        {
+                            Id = new Guid("b53bcca4-d811-4b7f-b074-1eb9662b17b8"),
+                            FuelType = 2,
+                            ModelId = new Guid("15bf6bbf-a110-4a88-bc5e-8b4c47510b44"),
+                            Odo = 3461,
+                            PlateNumber = "527Q7D0TJVLX13970",
+                            RentCost = 1801.5914961220824,
+                            VehicleState = 0,
+                            VehicleType = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("3bd49b40-1472-4a04-bd6c-acea90b50d8d"),
+                            FuelType = 0,
+                            ModelId = new Guid("15bf6bbf-a110-4a88-bc5e-8b4c47510b44"),
+                            Odo = 9497,
+                            PlateNumber = "RGYX2N0AWNUH14391",
+                            RentCost = 3212.0614621721188,
+                            VehicleState = 1,
+                            VehicleType = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("af3b5a24-796c-45b6-802d-87edac0e0cc4"),
+                            FuelType = 3,
+                            ModelId = new Guid("15bf6bbf-a110-4a88-bc5e-8b4c47510b44"),
+                            Odo = 9254,
+                            PlateNumber = "L4BN8Z0AOCSU92534",
+                            RentCost = 3058.1908939835307,
+                            VehicleState = 0,
+                            VehicleType = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("8b5f8d92-ab8f-4583-bfe7-f4099388dc84"),
+                            FuelType = 0,
+                            ModelId = new Guid("15bf6bbf-a110-4a88-bc5e-8b4c47510b44"),
+                            Odo = 8357,
+                            PlateNumber = "1J8U1MPYCHPM81865",
+                            RentCost = 409.14694021276961,
+                            VehicleState = 2,
+                            VehicleType = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("a0d22b27-6cc9-4a15-8fbe-b0a93ec4289c"),
+                            FuelType = 0,
+                            ModelId = new Guid("8ae805d5-0d78-4c71-bd7b-799b49a3a774"),
+                            Odo = 973,
+                            PlateNumber = "V4K3W7E0BBM280328",
+                            RentCost = 1979.5383017298959,
+                            VehicleState = 2,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("76f37ce8-1957-4ec1-9f93-a8e287c1e2ce"),
+                            FuelType = 1,
+                            ModelId = new Guid("8ae805d5-0d78-4c71-bd7b-799b49a3a774"),
+                            Odo = 3599,
+                            PlateNumber = "UFM4A98O8KLC55263",
+                            RentCost = 1515.1963515422754,
+                            VehicleState = 1,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("ba784c0f-cc66-4677-ad26-f3b0b737be43"),
+                            FuelType = 2,
+                            ModelId = new Guid("8ae805d5-0d78-4c71-bd7b-799b49a3a774"),
+                            Odo = 2477,
+                            PlateNumber = "P433YQBMR9OM68877",
+                            RentCost = 2390.6491200764117,
+                            VehicleState = 1,
+                            VehicleType = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("16101dac-7bb2-4e4e-83be-51a28ba55aa0"),
+                            FuelType = 2,
+                            ModelId = new Guid("8ae805d5-0d78-4c71-bd7b-799b49a3a774"),
+                            Odo = 3242,
+                            PlateNumber = "7OG6F1S8F8SC91768",
+                            RentCost = 1430.0654789232035,
+                            VehicleState = 0,
+                            VehicleType = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("f9a199f2-5c4b-4c0f-ac81-324665e642e8"),
+                            FuelType = 0,
+                            ModelId = new Guid("8ae805d5-0d78-4c71-bd7b-799b49a3a774"),
+                            Odo = 6759,
+                            PlateNumber = "4Q81LIR5H7AW41624",
+                            RentCost = 583.43270143449433,
                             VehicleState = 2,
                             VehicleType = 0
                         },
                         new
                         {
-                            Id = new Guid("c477c7bb-3802-4f48-bd3a-638a384d8e72"),
+                            Id = new Guid("79d212d3-045f-45e3-8bc2-5a73bd2a36eb"),
                             FuelType = 3,
-                            ModelId = new Guid("517b1982-794f-4bf6-999f-5b5c2f462721"),
-                            Odo = 3748,
-                            PlateNumber = "4XJDV6IHLWP768596",
-                            RentCost = 549.71191275030401,
+                            ModelId = new Guid("4d54f5ee-5813-4c5e-9246-c065a85c99b9"),
+                            Odo = 7816,
+                            PlateNumber = "CCKQYQVDKXSL20440",
+                            RentCost = 677.85628659378096,
                             VehicleState = 2,
+                            VehicleType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("d3e2d749-f411-4d2f-be69-5fde49a73eeb"),
+                            FuelType = 2,
+                            ModelId = new Guid("4d54f5ee-5813-4c5e-9246-c065a85c99b9"),
+                            Odo = 6671,
+                            PlateNumber = "9W42KVYU8OJC98247",
+                            RentCost = 3769.8490324375207,
+                            VehicleState = 2,
+                            VehicleType = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("a531ee2b-3f11-4ec7-9a72-c15186890739"),
+                            FuelType = 2,
+                            ModelId = new Guid("4d54f5ee-5813-4c5e-9246-c065a85c99b9"),
+                            Odo = 5191,
+                            PlateNumber = "ICXVYO8OBURB95521",
+                            RentCost = 1593.3804027223368,
+                            VehicleState = 2,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("4f8b7f50-2a57-48c6-9170-89f033d2b86f"),
+                            FuelType = 3,
+                            ModelId = new Guid("4d54f5ee-5813-4c5e-9246-c065a85c99b9"),
+                            Odo = 8679,
+                            PlateNumber = "PECKFPXG16PI71781",
+                            RentCost = 1465.9194183590942,
+                            VehicleState = 2,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("42e79489-70e7-4c89-8912-fea0214590f0"),
+                            FuelType = 2,
+                            ModelId = new Guid("4d54f5ee-5813-4c5e-9246-c065a85c99b9"),
+                            Odo = 3542,
+                            PlateNumber = "OON9W94808QB70853",
+                            RentCost = 315.64282322497041,
+                            VehicleState = 0,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("404a789e-7494-4cff-a672-f6d24a5431fe"),
+                            FuelType = 2,
+                            ModelId = new Guid("ea1cc4b7-c655-4b48-8297-557e2d3fbff0"),
+                            Odo = 1567,
+                            PlateNumber = "3837S71LPVEG80427",
+                            RentCost = 3587.045664381536,
+                            VehicleState = 1,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("7aa431a8-c425-41f9-98c9-ca7226d60316"),
+                            FuelType = 0,
+                            ModelId = new Guid("ea1cc4b7-c655-4b48-8297-557e2d3fbff0"),
+                            Odo = 1973,
+                            PlateNumber = "E23XU6ILE8MX64598",
+                            RentCost = 2291.0589837434554,
+                            VehicleState = 3,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("c9584dcd-b427-42f7-a4b5-e977f43c05c4"),
+                            FuelType = 2,
+                            ModelId = new Guid("ea1cc4b7-c655-4b48-8297-557e2d3fbff0"),
+                            Odo = 6576,
+                            PlateNumber = "CKYF7KQGEFPQ63223",
+                            RentCost = 3351.1321108407283,
+                            VehicleState = 2,
+                            VehicleType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("6d087d7b-2fca-4ed1-8da8-a36aa973ff9f"),
+                            FuelType = 2,
+                            ModelId = new Guid("ea1cc4b7-c655-4b48-8297-557e2d3fbff0"),
+                            Odo = 81,
+                            PlateNumber = "O2FUODLEBWDO93475",
+                            RentCost = 1400.6560790769736,
+                            VehicleState = 3,
+                            VehicleType = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("c59a3a8f-3155-469d-9452-ca5b69053b0c"),
+                            FuelType = 1,
+                            ModelId = new Guid("ea1cc4b7-c655-4b48-8297-557e2d3fbff0"),
+                            Odo = 6288,
+                            PlateNumber = "L4FFEVRCOUUO50449",
+                            RentCost = 3634.641414006931,
+                            VehicleState = 2,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("8d89b45f-423c-4133-9cf3-fbcf6ee36532"),
+                            FuelType = 0,
+                            ModelId = new Guid("81ab22e6-6240-4b31-8586-2475de8edc51"),
+                            Odo = 3545,
+                            PlateNumber = "4DC2Z2TFAFZK77050",
+                            RentCost = 2836.7248072209422,
+                            VehicleState = 1,
+                            VehicleType = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("fb7fea6a-e9a5-4f45-a8f4-b9011ad7387e"),
+                            FuelType = 0,
+                            ModelId = new Guid("81ab22e6-6240-4b31-8586-2475de8edc51"),
+                            Odo = 9698,
+                            PlateNumber = "EAYRVV3CR5HR15390",
+                            RentCost = 218.50419556275401,
+                            VehicleState = 2,
+                            VehicleType = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("da6972b8-7c23-4cac-8b7a-0483799ac322"),
+                            FuelType = 3,
+                            ModelId = new Guid("81ab22e6-6240-4b31-8586-2475de8edc51"),
+                            Odo = 7397,
+                            PlateNumber = "OLJKO8RQN7O081713",
+                            RentCost = 3121.1362260487231,
+                            VehicleState = 2,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("aaaaa1c3-96a4-4233-b013-cb0fe1dd40ed"),
+                            FuelType = 2,
+                            ModelId = new Guid("81ab22e6-6240-4b31-8586-2475de8edc51"),
+                            Odo = 2554,
+                            PlateNumber = "OFJCKEZFHUDS21917",
+                            RentCost = 1661.6974565308451,
+                            VehicleState = 0,
+                            VehicleType = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("a50cdf57-6867-4d3e-9b19-e7e9add00783"),
+                            FuelType = 3,
+                            ModelId = new Guid("81ab22e6-6240-4b31-8586-2475de8edc51"),
+                            Odo = 3772,
+                            PlateNumber = "AHD5XCXZJDTM82490",
+                            RentCost = 3866.9087134807064,
+                            VehicleState = 1,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("5a809356-3312-4883-aac2-03e57df5e85d"),
+                            FuelType = 3,
+                            ModelId = new Guid("db15f770-f6dc-4c94-a3ad-6799ed7df34a"),
+                            Odo = 9067,
+                            PlateNumber = "LO9OTEBNDXZ116054",
+                            RentCost = 3058.2299487996079,
+                            VehicleState = 3,
+                            VehicleType = 3
+                        },
+                        new
+                        {
+                            Id = new Guid("53c45c17-442e-4962-acc9-f17a1dd8f3c7"),
+                            FuelType = 1,
+                            ModelId = new Guid("db15f770-f6dc-4c94-a3ad-6799ed7df34a"),
+                            Odo = 1992,
+                            PlateNumber = "IAATY91OYIW130907",
+                            RentCost = 2791.5189720640815,
+                            VehicleState = 0,
+                            VehicleType = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("07674a44-014c-4091-ab6b-ca40fd132a23"),
+                            FuelType = 0,
+                            ModelId = new Guid("db15f770-f6dc-4c94-a3ad-6799ed7df34a"),
+                            Odo = 2694,
+                            PlateNumber = "4CFT91AVMJEM67450",
+                            RentCost = 2669.2403603777684,
+                            VehicleState = 2,
+                            VehicleType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("0464f160-5894-4798-a48d-e89b7ad760d0"),
+                            FuelType = 0,
+                            ModelId = new Guid("db15f770-f6dc-4c94-a3ad-6799ed7df34a"),
+                            Odo = 4302,
+                            PlateNumber = "5E45LYOWHGR628259",
+                            RentCost = 1460.7347868621173,
+                            VehicleState = 3,
+                            VehicleType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("bd9c217d-58d6-41dc-bd9d-59697f9a7877"),
+                            FuelType = 1,
+                            ModelId = new Guid("db15f770-f6dc-4c94-a3ad-6799ed7df34a"),
+                            Odo = 7281,
+                            PlateNumber = "9ZEFLA7R05OJ18297",
+                            RentCost = 266.1001381614584,
+                            VehicleState = 3,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("e18fe9eb-8948-400c-bb55-cc5de8e609ea"),
+                            FuelType = 0,
+                            ModelId = new Guid("cd76eccf-a3f0-4680-b90a-0b19b10c4d48"),
+                            Odo = 3378,
+                            PlateNumber = "QZW2F2ICNTHY42698",
+                            RentCost = 3595.9452799517412,
+                            VehicleState = 3,
+                            VehicleType = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("e46c6467-783d-4540-a931-1b837251d039"),
+                            FuelType = 2,
+                            ModelId = new Guid("cd76eccf-a3f0-4680-b90a-0b19b10c4d48"),
+                            Odo = 711,
+                            PlateNumber = "VNADP9D5X3MR21419",
+                            RentCost = 2353.0020756198201,
+                            VehicleState = 1,
+                            VehicleType = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("b378ebbb-e4d6-4027-8466-f7cab9b153ad"),
+                            FuelType = 3,
+                            ModelId = new Guid("cd76eccf-a3f0-4680-b90a-0b19b10c4d48"),
+                            Odo = 7802,
+                            PlateNumber = "E515QM9TSCA139047",
+                            RentCost = 3674.6122738784852,
+                            VehicleState = 0,
+                            VehicleType = 3
+                        },
+                        new
+                        {
+                            Id = new Guid("343a615c-e28b-4f45-ba96-041d9f917f37"),
+                            FuelType = 0,
+                            ModelId = new Guid("cd76eccf-a3f0-4680-b90a-0b19b10c4d48"),
+                            Odo = 8143,
+                            PlateNumber = "SAMLSNNBHKBQ99550",
+                            RentCost = 2036.0845886707107,
+                            VehicleState = 2,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("f8214993-0cdd-4c2a-88d0-75b74149a35e"),
+                            FuelType = 2,
+                            ModelId = new Guid("cd76eccf-a3f0-4680-b90a-0b19b10c4d48"),
+                            Odo = 446,
+                            PlateNumber = "12XLKLKXMRDM13924",
+                            RentCost = 1448.2184584411414,
+                            VehicleState = 0,
                             VehicleType = 5
                         });
                 });
 
-            modelBuilder.Entity("DAL.Entities.VehicleClientHistory", b =>
+            modelBuilder.Entity("DAL.Entities.CarModelEntity", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ClientId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid>("VehicleId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
-
-                    b.HasIndex("VehicleId");
-
-                    b.ToTable("VehicleClientHistories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("84866180-cc0c-4665-809a-763f143a58c6"),
-                            ClientId = new Guid("3eb356a0-8123-42ef-af05-0650b333a949"),
-                            EndDate = new DateTime(2024, 3, 16, 14, 28, 38, 370, DateTimeKind.Utc).AddTicks(6842),
-                            StartDate = new DateTime(2024, 2, 8, 13, 33, 22, 549, DateTimeKind.Utc).AddTicks(5410),
-                            VehicleId = new Guid("3f3ffd9e-938f-4321-83fb-3bcd2f7941d2")
-                        },
-                        new
-                        {
-                            Id = new Guid("1dcb247b-f8ab-4158-a646-7d9de700a44c"),
-                            ClientId = new Guid("3eb356a0-8123-42ef-af05-0650b333a949"),
-                            EndDate = new DateTime(2023, 9, 4, 17, 51, 47, 990, DateTimeKind.Utc).AddTicks(2944),
-                            StartDate = new DateTime(2023, 9, 12, 7, 9, 2, 852, DateTimeKind.Utc).AddTicks(7515),
-                            VehicleId = new Guid("1d6ba6ae-d6a9-418a-b97d-16ff6bcde9f2")
-                        },
-                        new
-                        {
-                            Id = new Guid("5129272d-5326-4348-a411-b1bb59617757"),
-                            ClientId = new Guid("3eb356a0-8123-42ef-af05-0650b333a949"),
-                            EndDate = new DateTime(2024, 6, 6, 9, 0, 12, 791, DateTimeKind.Utc).AddTicks(8886),
-                            StartDate = new DateTime(2023, 9, 9, 20, 1, 33, 767, DateTimeKind.Utc).AddTicks(1210),
-                            VehicleId = new Guid("89d76d9c-43c2-4285-9e15-6b45f31beb8b")
-                        },
-                        new
-                        {
-                            Id = new Guid("4d9717dd-f81c-4959-aefb-49f13876d6c6"),
-                            ClientId = new Guid("3eb356a0-8123-42ef-af05-0650b333a949"),
-                            EndDate = new DateTime(2023, 6, 22, 5, 36, 30, 319, DateTimeKind.Utc).AddTicks(2876),
-                            StartDate = new DateTime(2023, 8, 24, 18, 36, 4, 567, DateTimeKind.Utc).AddTicks(4061),
-                            VehicleId = new Guid("294081d5-077b-487f-acf8-233528581dc7")
-                        },
-                        new
-                        {
-                            Id = new Guid("ee2fd042-f0ba-4976-9e9e-7eb00ea559e9"),
-                            ClientId = new Guid("3eb356a0-8123-42ef-af05-0650b333a949"),
-                            EndDate = new DateTime(2024, 3, 5, 23, 35, 38, 920, DateTimeKind.Utc).AddTicks(6877),
-                            StartDate = new DateTime(2023, 7, 29, 2, 16, 39, 149, DateTimeKind.Utc).AddTicks(9299),
-                            VehicleId = new Guid("8102baa1-d51a-432d-9d5f-17d4bf868a78")
-                        });
-                });
-
-            modelBuilder.Entity("DAL.Entities.ModelName", b =>
-                {
-                    b.HasOne("DAL.Entities.Manufacturer", "Manufacturer")
+                    b.HasOne("DAL.Entities.ManufacturerEntity", "Manufacturer")
                         .WithMany("ModelNames")
                         .HasForeignKey("ManufacturerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1768,24 +1768,15 @@ namespace DAL.Migrations
                     b.Navigation("Manufacturer");
                 });
 
-            modelBuilder.Entity("DAL.Entities.Vehicle", b =>
+            modelBuilder.Entity("DAL.Entities.VehicleClientHistoryEntity", b =>
                 {
-                    b.HasOne("DAL.Entities.ModelName", "ModelName")
-                        .WithMany("Vehicles")
-                        .HasForeignKey("ModelNameId");
-
-                    b.Navigation("ModelName");
-                });
-
-            modelBuilder.Entity("DAL.Entities.VehicleClientHistory", b =>
-                {
-                    b.HasOne("DAL.Entities.Client", "Client")
+                    b.HasOne("DAL.Entities.ClientEntity", "Client")
                         .WithMany("VehicleClientHistory")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DAL.Entities.Vehicle", "Vehicle")
+                    b.HasOne("DAL.Entities.VehicleEntity", "Vehicle")
                         .WithMany("VehicleClientHistory")
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1796,22 +1787,31 @@ namespace DAL.Migrations
                     b.Navigation("Vehicle");
                 });
 
-            modelBuilder.Entity("DAL.Entities.Client", b =>
+            modelBuilder.Entity("DAL.Entities.VehicleEntity", b =>
                 {
-                    b.Navigation("VehicleClientHistory");
+                    b.HasOne("DAL.Entities.CarModelEntity", "ModelName")
+                        .WithMany("Vehicles")
+                        .HasForeignKey("ModelNameId");
+
+                    b.Navigation("ModelName");
                 });
 
-            modelBuilder.Entity("DAL.Entities.Manufacturer", b =>
-                {
-                    b.Navigation("ModelNames");
-                });
-
-            modelBuilder.Entity("DAL.Entities.ModelName", b =>
+            modelBuilder.Entity("DAL.Entities.CarModelEntity", b =>
                 {
                     b.Navigation("Vehicles");
                 });
 
-            modelBuilder.Entity("DAL.Entities.Vehicle", b =>
+            modelBuilder.Entity("DAL.Entities.ClientEntity", b =>
+                {
+                    b.Navigation("VehicleClientHistory");
+                });
+
+            modelBuilder.Entity("DAL.Entities.ManufacturerEntity", b =>
+                {
+                    b.Navigation("ModelNames");
+                });
+
+            modelBuilder.Entity("DAL.Entities.VehicleEntity", b =>
                 {
                     b.Navigation("VehicleClientHistory");
                 });

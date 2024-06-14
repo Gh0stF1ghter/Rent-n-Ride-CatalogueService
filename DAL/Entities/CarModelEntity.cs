@@ -1,13 +1,13 @@
 ﻿namespace DAL.Entities;
 
-public class ModelName
+public class CarModelEntity
 {
     public Guid Id { get; set; }
 
     public string Name { get; set; } = string.Empty;
 
     public Guid ManufacturerId { get; set; }
-    public Manufacturer? Manufacturer { get; set; }
+    public ManufacturerEntity? Manufacturer { get; set; }
 
-    public IEnumerable<Vehicle> Vehicles { get; set; } = [];
+    public IEnumerable<VehicleEntity>? Vehicles { get; set; }
 }

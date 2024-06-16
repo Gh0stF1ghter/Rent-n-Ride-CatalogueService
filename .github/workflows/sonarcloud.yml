@@ -26,9 +26,9 @@ jobs:
     - name: Sonar Scan
       uses: highbyte/sonarscan-dotnet@v2.3.0
       with:
-        sonarProjectKey: Gh0stF1ghter_Project-Rent-n-Ride
-        sonarProjectName: Project-Rent-n-Ride
-        sonarOrganization: gh0stf1ghter
+        sonarProjectKey: ${{ vars.SONARORGANIZATION }}
+        sonarProjectName: ${{ vars.SONARPROJECTKEY }}
+        sonarOrganization: ${{ vars.SONARPROJECTNAME }}
         dotnetBuildArguments: --configuration Release
         dotnetTestArguments: --no-build --configuration Release --verbosity normal --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
         sonarBeginArguments: /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx" /d:sonar.coverage.exclusions="$EXCLUDE_FROM_COVERAGE" 

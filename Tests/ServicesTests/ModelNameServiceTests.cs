@@ -12,7 +12,7 @@ public class ModelNameServiceTests
 {
     private readonly ModelNameRepositoryMock _repositoryMock = new();
 
-    private readonly List<ModelName> _models = DataGenerator.AddModelData(5);
+    private readonly List<CarModelEntity> _models = DataGenerator.AddModelData(5);
 
     public ModelNameServiceTests()
     {
@@ -25,8 +25,8 @@ public class ModelNameServiceTests
     public async Task GetRangeAsync__ReturnsClientModelList()
     {
         //Arrange
-        var correctModels = _models.Adapt<IEnumerable<ModelNameModel>>();
-        var service = new ModelNameService(_repositoryMock.Object);
+        var correctModels = _models.Adapt<IEnumerable<CarModel>>();
+        var service = new CarModelService(_repositoryMock.Object);
 
         //Act
         var response = await service.GetRangeAsync(1, 1, default);
@@ -39,8 +39,8 @@ public class ModelNameServiceTests
     public async Task GetByIdAsync__ReturnsClientModel()
     {
         //Arrange
-        var correctModel = _models[0].Adapt<ModelNameModel>();
-        var service = new ModelNameService(_repositoryMock.Object);
+        var correctModel = _models[0].Adapt<CarModel>();
+        var service = new CarModelService(_repositoryMock.Object);
 
         //Act
         var response = await service.GetByIdAsync(Guid.NewGuid(), default);
@@ -53,8 +53,8 @@ public class ModelNameServiceTests
     public async Task AddAsync_ClientModel_ReturnsClientModel()
     {
         //Arrange
-        var correctModel = _models[0].Adapt<ModelNameModel>();
-        var service = new ModelNameService(_repositoryMock.Object);
+        var correctModel = _models[0].Adapt<CarModel>();
+        var service = new CarModelService(_repositoryMock.Object);
 
         //Act
         var response = await service.AddAsync(correctModel, default);
@@ -67,8 +67,8 @@ public class ModelNameServiceTests
     public async Task UpdateAsync_ClientModel_ReturnsClientModel()
     {
         //Arrange
-        var correctUpdatedModel = _models[1].Adapt<ModelNameModel>();
-        var service = new ModelNameService(_repositoryMock.Object);
+        var correctUpdatedModel = _models[1].Adapt<CarModel>();
+        var service = new CarModelService(_repositoryMock.Object);
 
         //Act
         var response = await service.UpdateAsync(correctUpdatedModel, default);
@@ -81,7 +81,7 @@ public class ModelNameServiceTests
     public async Task DeleteAsync_ClientId_()
     {
         //Arrange
-        var service = new ModelNameService(_repositoryMock.Object);
+        var service = new CarModelService(_repositoryMock.Object);
 
         //Act
         var response = async () => await service.DeleteAsync(Guid.NewGuid(), default);

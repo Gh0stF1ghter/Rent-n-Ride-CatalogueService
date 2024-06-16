@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace API.Validators;
 
-public class ShortVehicleClientHistoryViewModelValidator : AbstractValidator<ShortVchViewModel>
+public class ShortVehicleClientHistoryViewModelValidator : AbstractValidator<ShortVehicleClientHistoryViewModel>
 {
     public ShortVehicleClientHistoryViewModelValidator()
     {

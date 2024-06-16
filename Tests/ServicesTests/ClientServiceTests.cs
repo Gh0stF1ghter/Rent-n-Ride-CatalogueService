@@ -12,7 +12,7 @@ public class ClientServiceTests
 {
     private readonly ClientRepositoryMock _repositoryMock = new();
 
-    private readonly List<Client> _clients = DataGenerator.AddClientData(5);
+    private readonly List<ClientEntity> _clients = DataGenerator.AddClientData(5);
 
     public ClientServiceTests()
     {

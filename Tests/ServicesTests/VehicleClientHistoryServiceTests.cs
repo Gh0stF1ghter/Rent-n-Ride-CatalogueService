@@ -11,7 +11,7 @@ public class VehicleClientHistoryServiceTests
 {
     private readonly VehicleClientHistoryRepositoryMock _repositoryMock = new();
 
-    private readonly List<VehicleClientHistory> _vehicleClientHistories = DataGenerator.AddVehicleClientHistoryData(5);
+    private readonly List<VehicleClientHistoryEntity> _vehicleClientHistories = DataGenerator.AddVehicleClientHistoryData(5);
 
     public VehicleClientHistoryServiceTests()
     {
@@ -24,7 +24,7 @@ public class VehicleClientHistoryServiceTests
     public async Task GetRangeAsync__ReturnsClientModelList()
     {
         //Arrange
-        var correctModels = _vehicleClientHistories.Adapt<IEnumerable<VchModel>>();
+        var correctModels = _vehicleClientHistories.Adapt<IEnumerable<VehicleClientHistoryModel>>();
         var service = new VehicleClientHistoryService(_repositoryMock.Object);
 
         //Act
@@ -38,7 +38,7 @@ public class VehicleClientHistoryServiceTests
     public async Task GetByIdAsync__ReturnsClientModel()
     {
         //Arrange
-        var correctModel = _vehicleClientHistories[0].Adapt<VchModel>();
+        var correctModel = _vehicleClientHistories[0].Adapt<VehicleClientHistoryModel>();
         var service = new VehicleClientHistoryService(_repositoryMock.Object);
 
         //Act
@@ -52,7 +52,7 @@ public class VehicleClientHistoryServiceTests
     public async Task AddAsync_ClientModel_ReturnsClientModel()
     {
         //Arrange
-        var correctModel = _vehicleClientHistories[0].Adapt<VchModel>();
+        var correctModel = _vehicleClientHistories[0].Adapt<VehicleClientHistoryModel>();
         var service = new VehicleClientHistoryService(_repositoryMock.Object);
 
         //Act
@@ -66,7 +66,7 @@ public class VehicleClientHistoryServiceTests
     public async Task UpdateAsync_ClientModel_ReturnsClientModel()
     {
         //Arrange
-        var correctUpdatedModel = _vehicleClientHistories[1].Adapt<VchModel>();
+        var correctUpdatedModel = _vehicleClientHistories[1].Adapt<VehicleClientHistoryModel>();
         var service = new VehicleClientHistoryService(_repositoryMock.Object);
 
         //Act

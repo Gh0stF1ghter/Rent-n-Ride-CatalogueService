@@ -15,7 +15,7 @@ public class ClientController(IClientService service) : ControllerBase
     [ActionName("GetAllClientsInRange")]
     public async Task<IEnumerable<ClientViewModel>> GetAll([FromQuery] int page, [FromQuery] int pageSize, CancellationToken cancellationToken)
     {
-        var clients = await service.GetRangeAsync(pageSize, page, cancellationToken);
+        var clients = await service.GetRangeAsync(page, pageSize, cancellationToken);
 
         var clientsVMs = clients.Adapt<IEnumerable<ClientViewModel>>();
 

@@ -10,9 +10,9 @@ namespace BLL.Services.Implementations;
 
 public class ClientService(IClientRepository clientRepository) : IClientService
 {
-    public async Task<IEnumerable<ClientModel>> GetRangeAsync(int pageSize, int page, CancellationToken cancellationToken)
+    public async Task<IEnumerable<ClientModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
-        var clients = await clientRepository.GetRangeAsync(pageSize, page, cancellationToken);
+        var clients = await clientRepository.GetRangeAsync(page, pageSize, cancellationToken);
 
         var clientModels = clients.Adapt<IEnumerable<ClientModel>>();
 

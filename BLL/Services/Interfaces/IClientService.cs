@@ -4,7 +4,7 @@ namespace BLL.Services.Interfaces;
 
 public interface IClientService
 {
-    Task<IEnumerable<ClientModel>> GetRangeAsync(int pageSize, int page, CancellationToken cancellationToken);
+    Task<IEnumerable<ClientModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
 
     Task<ClientModel> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 

@@ -8,12 +8,12 @@ on:
 
 jobs:
   build:
-    name: .NET
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
+    
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
@@ -30,12 +30,12 @@ jobs:
 
   analyze:
     needs: build
-    
-    name: Quality Gate
 
     runs-on: ubuntu-latest
 
-    steps:    
+    steps:
+    - uses: actions/checkout@v4
+
     - name: Sonar Scan
       uses: highbyte/sonarscan-dotnet@v2.3.0
       with:

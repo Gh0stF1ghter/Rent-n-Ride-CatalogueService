@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Tests.Mocks;
 
-internal class ModelNameRepositoryMock : Mock<ICarModelRepository>
+internal class CarModelRepositoryMock : Mock<ICarModelRepository>
 {
     private readonly CancellationToken _anyToken = It.IsAny<CancellationToken>();
 
@@ -13,7 +13,7 @@ internal class ModelNameRepositoryMock : Mock<ICarModelRepository>
         Setup(cr => cr.GetRangeAsync(It.IsAny<int>(), It.IsAny<int>(), _anyToken))
             .ReturnsAsync(modelNamesToReturn);
 
-    public void GetById(CarModelEntity modelNameToReturn) =>
+    public void GetById(CarModelEntity? modelNameToReturn) =>
         Setup(cr => cr.GetByIdAsync(It.IsAny<Guid>(), _anyToken))
             .ReturnsAsync(modelNameToReturn);
 

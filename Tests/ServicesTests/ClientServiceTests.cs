@@ -1,4 +1,5 @@
-﻿using BLL.Models;
+﻿using BLL.Exceptions;
+using BLL.Models;
 using BLL.Services.Implementations;
 using DAL.Entities;
 using FluentAssertions;
@@ -78,15 +79,33 @@ public class ClientServiceTests
     }
 
     [Fact]
-    public async Task DeleteAsync_ClientId_()
+    public async Task UpdateAsync_InvalidId_ThrowsNotFoundException()
     {
         //Arrange
+        _repositoryMock.GetById(null);
+
+        var correctClientModel = _clients[1].Adapt<ClientModel>();
+        var service = new ClientService(_repositoryMock.Object);
+
+        //Act
+        var response = async () => await service.UpdateAsync(correctClientModel, default);
+
+        //Assert
+        await response.Should().ThrowAsync<NotFoundException>();
+    }
+
+    [Fact]
+    public async Task DeleteAsync_InvalidId_ThrowsNotFoundException()
+    {
+        //Arrange
+        _repositoryMock.GetById(null);
+
         var service = new ClientService(_repositoryMock.Object);
 
         //Act
         var response = async () => await service.DeleteAsync(Guid.NewGuid(), default);
 
         //Assert
-        await response.Should().NotThrowAsync();
+        await response.Should().ThrowAsync<NotFoundException>();
     }
 }

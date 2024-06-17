@@ -42,7 +42,7 @@ public class VehicleClientHistoryService(IVehicleClientHistoryRepository reposit
     public async Task<VehicleClientHistoryModel> UpdateAsync(VehicleClientHistoryModel vchModel, CancellationToken cancellationToken)
     {
         var newVchModel = await repository.GetByIdAsync(vchModel.Id, cancellationToken)
-            ?? throw new NotFoundException(ExceptionMessages.NotFound(nameof(VehicleClientHistoryEntity), newVchModel.Id));
+            ?? throw new NotFoundException(ExceptionMessages.NotFound(nameof(VehicleClientHistoryEntity), vchModel.Id));
 
         vchModel.Adapt(newVchModel);
 

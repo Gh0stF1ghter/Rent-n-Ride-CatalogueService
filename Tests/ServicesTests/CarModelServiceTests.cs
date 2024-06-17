@@ -8,13 +8,13 @@ using Tests.Mocks;
 
 namespace Tests.ServicesTests;
 
-public class ModelNameServiceTests
+public class CarModelServiceTests
 {
     private readonly ModelNameRepositoryMock _repositoryMock = new();
 
     private readonly List<CarModelEntity> _models = DataGenerator.AddModelData(5);
 
-    public ModelNameServiceTests()
+    public CarModelServiceTests()
     {
         _repositoryMock.GetRange(_models);
         _repositoryMock.GetById(_models[0]);

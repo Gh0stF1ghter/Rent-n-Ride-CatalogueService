@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using API.Exceptions;
+using BLL.Exceptions;
+using System.Net;
 using System.Text.Json;
 
 namespace API.Extensions;
@@ -21,11 +23,15 @@ public class ExceptionHandlingMiddleware(RequestDelegate next)
     {
         var responseMessage = ex switch
         {
-            _ => new
-            {
-                Status = HttpStatusCode.InternalServerError,
+            NotFoundException => new ExceptionResponse(
+                (int)HttpStatusCode.NotFound,
                 ex.Message
-            }
+                ),
+
+            _ => new ExceptionResponse(
+                (int)HttpStatusCode.InternalServerError,
+                ex.Message
+            )
         };
 
         var response = JsonSerializer.Serialize(responseMessage);

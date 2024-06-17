@@ -95,6 +95,19 @@ public class ClientServiceTests
     }
 
     [Fact]
+    public async Task DeleteAsync_ClientId_()
+    {
+        //Arrange
+        var service = new ClientService(_repositoryMock.Object);
+
+        //Act
+        var response = async () => await service.DeleteAsync(Guid.NewGuid(), default);
+
+        //Assert
+        await response.Should().NotThrowAsync();
+    }
+
+    [Fact]
     public async Task DeleteAsync_InvalidId_ThrowsNotFoundException()
     {
         //Arrange

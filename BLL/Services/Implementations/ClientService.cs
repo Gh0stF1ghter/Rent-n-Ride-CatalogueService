@@ -1,3 +1,5 @@
+using BLL.Exceptions;
+using BLL.Exceptions.ExceptionMessages;
 using BLL.Models;
 using BLL.Services.Interfaces;
 using DAL.Entities;
@@ -39,7 +41,8 @@ public class ClientService(IClientRepository clientRepository) : IClientService
 
     public async Task<ClientModel> UpdateAsync(ClientModel newClientModel, CancellationToken cancellationToken)
     {
-        var clientToUpdate = await clientRepository.GetByIdAsync(newClientModel.Id, cancellationToken);
+        var clientToUpdate = await clientRepository.GetByIdAsync(newClientModel.Id, cancellationToken)
+            ?? throw new NotFoundException(ExceptionMessages.NotFound(nameof(ClientEntity), newClientModel.Id));
 
         newClientModel.Adapt(clientToUpdate);
 
@@ -52,7 +55,8 @@ public class ClientService(IClientRepository clientRepository) : IClientService
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
-        var clientToDelete = await clientRepository.GetByIdAsync(id, cancellationToken);
+        var clientToDelete = await clientRepository.GetByIdAsync(id, cancellationToken)
+            ?? throw new NotFoundException(ExceptionMessages.NotFound(nameof(ClientEntity), id));
 
         await clientRepository.RemoveAsync(clientToDelete, cancellationToken);
     }

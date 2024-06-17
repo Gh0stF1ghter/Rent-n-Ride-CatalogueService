@@ -1,3 +1,5 @@
+using BLL.Exceptions.ExceptionMessages;
+using BLL.Exceptions;
 using BLL.Models;
 using BLL.Services.Interfaces;
 using DAL.Entities;
@@ -39,7 +41,8 @@ public class VehicleService(IVehicleRepository repository) : IVehicleService
 
     public async Task<VehicleModel> UpdateAsync(VehicleModel newVehicleModel, CancellationToken cancellationToken)
     {
-        var vehicle = await repository.GetByIdAsync(newVehicleModel.Id, cancellationToken);
+        var vehicle = await repository.GetByIdAsync(newVehicleModel.Id, cancellationToken)
+            ?? throw new NotFoundException(ExceptionMessages.NotFound(nameof(VehicleEntity), newVehicleModel.Id));
 
         newVehicleModel.Adapt(vehicle);
 
@@ -52,7 +55,8 @@ public class VehicleService(IVehicleRepository repository) : IVehicleService
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
-        var vehicle = await repository.GetByIdAsync(id, cancellationToken);
+        var vehicle = await repository.GetByIdAsync(id, cancellationToken)
+            ?? throw new NotFoundException(ExceptionMessages.NotFound(nameof(VehicleEntity), id));
 
         await repository.RemoveAsync(vehicle, cancellationToken);
     }

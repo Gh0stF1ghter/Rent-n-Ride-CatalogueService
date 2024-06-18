@@ -3,6 +3,7 @@ using API.ViewModels.ShortViewModels;
 using BLL.Models;
 using BLL.Services.Interfaces;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;

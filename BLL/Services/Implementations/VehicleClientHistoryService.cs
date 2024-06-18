@@ -37,13 +37,13 @@ public class VehicleClientHistoryService(IVehicleClientHistoryRepository reposit
         return newVchModel;
     }
 
-    public async Task<VehicleClientHistoryModel> UpdateAsync(VehicleClientHistoryModel newVchModel, CancellationToken cancellationToken)
+    public async Task<VehicleClientHistoryModel> UpdateAsync(VehicleClientHistoryModel vchModel, CancellationToken cancellationToken)
     {
-        var vchModel = await repository.GetByIdAsync(newVchModel.Id, cancellationToken);
+        var newVchModel = await repository.GetByIdAsync(vchModel.Id, cancellationToken);
 
-        newVchModel.Adapt(vchModel);
+        vchModel.Adapt(newVchModel);
 
-        await repository.UpdateAsync(vchModel, cancellationToken);
+        await repository.UpdateAsync(newVchModel, cancellationToken);
 
         var vchModelToReturn = vchModel.Adapt<VehicleClientHistoryModel>();
 

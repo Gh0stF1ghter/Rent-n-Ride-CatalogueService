@@ -38,8 +38,29 @@ public class CarModelRepository(AgencyDbContext context, IDistributedCache cache
         return list;
     }
 
-    public async Task<CarModelEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
-        await GetByCondition(m => m.Id == id)
-            .Include(m => m.Manufacturer)
-            .FirstOrDefaultAsync(cancellationToken);
+    public async Task<CarModelEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+    {
+        var key = _cacheIdKeyBase + id;
+
+        var cacheEntity = await cache.GetAsync(key, cancellationToken);
+
+        CarModelEntity? entity;
+
+        if (cacheEntity is not null)
+        {
+            entity = cacheEntity.GetDataFromCache<CarModelEntity>();
+        }
+        else
+        {
+            entity = await GetByCondition(m => m.Id == id)
+                .Include(m => m.Manufacturer)
+                .FirstOrDefaultAsync(cancellationToken);
+
+            (var entityToCache, var options) = entity.ConvertDataForCaching();
+
+            await cache.SetAsync(key, entityToCache, options, cancellationToken);
+        }
+
+        return entity;
+    }
 }

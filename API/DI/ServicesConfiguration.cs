@@ -10,10 +10,10 @@ namespace API.DI;
 
 public static class ServicesConfiguration
 {
-    public static void AddApiDependencies(this IServiceCollection services, IConfiguration configuration)
+    public static void AddApiDependencies(this IServiceCollection services)
     {
         services.AddAutoValidation();
-        services.AddAuthentication(configuration);
+        services.AddAuthentication();
 
         services.ConfigureSwagger();
     }
@@ -24,7 +24,7 @@ public static class ServicesConfiguration
         services.AddFluentValidationAutoValidation();
     }
 
-    private static void AddAuthentication(this IServiceCollection services, IConfiguration configuration) =>
+    private static void AddAuthentication(this IServiceCollection services) =>
         services.AddAuthentication(options =>
         {
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -32,13 +32,16 @@ public static class ServicesConfiguration
         })
             .AddJwtBearer(options =>
             {
+                var key = Environment.GetEnvironmentVariable("JWT_SecretKey")
+                    ?? throw new KeyNotFoundException("JWT Key not configured");
+
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateAudience = false,
                     ValidateIssuer = false,
                     ValidateIssuerSigningKey = true,
                     ValidateLifetime = false,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:SecretKey"])),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
                     ClockSkew = TimeSpan.Zero
                 };
             });

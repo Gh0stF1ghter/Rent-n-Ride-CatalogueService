@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
 services.AddApplicationDependencies(builder.Configuration);
-services.AddApiDependencies();
+services.AddApiDependencies(builder.Configuration);
 
 GlobalMappingSettings.SetMapper();
 
@@ -26,6 +26,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

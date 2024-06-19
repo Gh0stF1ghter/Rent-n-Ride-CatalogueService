@@ -11,6 +11,7 @@ public class CarModelRepository(AgencyDbContext context) : RepositoryBase<CarMod
         await GetRange(page, pageSize)
                 .Include(m => m.Manufacturer)
                 .ToListAsync(cancellationToken);
+
     public async Task<CarModelEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
         await GetByCondition(m => m.Id == id)
                 .Include(m => m.Manufacturer)

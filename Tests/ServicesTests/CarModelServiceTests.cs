@@ -30,29 +30,6 @@ public class CarModelServiceTests
         //Arrange
         var correctModels = _models.Adapt<IEnumerable<CarModel>>();
 
-        var serializedModel = JsonConvert.SerializeObject(correctModels);
-        var cachedModel = Encoding.UTF8.GetBytes(serializedModel);
-        _distributedCacheMock.GetDataFromCache(cachedModel);
-
-        var service = new CarModelService(_repositoryMock.Object, _distributedCacheMock.Object);
-
-        //Act
-        var response = await service.GetRangeAsync(1, 1, default);
-
-        //Assert
-        response.Should().BeEquivalentTo(correctModels);
-    }
-
-    [Fact]
-    public async Task GetRangeAsync_EmptyCache_ReturnsClientModelList()
-    {
-        //Arrange
-        var correctModels = _models.Adapt<IEnumerable<CarModel>>();
-
-        var serializedModel = JsonConvert.SerializeObject(null);
-        var cachedModel = Encoding.UTF8.GetBytes(serializedModel);
-        _distributedCacheMock.GetDataFromCache(cachedModel);
-
         var service = new CarModelService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act

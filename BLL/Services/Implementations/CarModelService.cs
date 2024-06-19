@@ -12,19 +12,9 @@ public class CarModelService(ICarModelRepository repository, IDistributedCache d
 {
     public async Task<IEnumerable<CarModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
-        var key = nameof(IEnumerable<CarModel>) + nameof(CarModel) + page + pageSize;
-
-        var cache = await distributedCache.GetDataFromCacheAsync<IEnumerable<CarModel>>(key, cancellationToken);
-
-        if (cache is not null)
-            return cache;
-
         var modelNames = await repository.GetRangeAsync(page, pageSize, cancellationToken);
 
         var modelNameModels = modelNames.Adapt<IEnumerable<CarModel>>();
-
-        var cacheLifetime = TimeSpan.FromMinutes(3);
-        await distributedCache.CacheData(modelNameModels, cacheLifetime, key, cancellationToken);
 
         return modelNameModels;
     }

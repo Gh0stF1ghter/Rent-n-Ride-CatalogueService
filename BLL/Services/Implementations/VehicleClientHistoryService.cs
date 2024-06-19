@@ -12,19 +12,9 @@ public class VehicleClientHistoryService(IVehicleClientHistoryRepository reposit
 {
     public async Task<IEnumerable<VehicleClientHistoryModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
-        var key = nameof(IEnumerable<VehicleClientHistoryModel>) + nameof(VehicleClientHistoryModel) + page + pageSize;
-
-        var cache = await distributedCache.GetDataFromCacheAsync<IEnumerable<VehicleClientHistoryModel>>(key, cancellationToken);
-
-        if (cache is not null)
-            return cache;
-
         var vehicleClientHistories = await repository.GetRangeAsync(page, pageSize, cancellationToken);
 
         var vehicleClientHistoryModels = vehicleClientHistories.Adapt<IEnumerable<VehicleClientHistoryModel>>();
-
-        var cacheLifetime = TimeSpan.FromMinutes(5);
-        await distributedCache.CacheData(vehicleClientHistoryModels, cacheLifetime, key, cancellationToken);
 
         return vehicleClientHistoryModels;
     }

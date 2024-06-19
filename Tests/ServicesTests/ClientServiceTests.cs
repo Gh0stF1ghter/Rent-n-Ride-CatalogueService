@@ -30,29 +30,6 @@ public class ClientServiceTests
         //Arrange
         var correctClientModels = _clients.Adapt<IEnumerable<ClientModel>>();
 
-        var serializedModel = JsonConvert.SerializeObject(correctClientModels);
-        var cachedModel = Encoding.UTF8.GetBytes(serializedModel);
-        _distributedCacheMock.GetDataFromCache(cachedModel);
-
-        var service = new ClientService(_repositoryMock.Object, _distributedCacheMock.Object);
-
-        //Act
-        var response = await service.GetRangeAsync(1, 1, default);
-
-        //Assert
-        response.Should().BeEquivalentTo(correctClientModels);
-    }
-
-    [Fact]
-    public async Task GetRangeAsync_EmptyCache_ReturnsClientModelList()
-    {
-        //Arrange
-        var correctClientModels = _clients.Adapt<IEnumerable<ClientModel>>();
-
-        var serializedModel = JsonConvert.SerializeObject(null);
-        var cachedModel = Encoding.UTF8.GetBytes(serializedModel);
-        _distributedCacheMock.GetDataFromCache(cachedModel);
-
         var service = new ClientService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act

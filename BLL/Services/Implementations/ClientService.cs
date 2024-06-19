@@ -12,19 +12,9 @@ public class ClientService(IClientRepository clientRepository, IDistributedCache
 {
     public async Task<IEnumerable<ClientModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
-        var key = nameof(IEnumerable<ClientModel>) + nameof(ClientModel) + page + pageSize;
-
-        var cache = await distributedCache.GetDataFromCacheAsync<IEnumerable<ClientModel>>(key, cancellationToken);
-
-        if (cache is not null)
-            return cache;
-
         var clients = await clientRepository.GetRangeAsync(page, pageSize, cancellationToken);
 
         var clientModels = clients.Adapt<IEnumerable<ClientModel>>();
-
-        var cacheLifetime = TimeSpan.FromMinutes(5);
-        await distributedCache.CacheData(clientModels, cacheLifetime, key, cancellationToken);
 
         return clientModels;
     }

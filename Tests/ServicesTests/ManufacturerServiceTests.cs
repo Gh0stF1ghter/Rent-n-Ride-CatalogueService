@@ -49,6 +49,11 @@ public class ManufacturerServiceTests
     {
         //Arrange
         var correctModels = _manufacturers.Adapt<IEnumerable<ManufacturerModel>>();
+
+        var serializedModel = JsonConvert.SerializeObject(null);
+        var cachedModel = Encoding.UTF8.GetBytes(serializedModel);
+        _distributedCacheMock.GetDataFromCache(cachedModel);
+
         var service = new ManufacturerService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act
@@ -82,6 +87,11 @@ public class ManufacturerServiceTests
     {
         //Arrange
         var correctModel = _manufacturers[0].Adapt<ManufacturerModel>();
+
+        var serializedModel = JsonConvert.SerializeObject(null);
+        var cachedModel = Encoding.UTF8.GetBytes(serializedModel);
+        _distributedCacheMock.GetDataFromCache(cachedModel);
+
         var service = new ManufacturerService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act

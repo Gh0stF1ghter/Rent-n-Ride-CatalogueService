@@ -48,6 +48,11 @@ public class VehicleClientHistoryServiceTests
     {
         //Arrange
         var correctModels = _vehicleClientHistories.Adapt<IEnumerable<VehicleClientHistoryModel>>();
+
+        var serializedModel = JsonConvert.SerializeObject(null);
+        var cachedModel = Encoding.UTF8.GetBytes(serializedModel);
+        _distributedCacheMock.GetDataFromCache(cachedModel);
+
         var service = new VehicleClientHistoryService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act
@@ -81,6 +86,11 @@ public class VehicleClientHistoryServiceTests
     {
         //Arrange
         var correctModel = _vehicleClientHistories[0].Adapt<VehicleClientHistoryModel>();
+
+        var serializedModel = JsonConvert.SerializeObject(null);
+        var cachedModel = Encoding.UTF8.GetBytes(serializedModel);
+        _distributedCacheMock.GetDataFromCache(cachedModel);
+
         var service = new VehicleClientHistoryService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act

@@ -48,6 +48,11 @@ public class ClientServiceTests
     {
         //Arrange
         var correctClientModels = _clients.Adapt<IEnumerable<ClientModel>>();
+
+        var serializedModel = JsonConvert.SerializeObject(null);
+        var cachedModel = Encoding.UTF8.GetBytes(serializedModel);
+        _distributedCacheMock.GetDataFromCache(cachedModel);
+
         var service = new ClientService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act
@@ -81,6 +86,11 @@ public class ClientServiceTests
     {
         //Arrange
         var correctClientModel = _clients[0].Adapt<ClientModel>();
+
+        var serializedModel = JsonConvert.SerializeObject(null);
+        var cachedModel = Encoding.UTF8.GetBytes(serializedModel);
+        _distributedCacheMock.GetDataFromCache(cachedModel);
+
         var service = new ClientService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act

@@ -1,28 +1,34 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
-using System.Text;
 
 namespace DAL.Extensions;
 internal static class Cache
 {
-    public static T GetDataFromCache<T>(this byte[] cache)
+    public static async Task<T?> GetDataFromCacheAsync<T>(this IDistributedCache distributedCache, string key, CancellationToken cancellationToken)
     {
-        var serializedData = Encoding.UTF8.GetString(cache);
-        var data = JsonConvert.DeserializeObject<T>(serializedData)!;
+        var cache = await distributedCache.GetStringAsync(key, cancellationToken);
+
+        if (cache is null)
+            return default;
+
+        var data = JsonConvert.DeserializeObject<T>(cache)!;
 
         return data;
     }
 
-    public static (byte[], DistributedCacheEntryOptions) ConvertDataForCaching<T>(this T data)
+    public static async Task ConvertDataForCaching<T>(this IDistributedCache distributedCache, T data, TimeSpan cacheLifetime, string key, CancellationToken cancellationToken)
     {
+        if (data is null) 
+            return;
+
         var serializedData = JsonConvert.SerializeObject(data);
 
-        var bytedData = Encoding.UTF8.GetBytes(serializedData);
+        var options = new DistributedCacheEntryOptions
+        {
+            AbsoluteExpirationRelativeToNow = cacheLifetime,
+            SlidingExpiration = TimeSpan.FromMinutes(2)
+        };
 
-        var options = new DistributedCacheEntryOptions()
-            .SetSlidingExpiration(TimeSpan.FromMinutes(2))
-            .SetAbsoluteExpiration(DateTime.Now.AddMinutes(10));
-
-        return (bytedData, options);
+        await distributedCache.SetStringAsync(key, serializedData, options, cancellationToken);
     }
 }

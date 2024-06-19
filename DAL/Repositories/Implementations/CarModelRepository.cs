@@ -12,55 +12,51 @@ public class CarModelRepository(AgencyDbContext context, IDistributedCache cache
     private const string _cacheListKeyBase = "AllModels";
     private const string _cacheIdKeyBase = "Model";
 
-    public async Task<IEnumerable<CarModelEntity>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken) 
+    public async Task<IEnumerable<CarModelEntity>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
         var key = _cacheListKeyBase + page + pageSize;
 
-        var cacheList = await cache.GetAsync(key, cancellationToken);
-
-        IEnumerable<CarModelEntity> list;
+        var cacheList = await cache.GetDataFromCacheAsync<IEnumerable<CarModelEntity>>(key, cancellationToken);
 
         if (cacheList is not null)
         {
-            list = cacheList.GetDataFromCache<List<CarModelEntity>>();
+            return cacheList;
         }
         else
         {
-            list = await GetRange(page, pageSize)
+            var list = await GetRange(page, pageSize)
                 .Include(m => m.Manufacturer)
                 .ToListAsync(cancellationToken);
 
-            (var listToCache, var options) = list.ConvertDataForCaching();
+            var cacheLifetime = TimeSpan.FromMinutes(3);
 
-            await cache.SetAsync(key, listToCache, options, cancellationToken);
+            await cache.ConvertDataForCaching(list, cacheLifetime, key, cancellationToken);
+
+            return list;
         }
-
-        return list;
     }
 
     public async Task<CarModelEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         var key = _cacheIdKeyBase + id;
 
-        var cacheEntity = await cache.GetAsync(key, cancellationToken);
-
-        CarModelEntity? entity;
+        var cacheEntity = await cache.GetDataFromCacheAsync<CarModelEntity>(key, cancellationToken);
 
         if (cacheEntity is not null)
         {
-            entity = cacheEntity.GetDataFromCache<CarModelEntity>();
+            return cacheEntity;
         }
         else
         {
-            entity = await GetByCondition(m => m.Id == id)
+            var entity = await GetByCondition(m => m.Id == id)
                 .Include(m => m.Manufacturer)
                 .FirstOrDefaultAsync(cancellationToken);
 
-            (var entityToCache, var options) = entity.ConvertDataForCaching();
+            var cacheLifetime = TimeSpan.FromMinutes(10);
 
-            await cache.SetAsync(key, entityToCache, options, cancellationToken);
+            await cache.ConvertDataForCaching(entity, cacheLifetime, key, cancellationToken);
+
+            return entity;
         }
-
-        return entity;
     }
 }

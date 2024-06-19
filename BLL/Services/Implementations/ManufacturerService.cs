@@ -12,7 +12,7 @@ public class ManufacturerService(IManufacturerRepository repository, IDistribute
 {
     public async Task<IEnumerable<ManufacturerModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
-        var key = nameof(IEnumerable<ManufacturerModel>) + page + pageSize;
+        var key = nameof(IEnumerable<ManufacturerModel>) + nameof(ManufacturerModel) + page + pageSize;
 
         var cache = await distributedCache.GetDataFromCacheAsync<IEnumerable<ManufacturerModel>>(key, cancellationToken);
 

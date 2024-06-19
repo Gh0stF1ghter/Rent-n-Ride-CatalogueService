@@ -12,7 +12,7 @@ public class ClientService(IClientRepository clientRepository, IDistributedCache
 {
     public async Task<IEnumerable<ClientModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
-        var key = nameof(IEnumerable<ClientModel>) + page + pageSize;
+        var key = nameof(IEnumerable<ClientModel>) + nameof(ClientModel) + page + pageSize;
 
         var cache = await distributedCache.GetDataFromCacheAsync<IEnumerable<ClientModel>>(key, cancellationToken);
 

@@ -14,6 +14,9 @@ public static class ServicesConfiguration
     {
         services.AddDataAccessDependencies(configuration);
 
+        services.AddStackExchangeRedisCache(options =>
+            options.Configuration = configuration.GetConnectionString("Redis"));
+
         TypeAdapterConfig.GlobalSettings.Scan(Assembly.GetExecutingAssembly());
 
         services.AddServices();

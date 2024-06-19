@@ -1,27 +1,49 @@
 using BLL.Models;
 using BLL.Services.Interfaces;
 using DAL.Entities;
+using DAL.Extensions;
 using DAL.Repositories.Interfaces;
 using Mapster;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace BLL.Services.Implementations;
 
-public class VehicleClientHistoryService(IVehicleClientHistoryRepository repository) : IVehicleClientHistoryService
+public class VehicleClientHistoryService(IVehicleClientHistoryRepository repository, IDistributedCache distributedCache) : IVehicleClientHistoryService
 {
     public async Task<IEnumerable<VehicleClientHistoryModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
+        var key = nameof(IEnumerable<VehicleClientHistoryModel>) + page + pageSize;
+
+        var cache = await distributedCache.GetDataFromCacheAsync<IEnumerable<VehicleClientHistoryModel>>(key, cancellationToken);
+
+        if (cache is not null)
+            return cache;
+
         var vehicleClientHistories = await repository.GetRangeAsync(page, pageSize, cancellationToken);
 
         var vehicleClientHistoryModels = vehicleClientHistories.Adapt<IEnumerable<VehicleClientHistoryModel>>();
+
+        var cacheLifetime = TimeSpan.FromMinutes(5);
+        await distributedCache.CacheData(vehicleClientHistoryModels, cacheLifetime, key, cancellationToken);
 
         return vehicleClientHistoryModels;
     }
 
     public async Task<VehicleClientHistoryModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
+        var key = nameof(VehicleClientHistoryModel) + id;
+
+        var cache = await distributedCache.GetDataFromCacheAsync<VehicleClientHistoryModel>(key, cancellationToken);
+
+        if (cache is not null)
+            return cache;
+
         var vch = await repository.GetByIdAsync(id, cancellationToken);
 
         var vchModel = vch.Adapt<VehicleClientHistoryModel>();
+
+        var cacheLifetime = TimeSpan.FromMinutes(10);
+        await distributedCache.CacheData(vchModel, cacheLifetime, key, cancellationToken);
 
         return vchModel;
     }
@@ -47,6 +69,10 @@ public class VehicleClientHistoryService(IVehicleClientHistoryRepository reposit
 
         var vchModelToReturn = vchModel.Adapt<VehicleClientHistoryModel>();
 
+        var key = nameof(VehicleClientHistoryModel) + vchModelToReturn.Id;
+        var cacheLifetime = TimeSpan.FromMinutes(10);
+        await distributedCache.CacheData(vchModelToReturn, cacheLifetime, key, cancellationToken);
+
         return vchModelToReturn;
     }
 
@@ -55,5 +81,8 @@ public class VehicleClientHistoryService(IVehicleClientHistoryRepository reposit
         var modelName = await repository.GetByIdAsync(id, cancellationToken);
 
         await repository.RemoveAsync(modelName, cancellationToken);
+
+        var key = nameof(VehicleClientHistoryModel) + id;
+        await distributedCache.RemoveAsync(key, cancellationToken);
     }
 }

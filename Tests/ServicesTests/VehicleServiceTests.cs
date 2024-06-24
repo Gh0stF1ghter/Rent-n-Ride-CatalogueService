@@ -114,7 +114,7 @@ public class VehicleServiceTests
         _repositoryMock.GetById(null);
 
         var correctUpdatedModel = _vehicles[1].Adapt<VehicleModel>();
-        var service = new VehicleService(_repositoryMock.Object);
+        var service = new VehicleService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act
         var response = async () => await service.UpdateAsync(correctUpdatedModel, default);
@@ -142,7 +142,7 @@ public class VehicleServiceTests
         //Arrange
         _repositoryMock.GetById(null);
 
-        var service = new VehicleService(_repositoryMock.Object);
+        var service = new VehicleService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act
         var response = async () => await service.DeleteAsync(Guid.NewGuid(), default);

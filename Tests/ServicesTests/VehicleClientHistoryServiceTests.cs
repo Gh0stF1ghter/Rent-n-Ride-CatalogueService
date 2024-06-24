@@ -113,7 +113,7 @@ public class VehicleClientHistoryServiceTests
         _repositoryMock.GetById(null);
 
         var correctUpdatedModel = _vehicleClientHistories[1].Adapt<VehicleClientHistoryModel>();
-        var service = new VehicleClientHistoryService(_repositoryMock.Object);
+        var service = new VehicleClientHistoryService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act
         var response = async () => await service.UpdateAsync(correctUpdatedModel, default);
@@ -141,7 +141,7 @@ public class VehicleClientHistoryServiceTests
         //Arrange
         _repositoryMock.GetById(null);
 
-        var service = new VehicleClientHistoryService(_repositoryMock.Object);
+        var service = new VehicleClientHistoryService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act
         var response = async () => await service.DeleteAsync(Guid.NewGuid(), default);

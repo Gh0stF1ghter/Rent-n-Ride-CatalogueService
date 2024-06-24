@@ -114,7 +114,7 @@ public class ManufacturerServiceTests
         _repositoryMock.GetById(null);
 
         var correctUpdatedModel = _manufacturers[1].Adapt<ManufacturerModel>();
-        var service = new ManufacturerService(_repositoryMock.Object);
+        var service = new ManufacturerService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act
         var response = async () => await service.UpdateAsync(correctUpdatedModel, default);
@@ -142,7 +142,7 @@ public class ManufacturerServiceTests
         //Arrange
         _repositoryMock.GetById(null);
 
-        var service = new ManufacturerService(_repositoryMock.Object);
+        var service = new ManufacturerService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act
         var response = async () => await service.DeleteAsync(Guid.NewGuid(), default);

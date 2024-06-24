@@ -14,7 +14,6 @@ namespace Tests.ServicesTests;
 
 public class CarModelServiceTests
 {
-    private readonly ModelNameRepositoryMock _repositoryMock = new();
     private readonly DistributedCacheMock _distributedCacheMock = new();
     private readonly CarModelRepositoryMock _repositoryMock = new();
 
@@ -115,7 +114,7 @@ public class CarModelServiceTests
         _repositoryMock.GetById(null);
 
         var correctUpdatedModel = _models[1].Adapt<CarModel>();
-        var service = new CarModelService(_repositoryMock.Object);
+        var service = new CarModelService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act
         var response = async () => await service.UpdateAsync(correctUpdatedModel, default);
@@ -144,7 +143,7 @@ public class CarModelServiceTests
         //Arrange
         _repositoryMock.GetById(null);
 
-        var service = new CarModelService(_repositoryMock.Object);
+        var service = new CarModelService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act
         var response = async () => await service.DeleteAsync(Guid.NewGuid(), default);

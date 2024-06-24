@@ -113,7 +113,7 @@ public class ClientServiceTests
         _repositoryMock.GetById(null);
 
         var correctClientModel = _clients[1].Adapt<ClientModel>();
-        var service = new ClientService(_repositoryMock.Object);
+        var service = new ClientService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act
         var response = async () => await service.UpdateAsync(correctClientModel, default);
@@ -141,7 +141,7 @@ public class ClientServiceTests
         //Arrange
         _repositoryMock.GetById(null);
 
-        var service = new ClientService(_repositoryMock.Object);
+        var service = new ClientService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act
         var response = async () => await service.DeleteAsync(Guid.NewGuid(), default);

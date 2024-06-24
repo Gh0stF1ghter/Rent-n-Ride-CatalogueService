@@ -1,4 +1,5 @@
-﻿using BLL.Models;
+﻿using BLL.Exceptions;
+using BLL.Models;
 using BLL.Services.Implementations;
 using DAL.Entities;
 using FluentAssertions;
@@ -22,7 +23,7 @@ public class ManufacturerServiceTests
     }
 
     [Fact]
-    public async Task GetRangeAsync__ReturnsClientModelList()
+    public async Task GetRangeAsync__ReturnsManufacturerModelList()
     {
         //Arrange
         var correctModels = _manufacturers.Adapt<IEnumerable<ManufacturerModel>>();
@@ -36,7 +37,7 @@ public class ManufacturerServiceTests
     }
 
     [Fact]
-    public async Task GetByIdAsync__ReturnsClientModel()
+    public async Task GetByIdAsync__ReturnsManufacturerModel()
     {
         //Arrange
         var correctModel = _manufacturers[0].Adapt<ManufacturerModel>();
@@ -50,7 +51,7 @@ public class ManufacturerServiceTests
     }
 
     [Fact]
-    public async Task AddAsync_ClientModel_ReturnsClientModel()
+    public async Task AddAsync_ManufacturerModel_ReturnsManufacturerModel()
     {
         //Arrange
         var correctModel = _manufacturers[0].Adapt<ManufacturerModel>();
@@ -64,7 +65,7 @@ public class ManufacturerServiceTests
     }
 
     [Fact]
-    public async Task UpdateAsync_ClientModel_ReturnsClientModel()
+    public async Task UpdateAsync_ManufacturerModel_ReturnsManufacturerModel()
     {
         //Arrange
         var correctUpdatedModel = _manufacturers[1].Adapt<ManufacturerModel>();
@@ -78,7 +79,23 @@ public class ManufacturerServiceTests
     }
 
     [Fact]
-    public async Task DeleteAsync_ClientId_()
+    public async Task UpdateAsync_InvalidId_ThrowsNotFoundException()
+    {
+        //Arrange
+        _repositoryMock.GetById(null);
+
+        var correctUpdatedModel = _manufacturers[1].Adapt<ManufacturerModel>();
+        var service = new ManufacturerService(_repositoryMock.Object);
+
+        //Act
+        var response = async () => await service.UpdateAsync(correctUpdatedModel, default);
+
+        //Assert
+        await response.Should().ThrowAsync<NotFoundException>();
+    }
+
+    [Fact]
+    public async Task DeleteAsync_ManufacturerId_()
     {
         //Arrange
         var service = new ManufacturerService(_repositoryMock.Object);
@@ -88,5 +105,20 @@ public class ManufacturerServiceTests
 
         //Assert
         await response.Should().NotThrowAsync();
+    }
+
+    [Fact]
+    public async Task DeleteAsync_InvalidId_ThrowsNotFoundException()
+    {
+        //Arrange
+        _repositoryMock.GetById(null);
+
+        var service = new ManufacturerService(_repositoryMock.Object);
+
+        //Act
+        var response = async () => await service.DeleteAsync(Guid.NewGuid(), default);
+
+        //Assert
+        await response.Should().ThrowAsync<NotFoundException>();
     }
 }

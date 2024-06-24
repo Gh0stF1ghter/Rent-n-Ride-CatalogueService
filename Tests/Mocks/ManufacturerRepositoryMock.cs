@@ -13,7 +13,7 @@ internal class ManufacturerRepositoryMock : Mock<IManufacturerRepository>
         Setup(cr => cr.GetRangeAsync(It.IsAny<int>(), It.IsAny<int>(), _anyToken))
             .ReturnsAsync(manufacturersToReturn);
 
-    public void GetById(ManufacturerEntity manufacturerToReturn) =>
+    public void GetById(ManufacturerEntity? manufacturerToReturn) =>
         Setup(cr => cr.GetByIdAsync(It.IsAny<Guid>(), _anyToken))
             .ReturnsAsync(manufacturerToReturn);
 

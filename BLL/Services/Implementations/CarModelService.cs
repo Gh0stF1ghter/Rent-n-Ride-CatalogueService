@@ -3,6 +3,8 @@ using BLL.Services.Interfaces;
 using DAL.Entities;
 using DAL.Repositories.Interfaces;
 using Mapster;
+using BLL.Exceptions;
+using BLL.Exceptions.ExceptionMessages;
 
 namespace BLL.Services.Implementations;
 
@@ -39,7 +41,8 @@ public class CarModelService(ICarModelRepository repository) : ICarModelService
 
     public async Task<CarModel> UpdateAsync(CarModel newModelNameModel, CancellationToken cancellationToken)
     {
-        var modelName = await repository.GetByIdAsync(newModelNameModel.Id, cancellationToken);
+        var modelName = await repository.GetByIdAsync(newModelNameModel.Id, cancellationToken)
+            ?? throw new NotFoundException(ExceptionMessages.NotFound(nameof(CarModelEntity), newModelNameModel.Id));
 
         newModelNameModel.Adapt(modelName);
 
@@ -52,7 +55,8 @@ public class CarModelService(ICarModelRepository repository) : ICarModelService
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
-        var modelName = await repository.GetByIdAsync(id, cancellationToken);
+        var modelName = await repository.GetByIdAsync(id, cancellationToken) 
+            ?? throw new NotFoundException(ExceptionMessages.NotFound(nameof(CarModelEntity), id));
 
         await repository.RemoveAsync(modelName, cancellationToken);
     }

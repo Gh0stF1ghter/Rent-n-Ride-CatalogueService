@@ -1,3 +1,5 @@
+using BLL.Exceptions.ExceptionMessages;
+using BLL.Exceptions;
 using BLL.Models;
 using BLL.Services.Interfaces;
 using DAL.Entities;
@@ -39,7 +41,8 @@ public class VehicleClientHistoryService(IVehicleClientHistoryRepository reposit
 
     public async Task<VehicleClientHistoryModel> UpdateAsync(VehicleClientHistoryModel vchModel, CancellationToken cancellationToken)
     {
-        var newVchModel = await repository.GetByIdAsync(vchModel.Id, cancellationToken);
+        var newVchModel = await repository.GetByIdAsync(vchModel.Id, cancellationToken)
+            ?? throw new NotFoundException(ExceptionMessages.NotFound(nameof(VehicleClientHistoryEntity), vchModel.Id));
 
         vchModel.Adapt(newVchModel);
 
@@ -52,7 +55,8 @@ public class VehicleClientHistoryService(IVehicleClientHistoryRepository reposit
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
-        var modelName = await repository.GetByIdAsync(id, cancellationToken);
+        var modelName = await repository.GetByIdAsync(id, cancellationToken)
+            ?? throw new NotFoundException(ExceptionMessages.NotFound(nameof(VehicleClientHistoryEntity), id));
 
         await repository.RemoveAsync(modelName, cancellationToken);
     }

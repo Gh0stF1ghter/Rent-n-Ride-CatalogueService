@@ -1,4 +1,5 @@
-﻿using BLL.Models;
+﻿using BLL.Exceptions;
+using BLL.Models;
 using BLL.Services.Implementations;
 using DAL.Entities;
 using FluentAssertions;
@@ -21,7 +22,7 @@ public class VehicleClientHistoryServiceTests
     }
 
     [Fact]
-    public async Task GetRangeAsync__ReturnsClientModelList()
+    public async Task GetRangeAsync__ReturnsVehicleClientHistoryModelList()
     {
         //Arrange
         var correctModels = _vehicleClientHistories.Adapt<IEnumerable<VehicleClientHistoryModel>>();
@@ -35,7 +36,7 @@ public class VehicleClientHistoryServiceTests
     }
 
     [Fact]
-    public async Task GetByIdAsync__ReturnsClientModel()
+    public async Task GetByIdAsync__ReturnsVehicleClientHistoryModel()
     {
         //Arrange
         var correctModel = _vehicleClientHistories[0].Adapt<VehicleClientHistoryModel>();
@@ -49,7 +50,7 @@ public class VehicleClientHistoryServiceTests
     }
 
     [Fact]
-    public async Task AddAsync_ClientModel_ReturnsClientModel()
+    public async Task AddAsync_VehicleClientHistoryModel_ReturnsVehicleClientHistoryModel()
     {
         //Arrange
         var correctModel = _vehicleClientHistories[0].Adapt<VehicleClientHistoryModel>();
@@ -63,7 +64,7 @@ public class VehicleClientHistoryServiceTests
     }
 
     [Fact]
-    public async Task UpdateAsync_ClientModel_ReturnsClientModel()
+    public async Task UpdateAsync_VehicleClientHistoryModel_ReturnsVehicleClientHistoryModel()
     {
         //Arrange
         var correctUpdatedModel = _vehicleClientHistories[1].Adapt<VehicleClientHistoryModel>();
@@ -77,7 +78,23 @@ public class VehicleClientHistoryServiceTests
     }
 
     [Fact]
-    public async Task DeleteAsync_ClientId_()
+    public async Task UpdateAsync_InvalidId_ThrowsNotFoundException()
+    {
+        //Arrange
+        _repositoryMock.GetById(null);
+
+        var correctUpdatedModel = _vehicleClientHistories[1].Adapt<VehicleClientHistoryModel>();
+        var service = new VehicleClientHistoryService(_repositoryMock.Object);
+
+        //Act
+        var response = async () => await service.UpdateAsync(correctUpdatedModel, default);
+
+        //Assert
+        await response.Should().ThrowAsync<NotFoundException>();
+    }
+
+    [Fact]
+    public async Task DeleteAsync_VehicleClientHistoryId_()
     {
         //Arrange
         var service = new VehicleClientHistoryService(_repositoryMock.Object);
@@ -87,5 +104,20 @@ public class VehicleClientHistoryServiceTests
 
         //Assert
         await response.Should().NotThrowAsync();
+    }
+
+    [Fact]
+    public async Task DeleteAsync_InvalidId_ThrowsNotFoundException()
+    {
+        //Arrange
+        _repositoryMock.GetById(null);
+
+        var service = new VehicleClientHistoryService(_repositoryMock.Object);
+
+        //Act
+        var response = async () => await service.DeleteAsync(Guid.NewGuid(), default);
+
+        //Assert
+        await response.Should().ThrowAsync<NotFoundException>();
     }
 }

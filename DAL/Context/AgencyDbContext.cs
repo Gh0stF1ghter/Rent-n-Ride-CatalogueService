@@ -10,9 +10,4 @@ public class AgencyDbContext(DbContextOptions dbContextOptions) : DbContext(dbCo
     public DbSet<CarModelEntity> VehicleModels { get; set; }
     public DbSet<VehicleEntity> Vehicles { get; set; }
     public DbSet<VehicleClientHistoryEntity> VehicleClientHistories { get; set; }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
-    }
 }

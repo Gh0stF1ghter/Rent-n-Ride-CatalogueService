@@ -4,6 +4,8 @@ using BLL.Services.Implementations;
 using DAL.Entities;
 using FluentAssertions;
 using Mapster;
+using Newtonsoft.Json;
+using System.Text;
 using Tests.DataGeneration;
 using Tests.Mocks;
 
@@ -12,6 +14,8 @@ namespace Tests.ServicesTests;
 public class VehicleServiceTests
 {
     private readonly VehicleRepositoryMock _repositoryMock = new();
+
+    private readonly DistributedCacheMock _distributedCacheMock = new();
 
     private readonly List<VehicleEntity> _vehicles = DataGenerator.AddVehicleData(5);
 
@@ -27,7 +31,8 @@ public class VehicleServiceTests
     {
         //Arrange
         var correctModels = _vehicles.Adapt<IEnumerable<VehicleModel>>();
-        var service = new VehicleService(_repositoryMock.Object);
+
+        var service = new VehicleService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act
         var response = await service.GetRangeAsync(1, 1, default);
@@ -41,7 +46,31 @@ public class VehicleServiceTests
     {
         //Arrange
         var correctModel = _vehicles[0].Adapt<VehicleModel>();
-        var service = new VehicleService(_repositoryMock.Object);
+
+        var serializedModel = JsonConvert.SerializeObject(correctModel);
+        var cachedModel = Encoding.UTF8.GetBytes(serializedModel);
+        _distributedCacheMock.GetDataFromCache(cachedModel);
+
+        var service = new VehicleService(_repositoryMock.Object, _distributedCacheMock.Object);
+
+        //Act
+        var response = await service.GetByIdAsync(Guid.NewGuid(), default);
+
+        //Assert
+        response.Should().BeEquivalentTo(correctModel);
+    }
+
+    [Fact]
+    public async Task GetByIdAsync_EmptyCache_ReturnsClientModel()
+    {
+        //Arrange
+        var correctModel = _vehicles[0].Adapt<VehicleModel>();
+
+        var serializedModel = JsonConvert.SerializeObject(null);
+        var cachedModel = Encoding.UTF8.GetBytes(serializedModel);
+        _distributedCacheMock.GetDataFromCache(cachedModel);
+
+        var service = new VehicleService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act
         var response = await service.GetByIdAsync(Guid.NewGuid(), default);
@@ -55,7 +84,7 @@ public class VehicleServiceTests
     {
         //Arrange
         var correctModel = _vehicles[0].Adapt<VehicleModel>();
-        var service = new VehicleService(_repositoryMock.Object);
+        var service = new VehicleService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act
         var response = await service.AddAsync(correctModel, default);
@@ -69,7 +98,7 @@ public class VehicleServiceTests
     {
         //Arrange
         var correctUpdatedModel = _vehicles[1].Adapt<VehicleModel>();
-        var service = new VehicleService(_repositoryMock.Object);
+        var service = new VehicleService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act
         var response = await service.UpdateAsync(correctUpdatedModel, default);
@@ -85,7 +114,7 @@ public class VehicleServiceTests
         _repositoryMock.GetById(null);
 
         var correctUpdatedModel = _vehicles[1].Adapt<VehicleModel>();
-        var service = new VehicleService(_repositoryMock.Object);
+        var service = new VehicleService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act
         var response = async () => await service.UpdateAsync(correctUpdatedModel, default);
@@ -98,7 +127,7 @@ public class VehicleServiceTests
     public async Task DeleteAsync_VehicleId_()
     {
         //Arrange
-        var service = new VehicleService(_repositoryMock.Object);
+        var service = new VehicleService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act
         var response = async () => await service.DeleteAsync(Guid.NewGuid(), default);
@@ -113,7 +142,7 @@ public class VehicleServiceTests
         //Arrange
         _repositoryMock.GetById(null);
 
-        var service = new VehicleService(_repositoryMock.Object);
+        var service = new VehicleService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act
         var response = async () => await service.DeleteAsync(Guid.NewGuid(), default);

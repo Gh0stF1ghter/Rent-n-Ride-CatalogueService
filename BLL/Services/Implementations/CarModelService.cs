@@ -1,14 +1,16 @@
 using BLL.Models;
 using BLL.Services.Interfaces;
 using DAL.Entities;
+using DAL.Extensions;
 using DAL.Repositories.Interfaces;
 using Mapster;
+using Microsoft.Extensions.Caching.Distributed;
 using BLL.Exceptions;
 using BLL.Exceptions.ExceptionMessages;
 
 namespace BLL.Services.Implementations;
 
-public class CarModelService(ICarModelRepository repository) : ICarModelService
+public class CarModelService(ICarModelRepository repository, IDistributedCache distributedCache) : ICarModelService
 {
     public async Task<IEnumerable<CarModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
@@ -21,9 +23,19 @@ public class CarModelService(ICarModelRepository repository) : ICarModelService
 
     public async Task<CarModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
+        var key = nameof(CarModel) + id;
+
+        var cache = await distributedCache.GetDataFromCacheAsync<CarModel>(key, cancellationToken);
+
+        if (cache is not null)
+            return cache;
+
         var modelName = await repository.GetByIdAsync(id, cancellationToken);
 
         var modelNameModel = modelName.Adapt<CarModel>();
+
+        var cacheLifetime = TimeSpan.FromMinutes(10);
+        await distributedCache.CacheData(modelNameModel, cacheLifetime, key, cancellationToken);
 
         return modelNameModel;
     }
@@ -50,6 +62,10 @@ public class CarModelService(ICarModelRepository repository) : ICarModelService
 
         var modeNameToReturn = modelName.Adapt<CarModel>();
 
+        var key = nameof(CarModel) + modeNameToReturn.Id;
+        var cacheLifetime = TimeSpan.FromMinutes(10);
+        await distributedCache.CacheData(modeNameToReturn, cacheLifetime, key, cancellationToken);
+
         return modeNameToReturn;
     }
 
@@ -59,5 +75,8 @@ public class CarModelService(ICarModelRepository repository) : ICarModelService
             ?? throw new NotFoundException(ExceptionMessages.NotFound(nameof(CarModelEntity), id));
 
         await repository.RemoveAsync(modelName, cancellationToken);
+
+        var key = nameof(CarModel) + id;
+        await distributedCache.RemoveAsync(key, cancellationToken);
     }
 }

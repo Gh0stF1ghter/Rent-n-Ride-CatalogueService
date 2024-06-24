@@ -9,11 +9,11 @@ public class CarModelRepository(AgencyDbContext context) : RepositoryBase<CarMod
 {
     public async Task<IEnumerable<CarModelEntity>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken) =>
         await GetRange(page, pageSize)
-            .Include(m => m.Manufacturer)
-            .ToListAsync(cancellationToken);
-    
+                .Include(m => m.Manufacturer)
+                .ToListAsync(cancellationToken);
+
     public async Task<CarModelEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
         await GetByCondition(m => m.Id == id)
-            .Include(m => m.Manufacturer)
-            .FirstOrDefaultAsync(cancellationToken);
+                .Include(m => m.Manufacturer)
+                .FirstOrDefaultAsync(cancellationToken);
 }

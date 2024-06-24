@@ -3,12 +3,14 @@ using BLL.Exceptions;
 using BLL.Models;
 using BLL.Services.Interfaces;
 using DAL.Entities;
+using DAL.Extensions;
 using DAL.Repositories.Interfaces;
 using Mapster;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace BLL.Services.Implementations;
 
-public class VehicleService(IVehicleRepository repository) : IVehicleService
+public class VehicleService(IVehicleRepository repository, IDistributedCache distributedCache) : IVehicleService
 {
     public async Task<IEnumerable<VehicleModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
@@ -21,9 +23,19 @@ public class VehicleService(IVehicleRepository repository) : IVehicleService
 
     public async Task<VehicleModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
+        var key = nameof(VehicleModel) + id;
+
+        var cache = await distributedCache.GetDataFromCacheAsync<VehicleModel>(key, cancellationToken);
+
+        if (cache is not null)
+            return cache;
+
         var vehicle = await repository.GetByIdAsync(id, cancellationToken);
 
         var vehicleModel = vehicle.Adapt<VehicleModel>();
+
+        var cacheLifetime = TimeSpan.FromMinutes(10);
+        await distributedCache.CacheData(vehicleModel, cacheLifetime, key, cancellationToken);
 
         return vehicleModel;
     }
@@ -50,6 +62,10 @@ public class VehicleService(IVehicleRepository repository) : IVehicleService
 
         var vehicleToUpdate = vehicle.Adapt<VehicleModel>();
 
+        var key = nameof(VehicleModel) + vehicleToUpdate.Id;
+        var cacheLifetime = TimeSpan.FromMinutes(10);
+        await distributedCache.CacheData(vehicleToUpdate, cacheLifetime, key, cancellationToken);
+
         return vehicleToUpdate;
     }
 
@@ -59,5 +75,8 @@ public class VehicleService(IVehicleRepository repository) : IVehicleService
             ?? throw new NotFoundException(ExceptionMessages.NotFound(nameof(VehicleEntity), id));
 
         await repository.RemoveAsync(vehicle, cancellationToken);
+
+        var key = nameof(VehicleModel) + id;
+        await distributedCache.RemoveAsync(key, cancellationToken);
     }
 }

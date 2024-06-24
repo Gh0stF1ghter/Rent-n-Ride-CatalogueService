@@ -3,12 +3,14 @@ using BLL.Exceptions.ExceptionMessages;
 using BLL.Models;
 using BLL.Services.Interfaces;
 using DAL.Entities;
+using DAL.Extensions;
 using DAL.Repositories.Interfaces;
 using Mapster;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace BLL.Services.Implementations;
 
-public class ClientService(IClientRepository clientRepository) : IClientService
+public class ClientService(IClientRepository clientRepository, IDistributedCache distributedCache) : IClientService
 {
     public async Task<IEnumerable<ClientModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
@@ -21,9 +23,19 @@ public class ClientService(IClientRepository clientRepository) : IClientService
 
     public async Task<ClientModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
+        var key = nameof(ClientModel) + id;
+
+        var cache = await distributedCache.GetDataFromCacheAsync<ClientModel>(key, cancellationToken);
+
+        if (cache is not null)
+            return cache;
+
         var client = await clientRepository.GetByIdAsync(id, cancellationToken);
 
         var clientModel = client.Adapt<ClientModel>();
+
+        var cacheLifetime = TimeSpan.FromMinutes(10);
+        await distributedCache.CacheData(cache, cacheLifetime, key, cancellationToken);
 
         return clientModel;
     }
@@ -50,6 +62,10 @@ public class ClientService(IClientRepository clientRepository) : IClientService
 
         var clientToReturn = clientToUpdate.Adapt<ClientModel>();
 
+        var key = nameof(ClientModel) + clientToReturn.Id;
+        var cacheLifetime = TimeSpan.FromMinutes(10);
+        await distributedCache.CacheData(clientToReturn, cacheLifetime, key, cancellationToken);
+
         return clientToReturn;
     }
 
@@ -59,5 +75,8 @@ public class ClientService(IClientRepository clientRepository) : IClientService
             ?? throw new NotFoundException(ExceptionMessages.NotFound(nameof(ClientEntity), id));
 
         await clientRepository.RemoveAsync(clientToDelete, cancellationToken);
+
+        var key = nameof(ClientModel) + id;
+        await distributedCache.RemoveAsync(key, cancellationToken);
     }
 }

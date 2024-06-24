@@ -1,9 +1,9 @@
-﻿using DAL.Context;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using User.DataAccess.Context;
 
-namespace DAL.DI;
+namespace User.DataAccess.DI;
 
 public static class ServicesConfiguration
 {

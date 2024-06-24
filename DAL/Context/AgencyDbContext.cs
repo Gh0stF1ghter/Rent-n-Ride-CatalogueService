@@ -14,13 +14,5 @@ public class AgencyDbContext(DbContextOptions dbContextOptions) : DbContext(dbCo
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-
-        DataGenerator.Init();
-
-        modelBuilder.Entity<ManufacturerEntity>().HasData(DataGenerator.Manufacturers);
-        modelBuilder.Entity<CarModelEntity>().HasData(DataGenerator.VehicleModels);
-        modelBuilder.Entity<VehicleEntity>().HasData(DataGenerator.Vehicles);
-        modelBuilder.Entity<ClientEntity>().HasData(DataGenerator.Clients);
-        modelBuilder.Entity<VehicleClientHistoryEntity>().HasData(DataGenerator.VehicleClientHistories);
     }
 }

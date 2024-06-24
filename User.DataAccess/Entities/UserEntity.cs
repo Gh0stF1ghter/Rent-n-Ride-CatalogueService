@@ -1,4 +1,4 @@
-﻿namespace DAL.Entities;
+﻿namespace User.DataAccess.Entities;
 
 public class UserEntity
 {

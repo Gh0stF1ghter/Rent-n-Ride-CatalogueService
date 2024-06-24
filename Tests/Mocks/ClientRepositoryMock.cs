@@ -13,7 +13,7 @@ internal class ClientRepositoryMock : Mock<IClientRepository>
         Setup(cr => cr.GetRangeAsync(It.IsAny<int>(), It.IsAny<int>(), _anyToken))
             .ReturnsAsync(clientsToReturn);
 
-    public void GetById(ClientEntity clientToReturn) =>
+    public void GetById(ClientEntity? clientToReturn) =>
         Setup(cr => cr.GetByIdAsync(It.IsAny<Guid>(), _anyToken))
             .ReturnsAsync(clientToReturn);
 

@@ -1,4 +1,5 @@
-﻿using BLL.Models;
+﻿using BLL.Exceptions;
+using BLL.Models;
 using BLL.Services.Implementations;
 using DAL.Entities;
 using FluentAssertions;
@@ -26,7 +27,7 @@ public class VehicleServiceTests
     }
 
     [Fact]
-    public async Task GetRangeAsync__ReturnsClientModelList()
+    public async Task GetRangeAsync__ReturnsVehicleModelList()
     {
         //Arrange
         var correctModels = _vehicles.Adapt<IEnumerable<VehicleModel>>();
@@ -41,7 +42,7 @@ public class VehicleServiceTests
     }
 
     [Fact]
-    public async Task GetByIdAsync__ReturnsClientModel()
+    public async Task GetByIdAsync__ReturnsVehicleModel()
     {
         //Arrange
         var correctModel = _vehicles[0].Adapt<VehicleModel>();
@@ -79,7 +80,7 @@ public class VehicleServiceTests
     }
 
     [Fact]
-    public async Task AddAsync_ClientModel_ReturnsClientModel()
+    public async Task AddAsync_VehicleModel_ReturnsVehicleModel()
     {
         //Arrange
         var correctModel = _vehicles[0].Adapt<VehicleModel>();
@@ -93,7 +94,7 @@ public class VehicleServiceTests
     }
 
     [Fact]
-    public async Task UpdateAsync_ClientModel_ReturnsClientModel()
+    public async Task UpdateAsync_VehicleModel_ReturnsVehicleModel()
     {
         //Arrange
         var correctUpdatedModel = _vehicles[1].Adapt<VehicleModel>();
@@ -107,7 +108,23 @@ public class VehicleServiceTests
     }
 
     [Fact]
-    public async Task DeleteAsync_ClientId_()
+    public async Task UpdateAsync_InvalidId_ThrowsNotFoundException()
+    {
+        //Arrange
+        _repositoryMock.GetById(null);
+
+        var correctUpdatedModel = _vehicles[1].Adapt<VehicleModel>();
+        var service = new VehicleService(_repositoryMock.Object);
+
+        //Act
+        var response = async () => await service.UpdateAsync(correctUpdatedModel, default);
+
+        //Assert
+        await response.Should().ThrowAsync<NotFoundException>();
+    }
+
+    [Fact]
+    public async Task DeleteAsync_VehicleId_()
     {
         //Arrange
         var service = new VehicleService(_repositoryMock.Object, _distributedCacheMock.Object);
@@ -117,5 +134,20 @@ public class VehicleServiceTests
 
         //Assert
         await response.Should().NotThrowAsync();
+    }
+
+    [Fact]
+    public async Task DeleteAsync_InvalidId_ThrowsNotFoundException()
+    {
+        //Arrange
+        _repositoryMock.GetById(null);
+
+        var service = new VehicleService(_repositoryMock.Object);
+
+        //Act
+        var response = async () => await service.DeleteAsync(Guid.NewGuid(), default);
+
+        //Assert
+        await response.Should().ThrowAsync<NotFoundException>();
     }
 }

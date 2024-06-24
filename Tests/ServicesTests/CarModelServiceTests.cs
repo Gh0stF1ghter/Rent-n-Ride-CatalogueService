@@ -1,10 +1,12 @@
-﻿using BLL.Models;
+﻿using BLL.Exceptions;
+using BLL.Models;
 using BLL.Services.Implementations;
 using DAL.Entities;
 using FluentAssertions;
 using Mapster;
 using Newtonsoft.Json;
 using System.Text;
+using Moq;
 using Tests.DataGeneration;
 using Tests.Mocks;
 
@@ -14,6 +16,7 @@ public class CarModelServiceTests
 {
     private readonly ModelNameRepositoryMock _repositoryMock = new();
     private readonly DistributedCacheMock _distributedCacheMock = new();
+    private readonly CarModelRepositoryMock _repositoryMock = new();
 
     private readonly List<CarModelEntity> _models = DataGenerator.AddModelData(5);
 
@@ -25,7 +28,7 @@ public class CarModelServiceTests
     }
 
     [Fact]
-    public async Task GetRangeAsync__ReturnsClientModelList()
+    public async Task GetRangeAsync__ReturnsCarModelList()
     {
         //Arrange
         var correctModels = _models.Adapt<IEnumerable<CarModel>>();
@@ -40,7 +43,7 @@ public class CarModelServiceTests
     }
 
     [Fact]
-    public async Task GetByIdAsync__ReturnsClientModel()
+    public async Task GetByIdAsync__ReturnsCarModel()
     {
         //Arrange
         var correctModel = _models[0].Adapt<CarModel>();
@@ -78,7 +81,7 @@ public class CarModelServiceTests
     }
 
     [Fact]
-    public async Task AddAsync_ClientModel_ReturnsClientModel()
+    public async Task AddAsync_CarModel_ReturnsCarModel()
     {
         //Arrange
         var correctModel = _models[0].Adapt<CarModel>();
@@ -92,7 +95,7 @@ public class CarModelServiceTests
     }
 
     [Fact]
-    public async Task UpdateAsync_ClientModel_ReturnsClientModel()
+    public async Task UpdateAsync_CarModel_ReturnsCarModel()
     {
         //Arrange
         var correctUpdatedModel = _models[1].Adapt<CarModel>();
@@ -106,7 +109,24 @@ public class CarModelServiceTests
     }
 
     [Fact]
-    public async Task DeleteAsync_ClientId_()
+    public async Task UpdateAsync_CarModel_ThrowsNotFoundException()
+    {
+        //Arrange
+        _repositoryMock.GetById(null);
+
+        var correctUpdatedModel = _models[1].Adapt<CarModel>();
+        var service = new CarModelService(_repositoryMock.Object);
+
+        //Act
+        var response = async () => await service.UpdateAsync(correctUpdatedModel, default);
+
+        //Assert
+        await response.Should().ThrowAsync<NotFoundException>();
+    }
+
+
+    [Fact]
+    public async Task DeleteAsync_CarModelId_()
     {
         //Arrange
         var service = new CarModelService(_repositoryMock.Object, _distributedCacheMock.Object);
@@ -116,5 +136,20 @@ public class CarModelServiceTests
 
         //Assert
         await response.Should().NotThrowAsync();
+    }
+
+    [Fact]
+    public async Task DeleteAsync_InvalidId_ThrowsNotFoundException()
+    {
+        //Arrange
+        _repositoryMock.GetById(null);
+
+        var service = new CarModelService(_repositoryMock.Object);
+
+        //Act
+        var response = async () => await service.DeleteAsync(Guid.NewGuid(), default);
+
+        //Assert
+        await response.Should().ThrowAsync<NotFoundException>();
     }
 }

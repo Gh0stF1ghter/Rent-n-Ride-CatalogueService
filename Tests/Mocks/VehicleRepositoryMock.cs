@@ -13,7 +13,7 @@ internal class VehicleRepositoryMock : Mock<IVehicleRepository>
         Setup(cr => cr.GetRangeAsync(It.IsAny<int>(), It.IsAny<int>(), _anyToken))
             .ReturnsAsync(vehiclesToReturn);
 
-    public void GetById(VehicleEntity vehicleToReturn) =>
+    public void GetById(VehicleEntity? vehicleToReturn) =>
         Setup(cr => cr.GetByIdAsync(It.IsAny<Guid>(), _anyToken))
             .ReturnsAsync(vehicleToReturn);
 

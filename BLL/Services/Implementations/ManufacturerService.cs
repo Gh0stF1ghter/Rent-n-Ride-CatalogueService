@@ -1,3 +1,5 @@
+using BLL.Exceptions.ExceptionMessages;
+using BLL.Exceptions;
 using BLL.Models;
 using BLL.Services.Interfaces;
 using DAL.Entities;
@@ -51,7 +53,8 @@ public class ManufacturerService(IManufacturerRepository repository, IDistribute
 
     public async Task<ManufacturerModel> UpdateAsync(ManufacturerModel newManufacturerModel, CancellationToken cancellationToken)
     {
-        var manufacturer = await repository.GetByIdAsync(newManufacturerModel.Id, cancellationToken);
+        var manufacturer = await repository.GetByIdAsync(newManufacturerModel.Id, cancellationToken)
+            ?? throw new NotFoundException(ExceptionMessages.NotFound(nameof(ManufacturerEntity), newManufacturerModel.Id));
 
         newManufacturerModel.Adapt(manufacturer);
 
@@ -68,7 +71,8 @@ public class ManufacturerService(IManufacturerRepository repository, IDistribute
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
-        var manufacturer = await repository.GetByIdAsync(id, cancellationToken);
+        var manufacturer = await repository.GetByIdAsync(id, cancellationToken)
+            ?? throw new NotFoundException(ExceptionMessages.NotFound(nameof(ManufacturerEntity), id));
 
         await repository.RemoveAsync(manufacturer, cancellationToken);
 

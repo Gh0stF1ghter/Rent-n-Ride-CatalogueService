@@ -3,6 +3,7 @@ using API.ViewModels.ShortViewModels;
 using BLL.Models;
 using BLL.Services.Interfaces;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -34,6 +35,7 @@ public class ManufacturerController(IManufacturerService service) : ControllerBa
     }
 
     [HttpPost]
+    [Authorize("change:catalogue")]
     [ActionName("CreateManufacturer")]
     public async Task<ManufacturerViewModel> Create([FromBody] ShortManufacturerViewModel createManufacturerViewModel, CancellationToken cancellationToken)
     {
@@ -47,6 +49,7 @@ public class ManufacturerController(IManufacturerService service) : ControllerBa
     }
 
     [HttpPut("{id}")]
+    [Authorize("change:catalogue")]
     [ActionName("UpdateManufacturerById")]
     public async Task<ManufacturerViewModel> Update([FromRoute] Guid id, [FromBody] ShortManufacturerViewModel updateManufacturerViewModel, CancellationToken cancellationToken)
     {
@@ -61,6 +64,7 @@ public class ManufacturerController(IManufacturerService service) : ControllerBa
     }
 
     [HttpDelete("{id}")]
+    [Authorize("change:catalogue")]
     [ActionName("DeleteManufacturerById")]
     public async Task Delete([FromRoute] Guid id, CancellationToken cancellationToken)
     {

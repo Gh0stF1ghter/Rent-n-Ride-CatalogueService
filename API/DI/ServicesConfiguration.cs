@@ -1,9 +1,10 @@
-﻿using FluentValidation;
+﻿using API.Extensions;
+using API.Utilities.Authorization;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authorization;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using System.Reflection;
-using System.Security.Claims;
 
 namespace API.DI;
 
@@ -13,22 +14,38 @@ public static class ServicesConfiguration
     {
         services.AddAutoValidation();
 
-        services.AddAuthentication(
-            options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(
-            options =>
-            {
-                options.Authority = configuration["Auth0:Domain"];
-                options.Audience = configuration["Auth0:Audience"];
-            });
+        services.AddAuth0Authentication(configuration);
+
+        services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
+
+        services.ConfigureSwagger();
     }
 
     private static void AddAutoValidation(this IServiceCollection services)
     {
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddFluentValidationAutoValidation();
+    }
+
+    private static void AddAuth0Authentication(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddAuthentication(
+    options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    }).AddJwtBearer(
+    options =>
+    {
+        options.Authority = $"https://{configuration["Auth0:Domain"]}/";
+        options.Audience = configuration["Auth0:Audience"];
+    });
+
+        services.AddAuthorizationBuilder()
+            .AddPolicy("change:catalogue", policy =>
+                policy.Requirements.Add(
+                    new HasScopeRequirement("change:catalogue", configuration["Auth0:Domain"])
+                    ));
+
     }
 }

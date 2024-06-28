@@ -3,6 +3,7 @@ using API.ViewModels.ShortViewModels;
 using BLL.Models;
 using BLL.Services.Interfaces;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -34,6 +35,7 @@ public class VehicleController(IVehicleService service) : ControllerBase
     }
 
     [HttpPost]
+    [Authorize("change:catalogue")]
     [ActionName("CreateVehicle")]
     public async Task<VehicleViewModel> Create([FromBody] ShortVehicleViewModel createClientViewModel, CancellationToken cancellationToken)
     {
@@ -47,6 +49,7 @@ public class VehicleController(IVehicleService service) : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize("change:catalogue")]
     [ActionName("UpdateVehicleById")]
     public async Task<VehicleViewModel> Update([FromRoute] Guid id, [FromBody] ShortVehicleViewModel updateVehicleViewModel, CancellationToken cancellationToken)
     {
@@ -61,6 +64,7 @@ public class VehicleController(IVehicleService service) : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize("change:catalogue")]
     [ActionName("DeleteVehicleById")]
     public async Task Delete([FromRoute] Guid id, CancellationToken cancellationToken)
     {

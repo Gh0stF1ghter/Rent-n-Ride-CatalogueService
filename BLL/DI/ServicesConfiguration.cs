@@ -24,10 +24,8 @@ public static class ServicesConfiguration
 
     private static void AddServices(this IServiceCollection services)
     {
-        services.AddScoped<IClientService, ClientService>();
         services.AddScoped<IManufacturerService, ManufacturerService>();
         services.AddScoped<ICarModelService, CarModelService>();
-        services.AddScoped<IVehicleClientHistoryService, VehicleClientHistoryService>();
         services.AddScoped<IVehicleService, VehicleService>();
     }
 }

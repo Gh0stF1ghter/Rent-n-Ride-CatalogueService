@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace DAL.Repositories.Implementations;
 
-public class RepositoryBase<TEntity>(AgencyDbContext context) : IRepositoryBase<TEntity> where TEntity : class
+public class RepositoryBase<TEntity>(CatalogueDbContext context) : IRepositoryBase<TEntity> where TEntity : class
 {
     public IQueryable<TEntity> GetRange(int page, int pageSize)
     {

@@ -11,11 +11,9 @@ public static class ServicesConfiguration
 {
     public static void AddDataAccessDependencies(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<AgencyDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("DBConnection")));
+        services.AddDbContext<CatalogueDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("DBConnection")));
 
-        services.AddTransient<IClientRepository, ClientRepository>();
         services.AddTransient<IManufacturerRepository, ManufacturerRepository>();
-        services.AddTransient<IVehicleClientHistoryRepository, VehicleClientHistoryRepository>();
         services.AddTransient<ICarModelRepository, CarModelRepository>();
         services.AddTransient<IVehicleRepository, VehicleRepository>();
     }

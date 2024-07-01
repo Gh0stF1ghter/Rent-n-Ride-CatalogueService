@@ -10,6 +10,5 @@ public record VehicleViewModel(
     VehicleType VehicleType,
     VehicleState VehicleState,
     FuelType FuelType,
-    CarModelViewModel? Model,
-    ClientViewModel? Client
+    CarModelViewModel? Model
     );

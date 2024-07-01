@@ -2,6 +2,7 @@
 using System.Reflection;
 
 namespace BLL.MappingConfigurations;
+
 public static class GlobalMappingSettings
 {
     public static void SetMapper()

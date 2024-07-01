@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repositories.Implementations;
 
-public class CarModelRepository(AgencyDbContext context) : RepositoryBase<CarModelEntity>(context), ICarModelRepository
+public class CarModelRepository(CatalogueDbContext context) : RepositoryBase<CarModelEntity>(context), ICarModelRepository
 {
     public async Task<IEnumerable<CarModelEntity>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken) =>
         await GetRange(page, pageSize)

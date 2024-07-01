@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BLL.Exceptions.ExceptionMessages;
+﻿namespace BLL.Exceptions.ExceptionMessages;
 
 internal static class ExceptionMessages
 {

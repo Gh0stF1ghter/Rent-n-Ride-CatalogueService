@@ -6,7 +6,6 @@ using FluentAssertions;
 using Mapster;
 using Newtonsoft.Json;
 using System.Text;
-using Moq;
 using Tests.DataGeneration;
 using Tests.Mocks;
 

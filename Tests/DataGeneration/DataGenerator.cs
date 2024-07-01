@@ -26,21 +26,6 @@ internal static class DataGenerator
 
         return vehicleFaker.Generate(count);
     }
-
-    public static List<ClientEntity> AddClientData(int count)
-    {
-        var clientFaker = GetClientFaker();
-
-        return clientFaker.Generate(count);
-    }
-
-    public static List<VehicleClientHistoryEntity> AddVehicleClientHistoryData(int count)
-    {
-        var vehicleClientHistoryFaker = GetVehicleClientHistoryFaker();
-
-        return vehicleClientHistoryFaker.Generate(count);
-    }
-
     private static Faker<ManufacturerEntity> GetManufacturerFaker() =>
         new Faker<ManufacturerEntity>()
             .RuleFor(m => m.Id, _ => Guid.NewGuid())
@@ -62,18 +47,4 @@ internal static class DataGenerator
             .RuleFor(v => v.VehicleType, f => f.PickRandom<VehicleType>())
             .RuleFor(v => v.VehicleState, f => f.PickRandom<VehicleState>())
             .RuleFor(v => v.FuelType, f => f.PickRandom<FuelType>());
-
-    private static Faker<ClientEntity> GetClientFaker() =>
-        new Faker<ClientEntity>()
-            .RuleFor(c => c.Id, _ => Guid.NewGuid())
-            .RuleFor(c => c.FirstName, f => f.Name.FirstName())
-            .RuleFor(c => c.LastName, f => f.Name.LastName())
-            .RuleFor(c => c.Email, f => f.Internet.Email())
-            .RuleFor(c => c.PhoneNumber, f => f.Phone.PhoneNumber());
-
-    private static Faker<VehicleClientHistoryEntity> GetVehicleClientHistoryFaker() =>
-        new Faker<VehicleClientHistoryEntity>()
-            .RuleFor(vch => vch.Id, _ => Guid.NewGuid())
-            .RuleFor(vch => vch.StartDate, f => f.Date.Past(refDate: DateTime.UtcNow))
-            .RuleFor(vch => vch.EndDate, f => f.Date.Past(refDate: DateTime.UtcNow));
 }

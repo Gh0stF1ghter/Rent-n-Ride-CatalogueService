@@ -1,5 +1,6 @@
 ﻿using API.ViewModels;
 using API.ViewModels.ShortViewModels;
+using API.ViewModels.UpdateViewModels;
 using BLL.Models;
 using BLL.Services.Interfaces;
 using Mapster;
@@ -49,9 +50,8 @@ public class VehicleController(IVehicleService service) : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [Authorize("change:catalogue")]
     [ActionName("UpdateVehicleById")]
-    public async Task<VehicleViewModel> Update([FromRoute] Guid id, [FromBody] ShortVehicleViewModel updateVehicleViewModel, CancellationToken cancellationToken)
+    public async Task<VehicleViewModel> Update([FromRoute] Guid id, [FromBody] UpdateVehicleViewModel updateVehicleViewModel, CancellationToken cancellationToken)
     {
         var vehicleModel = updateVehicleViewModel.Adapt<VehicleModel>();
         vehicleModel.Id = id;

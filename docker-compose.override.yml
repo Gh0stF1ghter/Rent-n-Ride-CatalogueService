@@ -1,0 +1,36 @@
+version: '3.4'
+
+services:
+  catalogue.service:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - "7230:8080"
+
+  rent.service:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8081
+    ports:
+      - "7231:8081"
+
+  user.service:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8082
+    ports:
+      - "7232:8082"
+
+  postgres.db:
+    ports:
+      - 1433:1433 
+    environment:
+      POSTGRES_PASSWORD: 0451
+
+  redis:
+    ports:
+        - "6379:6379"
+    environment:
+        - REDIS_PORT=6379
+        - REDIS_PASSWORD=A&VeryComplex123Password

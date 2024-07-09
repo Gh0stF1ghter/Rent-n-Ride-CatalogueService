@@ -11,9 +11,7 @@ public static class ServicesConfiguration
 {
     public static void AddDataAccessDependencies(this IServiceCollection services, IConfiguration configuration)
     {
-        var connection = configuration.GetConnectionString("DBConnection") + Environment.GetEnvironmentVariable("POSTGRES_USER") + Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
-
-        services.AddDbContext<CatalogueDbContext>(options => options.UseNpgsql(connection));
+        services.AddDbContext<CatalogueDbContext>(options => options.UseNpgsql($"{configuration.GetConnectionString("DBConnection")} User ID={Environment.GetEnvironmentVariable("POSTGRES_USER")}; Password={Environment.GetEnvironmentVariable("POSTGRES_PASSWORD")}"));
 
         services.AddTransient<IManufacturerRepository, ManufacturerRepository>();
         services.AddTransient<ICarModelRepository, CarModelRepository>();

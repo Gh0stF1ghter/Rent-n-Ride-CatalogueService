@@ -3,30 +3,35 @@ version: '3.4'
 services:
   catalogue.service:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
     ports:
       - "7230:8080"
+    depends_on:
+      - postgres.db
 
   rent.service:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8081
     ports:
       - "7231:8081"
+    depends_on:
+      - postgres.db
 
   user.service:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8082
     ports:
       - "7232:8082"
+    depends_on:
+      - postgres.db
+      - redis
 
   postgres.db:
     ports:
-      - 1433:1433 
-    environment:
-      POSTGRES_PASSWORD: 0451
+      - 1433:5432
+    shm_size: 128mb
+    environment: 
+      POSTGRES_PASSWORD: user
 
   redis:
     ports:
@@ -34,3 +39,11 @@ services:
     environment:
         - REDIS_PORT=6379
         - REDIS_PASSWORD=A&VeryComplex123Password
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres.db

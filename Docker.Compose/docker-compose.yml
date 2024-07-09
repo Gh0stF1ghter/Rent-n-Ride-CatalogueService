@@ -4,19 +4,19 @@ services:
   catalogue.service:
     image: ${DOCKER_REGISTRY-}api
     build:
-      context: .
+      context: ../
       dockerfile: API/Dockerfile
 
   rent.service:
     image: ${DOCKER_REGISTRY-}rent.api
     build:
-      context: ../Rent-n-Ride-RentService/
+      context: ../../Rent-n-Ride-RentService/
       dockerfile: /Rent.API/Dockerfile
 
   user.service:
     image: ${DOCKER_REGISTRY-}user.api
     build:
-      context: ../Rent-n-Ride-UserService/
+      context: ../../Rent-n-Ride-UserService/
       dockerfile: /User.API/Dockerfile
 
   postgres.db:

@@ -3,7 +3,9 @@ version: '3.4'
 services:
   catalogue.service:
     environment:
-      - ASPNETCORE_HTTP_PORTS=8080
+      ASPNETCORE_HTTP_PORTS: 8080
+      POSTGRES_USER: User ID=${POSTGRES_USER};
+      POSTGRES_PASSWORD: Password=${POSTGRES_PASSWORD};
     ports:
       - "7230:8080"
     depends_on:
@@ -11,7 +13,9 @@ services:
 
   rent.service:
     environment:
-      - ASPNETCORE_HTTP_PORTS=8081
+      ASPNETCORE_HTTP_PORTS: 8081
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "7231:8081"
     depends_on:
@@ -19,7 +23,9 @@ services:
 
   user.service:
     environment:
-      - ASPNETCORE_HTTP_PORTS=8082
+      ASPNETCORE_HTTP_PORTS: 8082
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "7232:8082"
     depends_on:
@@ -31,14 +37,15 @@ services:
       - 1433:5432
     shm_size: 128mb
     environment: 
-      POSTGRES_PASSWORD: user
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
   redis:
     ports:
         - "6379:6379"
     environment:
-        - REDIS_PORT=6379
-        - REDIS_PASSWORD=A&VeryComplex123Password
+        REDIS_PORT: 6379
+        REDIS_PASSWORD: ${REDIS_PASSWORD}
 
   adminer:
     image: adminer

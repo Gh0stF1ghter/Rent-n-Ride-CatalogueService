@@ -16,8 +16,6 @@ public class CatalogueDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        Database.Migrate();
-
         DataGenerator.Init();
 
         modelBuilder.Entity<ManufacturerEntity>().HasData(DataGenerator.Manufacturers);

@@ -7,6 +7,7 @@ public record VehicleViewModel(
     string PlateNumber,
     int Odo,
     decimal RentCost,
+    bool IsRented,
     VehicleType VehicleType,
     VehicleState VehicleState,
     FuelType FuelType,

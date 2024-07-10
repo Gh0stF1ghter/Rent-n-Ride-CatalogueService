@@ -1,9 +1,8 @@
 ﻿using DAL.Enums;
 
-namespace API.ViewModels.ShortViewModels;
+namespace API.ViewModels.UpdateViewModels;
 
-public record ShortVehicleViewModel(
-    Guid? ModelId,
+public record UpdateVehicleViewModel(
     string PlateNumber,
     decimal RentCost,
     int Odo,
@@ -11,4 +10,4 @@ public record ShortVehicleViewModel(
     VehicleType VehicleType = VehicleType.None,
     VehicleState VehicleState = VehicleState.None,
     FuelType FuelType = FuelType.None
-    );
+);

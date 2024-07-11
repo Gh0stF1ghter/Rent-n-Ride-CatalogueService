@@ -32,6 +32,16 @@ services:
       - postgres.db
       - redis
 
+  ocelot.webhost:
+    environment:
+      ASPNETCORE_HTTP_PORTS: 8083
+    ports:
+      - 7233:8083
+    depends_on:
+      - catalogue.service
+      - rent.service
+      - user.service
+
   postgres.db:
     ports:
       - 1433:5432

@@ -2,22 +2,28 @@ version: '3.4'
 
 services:
   catalogue.service:
-    image: ${DOCKER_REGISTRY-}api
+    image: ${DOCKER_REGISTRY-}catalogue.service
     build:
       context: ../
       dockerfile: API/Dockerfile
 
   rent.service:
-    image: ${DOCKER_REGISTRY-}rent.api
+    image: ${DOCKER_REGISTRY-}rent.service
     build:
       context: ../../Rent-n-Ride-RentService/
       dockerfile: /Rent.API/Dockerfile
 
   user.service:
-    image: ${DOCKER_REGISTRY-}user.api
+    image: ${DOCKER_REGISTRY-}user.service
     build:
       context: ../../Rent-n-Ride-UserService/
       dockerfile: /User.API/Dockerfile
+
+  admin-panel.service:
+    image: ${DOCKER_REGISTRY-}admin-panel.service
+    build:
+      context: ../../Rent-n-Ride-AdminPanelService/AdminPanelService/
+      dockerfile: /AdminPanel.API/Dockerfile
 
   ocelot.webhost:
     image: ${DOCKER_REGISTRY-}ocelot.webhost

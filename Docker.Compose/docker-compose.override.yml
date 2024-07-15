@@ -10,6 +10,7 @@ services:
       - "7230:8080"
     depends_on:
       - postgres.db
+      - redis
 
   rent.service:
     environment:
@@ -20,17 +21,32 @@ services:
       - "7231:8081"
     depends_on:
       - postgres.db
+      - redis
 
   user.service:
     environment:
       ASPNETCORE_HTTP_PORTS: 8082
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASSWORD: user
     ports:
       - "7232:8082"
     depends_on:
       - postgres.db
       - redis
+
+  admin-panel.service:
+    environment:
+      ASPNETCORE_HTTP_PORTS: 8084
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASSWORD: user
+    ports:
+      - 7234:8084
+    depends_on:
+      - catalogue.service
+      - rent.service
+      - user.service
 
   ocelot.webhost:
     environment:
@@ -38,9 +54,7 @@ services:
     ports:
       - 7233:8083
     depends_on:
-      - catalogue.service
-      - rent.service
-      - user.service
+      - admin-panel.service
 
   postgres.db:
     ports:
@@ -64,3 +78,14 @@ services:
       - 8080:8080
     depends_on:
       - postgres.db
+
+  rabbitmq:
+    image: rabbitmq:management
+    hostname: "rabbitmq"
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=user
+    restart: always

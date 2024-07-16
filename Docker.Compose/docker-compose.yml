@@ -20,7 +20,7 @@ services:
       dockerfile: /User.API/Dockerfile
 
   admin-panel.service:
-    image: ${DOCKER_REGISTRY-}admin-panel.service
+    image: ${DOCKER_REGISTRY-}adminpanel.service
     build:
       context: ../../Rent-n-Ride-AdminPanelService/AdminPanelService/
       dockerfile: /AdminPanel.API/Dockerfile
@@ -28,7 +28,7 @@ services:
   ocelot.webhost:
     image: ${DOCKER_REGISTRY-}ocelot.webhost
     build:
-      context: ../../Rent-n-Ride-AdminPanelService/Ocelot.WebHost
+      context: ../../Rent-n-Ride-AdminPanelService/Ocelot.WebHost/
       dockerfile: /Dockerfile
 
   postgres.db:

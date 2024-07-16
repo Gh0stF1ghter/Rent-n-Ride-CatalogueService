@@ -2,6 +2,7 @@ using BLL.Services.Implementations;
 using BLL.Services.Interfaces;
 using DAL.DI;
 using Mapster;
+using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -19,8 +20,25 @@ public static class ServicesConfiguration
 
         TypeAdapterConfig.GlobalSettings.Scan(Assembly.GetExecutingAssembly());
 
+        services.AddMessageBroker(configuration);
+
         services.AddServices();
     }
+
+    public static void AddMessageBroker(this IServiceCollection services, IConfiguration configuration) =>
+    services.AddMassTransit(cfg =>
+    {
+        var assembly = Assembly.GetExecutingAssembly();
+
+        cfg.AddConsumers(assembly);
+
+        cfg.UsingRabbitMq((context, factoryCfg) =>
+        {
+            factoryCfg.Host(configuration.GetConnectionString("RabbitMQ"), "/");
+
+            factoryCfg.ConfigureEndpoints(context);
+        });
+    });
 
     private static void AddServices(this IServiceCollection services)
     {

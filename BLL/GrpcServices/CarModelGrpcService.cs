@@ -1,6 +1,4 @@
-﻿using BLL.Exceptions;
-using BLL.Exceptions.ExceptionMessages;
-using BLL.Services.Interfaces;
+﻿using BLL.Services.Interfaces;
 using CatalogGrpcService;
 using Grpc.Core;
 using Mapster;
@@ -30,9 +28,6 @@ public class CarModelGrpcService(ICarModelService service) : CatalogService.Cata
             throw new InvalidOperationException("Provided id is not GUID");
 
         var data = await service.GetByIdAsync(id, context.CancellationToken);
-
-        if (data is null)
-            throw new NotFoundException(ExceptionMessages.NotFound(nameof(data), id));
 
         var responseData = data.Adapt<ProtoCarModel>();
 

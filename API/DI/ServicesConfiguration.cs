@@ -19,12 +19,35 @@ public static class ServicesConfiguration
         services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
 
         services.ConfigureSwagger();
+
+        services.ConfigureCors(configuration);
     }
 
     private static void AddAutoValidation(this IServiceCollection services)
     {
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddFluentValidationAutoValidation();
+    }
+
+    private static void ConfigureCors(this IServiceCollection services, IConfiguration configuration)
+    {
+        var rent = configuration.GetConnectionString("RentService");
+        var admin = configuration.GetConnectionString("AdminPanelService");
+        var gateway = configuration.GetConnectionString("ApiGateway");
+
+        services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(builder =>
+                builder
+                .WithOrigins(
+                    rent,
+                    admin,
+                    gateway
+                    )
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+        });
     }
 
     private static void AddAuth0Authentication(this IServiceCollection services, IConfiguration configuration)

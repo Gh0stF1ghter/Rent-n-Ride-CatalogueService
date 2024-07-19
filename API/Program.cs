@@ -3,8 +3,6 @@ using API.Extensions;
 using BLL.DI;
 using BLL.GrpcServices;
 using BLL.MappingConfigurations;
-using Bogus;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);

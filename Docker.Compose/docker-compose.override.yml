@@ -3,40 +3,78 @@ version: '3.4'
 services:
   catalogue.service:
     environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
       ASPNETCORE_HTTP_PORTS: 8080
+      ASPNETCORE_HTTPS_PORTS: 8081
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "7230:8080"
+      - "7231:8081"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
     depends_on:
       - postgres.db
 
   rent.service:
     environment:
-      ASPNETCORE_HTTP_PORTS: 8081
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_HTTP_PORTS: 8082
+      ASPNETCORE_HTTPS_PORTS: 8083
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - "7231:8081"
+      - "7232:8082"
+      - "7233:8083"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
     depends_on:
       - postgres.db
 
   user.service:
     environment:
-      ASPNETCORE_HTTP_PORTS: 8082
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_HTTP_PORTS: 8084
+      ASPNETCORE_HTTPS_PORTS: 8085
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - "7232:8082"
+      - "7234:8084"
+      - "7235:8085"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
     depends_on:
       - postgres.db
       - redis
 
   ocelot.webhost:
     environment:
-      ASPNETCORE_HTTP_PORTS: 8083
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_HTTP_PORTS: 8086
+      ASPNETCORE_HTTPS_PORTS: 8087
     ports:
-      - 7233:8083
+      - 7236:8086
+      - 7237:8087
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+    depends_on:
+      - catalogue.service
+      - rent.service
+      - user.service
+
+  admin-panel.service:
+    environment:
+      ASPNETCORE_HTTP_PORTS: 8088
+      ASPNETCORE_HTTPS_PORTS: 8089
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASSWORD: user
+    ports:
+      - 7238:8088
+      - 7239:8089
     depends_on:
       - catalogue.service
       - rent.service

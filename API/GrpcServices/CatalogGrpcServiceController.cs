@@ -1,4 +1,5 @@
 ﻿using BLL.Services.Interfaces;
+using BLL.Exceptions.ExceptionMessages;
 using CatalogGrpcService;
 using Grpc.Core;
 using Mapster;
@@ -29,7 +30,7 @@ public class CatalogGrpcServiceController(
         var idIsValid = Guid.TryParse(request.Id, out var id);
 
         if (!idIsValid)
-            throw new InvalidOperationException("Provided id is not GUID");
+            throw new InvalidOperationException(ExceptionMessages.IdIsNotGuid(request.Id));
 
         var data = await carModelService.GetByIdAsync(id, context.CancellationToken);
 
@@ -61,7 +62,7 @@ public class CatalogGrpcServiceController(
         var idIsValid = Guid.TryParse(request.Id, out var id);
 
         if (!idIsValid)
-            throw new InvalidOperationException("Provided id is not GUID");
+            throw new InvalidOperationException(ExceptionMessages.IdIsNotGuid(request.Id));
 
         var data = await manufacturerService.GetByIdAsync(id, context.CancellationToken);
 
@@ -93,7 +94,7 @@ public class CatalogGrpcServiceController(
         var idIsValid = Guid.TryParse(request.Id, out var id);
 
         if (!idIsValid)
-            throw new InvalidOperationException("Provided id is not GUID");
+            throw new InvalidOperationException(ExceptionMessages.IdIsNotGuid(request.Id));
 
         var data = await vehicleService.GetByIdAsync(id, context.CancellationToken);
 

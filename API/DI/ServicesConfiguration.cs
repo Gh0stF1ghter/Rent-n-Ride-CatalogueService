@@ -21,6 +21,8 @@ public static class ServicesConfiguration
         services.ConfigureSwagger();
 
         services.ConfigureCors(configuration);
+
+        services.AddGrpc(_ => _.Interceptors.Add<GrpcExceptionHandlingInterceptor>());
     }
 
     private static void AddAutoValidation(this IServiceCollection services)

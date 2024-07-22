@@ -1,9 +1,8 @@
-﻿using BLL.Exceptions;
-using Grpc.Core.Interceptors;
-using Grpc.Core;
-using API.Exceptions;
+﻿using API.Exceptions;
+using BLL.Exceptions;
 using Google.Rpc;
-using CatalogGrpcService;
+using Grpc.Core;
+using Grpc.Core.Interceptors;
 
 namespace API.Extensions;
 
@@ -25,30 +24,20 @@ public class GrpcExceptionHandlingInterceptor : Interceptor
 
     private static TResponse MapResponse<TRequest, TResponse>(Exception ex)
     {
-        var responseViewModel = ex switch
+        var status = ex switch
         {
-            NotFoundException => new GrpcStatus
-            {
-                Message = ex.Message,
-                StatusCode = (int)Code.NotFound
-            },
+            NotFoundException => new ExceptionResponse((int)Code.NotFound, ex.Message),
 
-            InvalidOperationException => new GrpcStatus
-            {
-                Message = ex.Message,
-                StatusCode = (int)Code.FailedPrecondition
-            },
+            InvalidOperationException => new ExceptionResponse((int)Code.FailedPrecondition, ex.Message),
 
-            _ => new GrpcStatus
-            {
-                Message = ex.Message,
-                StatusCode = (int)Code.Internal
-            }
+            _ => new ExceptionResponse((int)Code.Internal, ex.Message),
         };
 
         var concreteResponse = Activator.CreateInstance<TResponse>();
 
-        concreteResponse?.GetType().GetProperty(nameof(GrpcStatus))?.SetValue(concreteResponse, responseViewModel);
+        concreteResponse?.GetType().GetProperty(nameof(status.StatusCode))?.SetValue(concreteResponse, status.StatusCode);
+
+        concreteResponse?.GetType().GetProperty(nameof(status.Message))?.SetValue(concreteResponse, status.Message);
 
         return concreteResponse;
     }

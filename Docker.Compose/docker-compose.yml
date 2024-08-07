@@ -19,6 +19,12 @@ services:
       context: ../../Rent-n-Ride-UserService/
       dockerfile: /User.API/Dockerfile
 
+  admin-panel.service:
+    image: ${DOCKER_REGISTRY-}adminpanel.api
+    build:
+      context: ../../Rent-n-Ride-AdminPanelService/AdminPanelService/
+      dockerfile: /AdminPanel.API/Dockerfile
+
   ocelot.webhost:
     image: ${DOCKER_REGISTRY-}ocelot.webhost
     build:

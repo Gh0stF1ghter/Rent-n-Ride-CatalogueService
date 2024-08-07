@@ -1,4 +1,5 @@
 ﻿using DAL.Entities;
+using DAL.QueryParameters;
 using DAL.Repositories.Interfaces;
 using Moq;
 using System.Linq.Expressions;
@@ -10,7 +11,7 @@ internal class VehicleRepositoryMock : Mock<IVehicleRepository>
     private readonly CancellationToken _anyToken = It.IsAny<CancellationToken>();
 
     public void GetRange(IEnumerable<VehicleEntity> vehiclesToReturn) =>
-        Setup(cr => cr.GetRangeAsync(It.IsAny<int>(), It.IsAny<int>(), _anyToken))
+        Setup(cr => cr.GetRangeAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<VehicleParameters>(), _anyToken))
             .ReturnsAsync(vehiclesToReturn);
 
     public void GetById(VehicleEntity? vehicleToReturn) =>

@@ -44,7 +44,7 @@ internal static class DataGenerator
             .RuleFor(v => v.Odo, f => f.Random.Number(0, 10000))
             .RuleFor(v => v.RentCost, f => f.Random.Decimal(100, 4000))
             .RuleFor(v => v.IsRented, f => f.Random.Bool())
-            .RuleFor(v => v.ModelId, _ => Guid.NewGuid())
+            .RuleFor(v => v.CarModelId, _ => Guid.NewGuid())
             .RuleFor(v => v.VehicleType, f => f.PickRandom<VehicleType>())
             .RuleFor(v => v.VehicleState, f => f.PickRandom<VehicleState>())
             .RuleFor(v => v.FuelType, f => f.PickRandom<FuelType>());

@@ -1,9 +1,13 @@
 using API.DI;
 using API.Extensions;
 using BLL.DI;
+using BLL.GrpcServices;
 using BLL.MappingConfigurations;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console());
 
 var services = builder.Services;
 
@@ -24,9 +28,14 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseSwagger();
 app.UseSwaggerUI();
 
+app.UseHttpsRedirection();
+
+app.UseCors();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapGrpcService<CatalogGrpcServiceController>();
 app.MapControllers();
 
 await app.RunAsync();

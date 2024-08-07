@@ -1,9 +1,10 @@
-using BLL.Exceptions.ExceptionMessages;
 using BLL.Exceptions;
+using BLL.Exceptions.ExceptionMessages;
 using BLL.Models;
 using BLL.Services.Interfaces;
 using DAL.Entities;
 using DAL.Extensions;
+using DAL.QueryParameters;
 using DAL.Repositories.Interfaces;
 using Mapster;
 using Microsoft.Extensions.Caching.Distributed;
@@ -12,9 +13,9 @@ namespace BLL.Services.Implementations;
 
 public class VehicleService(IVehicleRepository repository, IDistributedCache distributedCache) : IVehicleService
 {
-    public async Task<IEnumerable<VehicleModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken)
+    public async Task<IEnumerable<VehicleModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken, VehicleParameters? parameters = default)
     {
-        var vehicles = await repository.GetRangeAsync(page, pageSize, cancellationToken);
+        var vehicles = await repository.GetRangeAsync(page, pageSize, parameters, cancellationToken);
 
         var vehicleModels = vehicles.Adapt<IEnumerable<VehicleModel>>();
 

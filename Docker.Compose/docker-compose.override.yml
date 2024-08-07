@@ -16,6 +16,7 @@ services:
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
     depends_on:
       - postgres.db
+      - redis
 
   rent.service:
     environment:
@@ -106,3 +107,14 @@ services:
       - 8080:8080
     depends_on:
       - postgres.db
+
+  rabbitmq:
+    image: rabbitmq:management
+    hostname: "rabbitmq"
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=user
+    restart: always

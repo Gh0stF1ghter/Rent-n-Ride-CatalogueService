@@ -35,7 +35,7 @@ public class VehicleServiceTests
         var service = new VehicleService(_repositoryMock.Object, _distributedCacheMock.Object);
 
         //Act
-        var response = await service.GetRangeAsync(1, 1, default);
+        var response = await service.GetRangeAsync(1, 1, cancellationToken: default);
 
         //Assert
         response.Should().BeEquivalentTo(correctModels);

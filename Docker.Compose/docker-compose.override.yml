@@ -68,6 +68,7 @@ services:
 
   admin-panel.service:
     environment:
+      ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_HTTP_PORTS: 8088
       ASPNETCORE_HTTPS_PORTS: 8089
       RABBITMQ_DEFAULT_USER: user
@@ -75,6 +76,9 @@ services:
     ports:
       - 7238:8088
       - 7239:8089
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
     depends_on:
       - catalogue.service
       - rent.service

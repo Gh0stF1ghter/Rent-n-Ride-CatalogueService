@@ -1,10 +1,11 @@
 ﻿using BLL.Models;
+using DAL.QueryParameters;
 
 namespace BLL.Services.Interfaces;
 
 public interface IVehicleService
 {
-    Task<IEnumerable<VehicleModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken);
+    Task<IEnumerable<VehicleModel>> GetRangeAsync(int page, int pageSize, CancellationToken cancellationToken, VehicleParameters? parameters = default);
 
     Task<VehicleModel> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 

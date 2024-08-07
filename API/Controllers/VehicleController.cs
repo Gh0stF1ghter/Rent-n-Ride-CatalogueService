@@ -3,6 +3,7 @@ using API.ViewModels.ShortViewModels;
 using API.ViewModels.UpdateViewModels;
 using BLL.Models;
 using BLL.Services.Interfaces;
+using DAL.QueryParameters;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,9 +16,13 @@ public class VehicleController(IVehicleService service) : ControllerBase
 {
     [HttpGet]
     [ActionName("GetAllVehiclesInRange")]
-    public async Task<IEnumerable<VehicleViewModel>> GetAll([FromQuery] int page, [FromQuery] int pageSize, CancellationToken cancellationToken)
+    public async Task<IEnumerable<VehicleViewModel>> GetAll(
+        [FromQuery] int page,
+        [FromQuery] int pageSize,
+        [FromQuery] VehicleParameters parameters,
+        CancellationToken cancellationToken)
     {
-        var vehicles = await service.GetRangeAsync(page, pageSize, cancellationToken);
+        var vehicles = await service.GetRangeAsync(page, pageSize, cancellationToken, parameters);
 
         var vehiclesVMs = vehicles.Adapt<IEnumerable<VehicleViewModel>>();
 

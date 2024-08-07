@@ -2,25 +2,25 @@ version: '3.4'
 
 services:
   catalogue.service:
-    image: ${DOCKER_REGISTRY-}catalogue.service
+    image: ${DOCKER_REGISTRY-}api
     build:
       context: ../
       dockerfile: API/Dockerfile
 
   rent.service:
-    image: ${DOCKER_REGISTRY-}rent.service
+    image: ${DOCKER_REGISTRY-}rent.api
     build:
       context: ../../Rent-n-Ride-RentService/
       dockerfile: /Rent.API/Dockerfile
 
   user.service:
-    image: ${DOCKER_REGISTRY-}user.service
+    image: ${DOCKER_REGISTRY-}user.api
     build:
       context: ../../Rent-n-Ride-UserService/
       dockerfile: /User.API/Dockerfile
 
   admin-panel.service:
-    image: ${DOCKER_REGISTRY-}adminpanel.service
+    image: ${DOCKER_REGISTRY-}adminpanel.api
     build:
       context: ../../Rent-n-Ride-AdminPanelService/AdminPanelService/
       dockerfile: /AdminPanel.API/Dockerfile

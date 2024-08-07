@@ -1,4 +1,4 @@
-﻿using BLL.Services.Interfaces;
+using BLL.Services.Interfaces;
 using BLL.Exceptions.ExceptionMessages;
 using CatalogGrpcService;
 using Grpc.Core;
@@ -78,7 +78,7 @@ public class CatalogGrpcServiceController(
 
     public override async Task<GetVehiclesInRangeResponse> GetVehicles(GetModelListRequest request, ServerCallContext context)
     {
-        var dataList = await vehicleService.GetRangeAsync(request.PageNumber, request.PageSize, context.CancellationToken);
+        var dataList = await vehicleService.GetRangeAsync(request.PageNumber, request.PageSize, cancellationToken: context.CancellationToken);
 
         var responseData = dataList.Adapt<IEnumerable<ProtoVehicleModel>>();
 

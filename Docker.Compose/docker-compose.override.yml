@@ -33,7 +33,6 @@ services:
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
     depends_on:
       - postgres.db
-      - redis
 
   user.service:
     environment:
@@ -42,8 +41,6 @@ services:
       ASPNETCORE_HTTPS_PORTS: 8085
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      RABBITMQ_DEFAULT_USER: user
-      RABBITMQ_DEFAULT_PASSWORD: user
     ports:
       - "7234:8084"
       - "7235:8085"
